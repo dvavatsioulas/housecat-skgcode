@@ -7,7 +7,7 @@ class House extends Component {
     };
 
     componentDidMount() {
-      axios.get(`http://192.168.26.213:8000/properties`)
+      axios.get(`https://housecat-skgcode-api.herokuapp.com/api/properties`)
       .then(res => {
         const houses = res.data;
         this.setState({ houses });
