@@ -1,2 +1,2 @@
-# real-estate-chatbot-skgcode3
-A chatbot for a real-estate web app
+# housecat-skgcode-FRONT-END 
+Front-end part for HouseCat
