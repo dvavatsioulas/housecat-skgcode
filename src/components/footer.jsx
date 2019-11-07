@@ -16,7 +16,7 @@ class Footer extends Component {
   state = {};
   render() {
     return (
-      <footer className="page-footer font-small pt-4">
+      <footer className="page-footer font-small black pt-4">
         <div className="container-fluid text-center text-md-left">
           <div class="row">
             <div className="col-md-6 mt-md-0 mt-3">
@@ -99,7 +99,7 @@ class Footer extends Component {
         </div>
 
         <div
-          className="footer-copyright text-center white py-3"
+          className="footer-copyright text-center black py-3"
           style={styleText}
         >
           © 2019 Copyright: System of a down SKGCODE3

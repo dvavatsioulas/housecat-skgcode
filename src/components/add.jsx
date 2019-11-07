@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import NavBar from "./navbar";
+import Footer from "./footer";
 
-class Add extends Component {
+class Add extends React.Component {
    
     render() { 
        return (
-        <div className="Form">
-            <h1 > Form </h1>           
-        </div>
+        <React.Fragment>
+        <NavBar/>
+        <Footer/>
+        </React.Fragment>
        );
   }
 }

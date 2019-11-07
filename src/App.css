@@ -56,10 +56,11 @@
   width: 70%;
 }
 
-.navbar {
+.navbarClass {
   position: sticky;
   top: 0;
-  color: white;
+  font-size: 25px;
+  color: #aa66cc;
 }
 .container {
   
@@ -75,9 +76,6 @@
   text-align: center;
   width: auto;
   padding: 0;
-  background: #e2f0ef;
-  border: 3px solid white;
-  color: #51aaa3;
   margin:5rem; 
   display: block;
 
