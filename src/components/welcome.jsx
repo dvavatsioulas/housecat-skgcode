@@ -6,8 +6,8 @@ class Welcome extends Component {
        return (
         <div className="WelcomeText">
            <img src="catphoto.jpg" alt="home"/>
-            <h1 > About us </h1>
-            <a href="/house" >"Lets find YOUR new house!" </a>            
+            <h1 > welcome </h1>
+            <a href="http://localhost:3000/house" >"Lets find YOUR new house!" </a>            
         </div>
        );
   }

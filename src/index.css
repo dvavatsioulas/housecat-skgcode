@@ -1,15 +1,15 @@
 body {
   margin: 0;
-  font-family: 'Old Standard TT', serif;
+  font-family: "Old Standard TT", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #E4C7B7;
+  background-color: white;
 }
 
-#title{
+#title {
   text-align: center;
   font-size: 80px;
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
 }
 
 code {
