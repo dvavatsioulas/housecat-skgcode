@@ -16,12 +16,24 @@ import Add from "./components/add";
 
 const routing = (
   <Router>
+<<<<<<< HEAD
     <Switch> 
+=======
+    <hr />
+    <Switch>
+      
+>>>>>>> 69de49ceffa6d0cf964f4c06428699f8c26297b6
     <Route exact path="/rent" component={Rent} />
     <Route exact path="/buy" component={Buy} />
     <Route exact path="/about" component={About} />
     <Route exact path="/add" component={Add} />
+<<<<<<< HEAD
     <Route exact path="" component={App} />
+=======
+    <Route exact path="/" component={App} />
+
+    
+>>>>>>> 69de49ceffa6d0cf964f4c06428699f8c26297b6
     </Switch>
   </Router>
 );
