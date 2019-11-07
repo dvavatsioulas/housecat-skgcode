@@ -8,7 +8,7 @@ var styleBox = {
   background: "linear-gradient(to left, rgba(255,0,0,0), #00bfa5)"
 };
 
-class Filters extends Component {
+class Header extends Component {
   state = {};
   render() {
     return (
@@ -17,15 +17,15 @@ class Filters extends Component {
           <img className="backImg" src="newBackground.jpg" alt="backdround" />
           <div className="filter-block">
             <div className="rounded-pill" style={styleBox}>
-              <div className="d-flex flex-row ">
-                <p id="filtersTitle"></p>
-                <img
-                  className="rounded-circle"
-                  src="housecat.png"
+              <div className="d-flex flex-row">
+                {/* <img
+                className="rounded"
+                  src="logo.png"
                   width="20%"
                   height="10%"
-                />
-              </div>
+                /> */}
+                </div>
+             
               <div className="d-flex flex-row ">
                 <input
                   className="p-2 flex-grow-1 "
@@ -46,4 +46,4 @@ class Filters extends Component {
   }
 }
 
-export default Filters;
+export default Header;
