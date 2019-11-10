@@ -1,17 +1,25 @@
 import React, { Component } from "react";
-import NavBar from "./components/navbar";
-import Footer from "./components/footer";
+import NavBar from "./navbar";
+import Footer from "./footer";
+
+const value = localStorage.getItem("searchData") || "";
 
 class Result extends React.Component {
-    state = {  }
-    render() { 
-        return ( 
-            <React.Fragment>
-                <NavBar/>
-                <Footer/>
-           </React.Fragment>
-         );
-    }
+  constructor(props) {
+    super(props);
+    let item = JSON.parse(localStorage.getItem("searchData"));
+    console.log(item.location);
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar />
+        {value.location}
+        <Footer />
+      </React.Fragment>
+    );
+  }
 }
- 
+
 export default Result;

@@ -11,17 +11,17 @@ import Rent from "./components/rent";
 import Buy from "./components/buy";
 import About from "./components/about";
 import Add from "./components/add";
-
-
+import Result from "./components/result";
 
 const routing = (
   <Router>
-    <Switch> 
-        <Route exact path="/rent" component={Rent} />
-        <Route exact path="/buy" component={Buy} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/add" component={Add} />
-        <Route exact path="/" component={App} />
+    <Switch>
+      <Route exact path="/rent" component={Rent} />
+      <Route exact path="/buy" component={Buy} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/add" component={Add} />
+      <Route exact path="/result" component={Result} />
+      <Route exact path="/" component={App} />
     </Switch>
   </Router>
 );
