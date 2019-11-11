@@ -9,7 +9,7 @@ import {
 } from "mdbreact";
 
 var styleText = {
-  color: "#aa66cc"
+  color: "white"
 };
 
 class Footer extends Component {
@@ -19,60 +19,6 @@ class Footer extends Component {
       <footer className="page-footer font-small black pt-4">
         <div className="container-fluid text-center text-md-left">
           <div class="row">
-            <div className="col-md-6 mt-md-0 mt-3">
-              <h5 className="text-uppercase" style={styleText}>
-                Contact form:{" "}
-              </h5>
-              <div className="grey-text">
-                <MDBContainer>
-                  <MDBRow>
-                    <MDBCol md="6">
-                      <MDBInput
-                        label="Your name"
-                        icon="user"
-                        group
-                        type="text"
-                        validate
-                        error="wrong"
-                        success="right"
-                      />
-                      <MDBInput
-                        label="Your email"
-                        icon="envelope"
-                        group
-                        type="email"
-                        validate
-                        error="wrong"
-                        success="right"
-                      />
-                    </MDBCol>
-                    <MDBCol md="6">
-                      <MDBInput
-                        label="Subject"
-                        icon="tag"
-                        group
-                        type="text"
-                        validate
-                        error="wrong"
-                        success="right"
-                      />
-                      <MDBInput
-                        type="textarea"
-                        rows="1"
-                        label="Your message"
-                        icon="pencil-alt"
-                      />
-                    </MDBCol>
-                  </MDBRow>
-                  <div className="text-center">
-                    <MDBBtn outline color="secondary">
-                      Send <MDBIcon far icon="paper-plane" className="ml-1" />
-                    </MDBBtn>
-                  </div>
-                </MDBContainer>
-              </div>
-            </div>
-
             <hr className="clearfix w-100 d-md-none pb-3" />
 
             <div className="col-md-6 mt-md-0 mt-3">
@@ -94,6 +40,14 @@ class Footer extends Component {
                   <MDBIcon fab icon="linkedin-in" />
                 </MDBBtn>
               </MDBContainer>
+            </div>
+            <div className="col-md-4 mt-md-4 mt-2">
+            <div className="d-flex justify-content-center">
+              <form class="form-inline">
+                <input class="form-control p-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3 p-2" type="submit">Search</button>
+              </form>
+            </div>
             </div>
           </div>
         </div>

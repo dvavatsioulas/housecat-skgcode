@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 var styleText = {
-  color: "#aa66cc"
+  color: "white"
 };
 
 class NavBar extends Component {
@@ -9,13 +9,13 @@ class NavBar extends Component {
     return(
 
 <nav className="navbar fixed-top navbar-expand-lg navbar black scrolling-navbar navbarClass">
-<a className="navbar-brand" href="/"><img src="#" alt="logo"/></a>
-<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span className="navbar-toggler-icon"></span>
-</button>
-<div className="collapse navbar-collapse " id="navbarSupportedContent">
-  <ul className="navbar-nav mr-auto" >
+<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+<div className="collapse navbar-collapse d-flex flex-row" id="navbarSupportedContent">
+  <ul className="navbar-nav mr-auto p-2" >
     <li className="nav-item active">
     <a className="nav-link" style={styleText} href="/rent">Rent</a>
     </li>
@@ -23,22 +23,29 @@ class NavBar extends Component {
     <a className="nav-link" style={styleText}  href="/buy">Buy</a>
     </li>
     <li className="nav-item">
-    <a className="nav-link" style={styleText} href="/about">About</a>
-    </li>
-    <li className="nav-item">
       <a className="nav-link" style={styleText} href="/add">Add house</a>
     </li>
   </ul>
-  <ul className="navbar-nav nav-flex-icons">
-    <li className="nav-item">
-      <a className="nav-link"><i className="fab fa-facebook-f"></i></a>
-    </li>
-    <li className="nav-item">
-      <a className="nav-link"><i className="fab fa-twitter"></i></a>
-    </li>
-    <li className="nav-item">
-      <a className="nav-link"><i className="fab fa-instagram"></i></a>
-    </li>
+  </div>
+  <a className="navbar-brand" href="/"><img src="white-cat.png" alt="logo" width="60%" height="20%"/></a>
+  
+<div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarSupportedContent">
+ 
+ 
+<i className="fas fa-phone fa-xs p-2">
+ +30 2310666666 </i>
+  <ul className="navbar-nav p-2">
+  <li class="nav-item avatar dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownAboutUs" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">More
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+          aria-labelledby="navbarDropdownMenuLink-55">
+          <a class="dropdown-item" href="#">FAQ</a>
+          <a class="dropdown-item" href="#">About Us</a>
+          <a class="dropdown-item" href="#">Contact</a>
+        </div>
+      </li>
   </ul>
 </div>
 </nav>

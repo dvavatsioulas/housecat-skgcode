@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Result from "./result";
+import Result from "./results";
 
 var styleBox = {
   width: "100%",
@@ -39,14 +39,14 @@ class Header extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     let myObj = {
       location: this.state.location,
       priceUp: this.state.priceUp,
       priceDown: this.state.priceDown
     };
     localStorage.setItem("searchData", JSON.stringify(myObj));
-    window.open("/result", "_blank"); //to open new page
+    window.open("/results", "_self"); //to open new page
   }
 
   render() {

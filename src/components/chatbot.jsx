@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 class Chatbot extends Component {
-  // When the user clicks on div, open the popup
   myFunction() {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
@@ -11,7 +10,7 @@ class Chatbot extends Component {
     return (
       <React.Fragment>
         <button
-          className="btn btn-outline-info popup"
+          className="btn btn-dark popup"
           onClick={this.myFunction}
         >
           Need help?
