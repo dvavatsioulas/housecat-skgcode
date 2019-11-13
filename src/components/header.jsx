@@ -59,7 +59,7 @@ class Header extends Component {
               <div className="d-flex flex-row ">
                 <input
                   id="location"
-                  className="p-2 flex-grow-1 "
+                  className="p-2 flex-grow-1 h4"
                   type="text"
                   placeholder="Thessaloniki, Greece"
                   onChange={this.handleChangeLocation}
@@ -67,7 +67,7 @@ class Header extends Component {
                 />
                 <input
                   id="priceDown"
-                  className="p-2"
+                  className="p-2 h5"
                   type="text"
                   placeholder="280€"
                   onChange={this.handleChangePriceDown}
@@ -75,7 +75,7 @@ class Header extends Component {
                 />
                 <input
                   id="priceUp"
-                  className="p-2"
+                  className="p-2 h5"
                   type="text"
                   placeholder="400€"
                   onChange={this.handleChangePriceUp}

@@ -9,10 +9,7 @@ class Chatbot extends Component {
   render() {
     return (
       <React.Fragment>
-        <button
-          className="btn btn-dark popup"
-          onClick={this.myFunction}
-        >
+        <button className="btn btn-dark popup" onClick={this.myFunction}>
           Need help?
           <span className="popuptext" id="myPopup">
             <iframe

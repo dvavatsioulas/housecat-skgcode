@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import NavBar from "./navbar";
 import Footer from "./footer";
-import Chatbot from "./chatbot"
-
-const value = localStorage.getItem("searchData") || "";
+import Chatbot from "./chatbot";
+import FilterBox from "./filterBox";
+import House from "./house";
 
 class Results extends React.Component {
-  constructor(props) {
-    super(props);
-    let item = JSON.parse(localStorage.getItem("searchData"));
-  }
-
   render() {
     return (
       <React.Fragment>
         <NavBar />
+        <FilterBox />
         <Chatbot />
         <Footer />
       </React.Fragment>
@@ -22,5 +18,4 @@ class Results extends React.Component {
   }
 }
 
- 
 export default Results;
