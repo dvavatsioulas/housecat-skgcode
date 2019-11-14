@@ -11,6 +11,7 @@ class Results extends React.Component {
       <React.Fragment>
         <NavBar />
         <FilterBox />
+        <House />
         <Chatbot />
         <Footer />
       </React.Fragment>

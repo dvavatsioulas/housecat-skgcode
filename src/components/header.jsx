@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import Result from "./results";
+import axios from "axios";
+//var cors = require('cors');
 
 var styleBox = {
   width: "100%",
   height: "100%",
   padding: "50px",
   border: "2px solid white",
-  background: "linear-gradient(to left, rgba(255,0,0,0), #00bfa5)"
+  background: "linear-gradient(to left, rgba(255,0,0,0), #331900)"
 };
 
 class Header extends Component {
@@ -14,12 +15,12 @@ class Header extends Component {
     super(props);
     this.state = {
       location: "",
-      priceUp: "",
-      priceDown: ""
+      minprice: "",
+      maxprice: "",
     };
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
-    this.handleChangePriceDown = this.handleChangePriceDown.bind(this);
-    this.handleChangePriceUp = this.handleChangePriceUp.bind(this);
+    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
+    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -28,32 +29,57 @@ class Header extends Component {
       location: event.target.value
     });
   }
-  handleChangePriceUp(event) {
+  handleChangeMaxPrice(event) {
     this.setState({
-      priceUp: event.target.value
+      maxprice: event.target.value
     });
   }
-  handleChangePriceDown(event) {
+  handleChangeMinPrice(event) {
     this.setState({
-      priceDown: event.target.value
+      minprice: event.target.value
     });
   }
 
   handleSubmit() {
-    let myObj = {
-      location: this.state.location,
-      priceUp: this.state.priceUp,
-      priceDown: this.state.priceDown
-    };
-    localStorage.setItem("searchData", JSON.stringify(myObj));
-    window.open("/results", "_self"); //to open new page
+   
+    axios.post('http://192.168.26.213:8000/api/properties/search',  {
+      "id":null,
+        "minprice":null,
+        "maxprice":null,
+        "sqm": null,
+        "location":this.state.location,
+        "bedrooms":null,
+        "bathrooms":null,
+        "property_type":null,
+        "floor":null,
+        "description":null,
+        "sale_type":null,
+        "phone":null,
+        "email":null,
+        "img_url": null,
+        "furnitured":null,
+        "heating_type":null,
+        "built_year":null,
+        "parking":null
+    }).then(res => {
+      //  const minprice = res.data.minprice;
+      // const maxPrice = res.data.maxprice;
+      const location = res.data.location;
+      let searchFirst = {
+        thelocation: location
+      }
+      //  const minprice = res.data.minprice;
+      // const maxPrice = res.data.maxprice;
+      localStorage.setItem("searchdata", searchFirst);
+      window.open("/results", "_self"); //to open new page
+    });
   }
 
   render() {
     return (
       <React.Fragment>
         <div>
-          <img className="backImg" src="newBackground.jpg" alt="backdround" />
+          <img className="backImg" src="backgroundHouse.jpg" alt="backdround" />
           <div className="filter-block">
             <div className="rounded-pill" style={styleBox}>
               <div className="d-flex flex-row ">
@@ -66,20 +92,20 @@ class Header extends Component {
                   value={this.state.location}
                 />
                 <input
-                  id="priceDown"
+                  id="minprice"
                   className="p-2 h5"
                   type="text"
                   placeholder="280€"
-                  onChange={this.handleChangePriceDown}
-                  value={this.state.priceDown}
+                  onChange={this.handleChangeMinPrice}
+                  value={this.state.minprice}
                 />
                 <input
-                  id="priceUp"
+                  id="maxprice"
                   className="p-2 h5"
                   type="text"
                   placeholder="400€"
-                  onChange={this.handleChangePriceUp}
-                  value={this.state.priceUp}
+                  onChange={this.handleChangeMaxPrice}
+                  value={this.state.maxprice}
                 />
                 <div className="p-2">
                   <button
