@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import House from "./house";
 import axios from "axios";
 //var cors = require('cors');
 
@@ -14,9 +15,9 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: "",
-      minprice: "",
-      maxprice: "",
+      location: null,
+      minprice: null,
+      maxprice: null
     };
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
@@ -40,41 +41,52 @@ class Header extends Component {
     });
   }
 
+
   handleSubmit() {
-   
-    axios.post('http://192.168.26.213:8000/api/properties/search',  {
-      "id":null,
-        "minprice":null,
-        "maxprice":null,
+    axios.post('http://localhost:8000/api/properties/search',  {
+        "id":null,
+        "minprice":this.state.minprice,
+        "maxprice":this.state.minprice,
         "sqm": null,
         "location":this.state.location,
         "bedrooms":null,
         "bathrooms":null,
         "property_type":null,
         "floor":null,
-        "description":null,
         "sale_type":null,
-        "phone":null,
-        "email":null,
-        "img_url": null,
         "furnitured":null,
         "heating_type":null,
-        "built_year":null,
+        "minbuilt_year":null,
+        "maxbuilt_year":null,
         "parking":null
     }).then(res => {
-      //  const minprice = res.data.minprice;
-      // const maxPrice = res.data.maxprice;
-      const location = res.data.location;
-      let searchFirst = {
-        thelocation: location
+
+      let filterboxInfo = {
+        location: this.state.location,
+        minprice: this.state.minprice,
+        maxprice: this.state.maxprice
       }
-      //  const minprice = res.data.minprice;
-      // const maxPrice = res.data.maxprice;
-      localStorage.setItem("searchdata", searchFirst);
+      localStorage.setItem("filters",JSON.stringify(filterboxInfo));
+
+      let filteringResults = res.data;
+      localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+      // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
+      setTimeout( () => {
+       this.setState({ position: 1 });
+      }, 2000);
       window.open("/results", "_self"); //to open new page
     });
   }
-
+/*
+  keepFilters(){
+    let filterboxInfo = {
+      "location": "athina",
+      minprice:200,
+      maxprice:300,
+    }
+    localStorage.setItem("filters",filterboxInfo);
+  }
+*/
   render() {
     return (
       <React.Fragment>
