@@ -41,8 +41,7 @@ import React, { Component } from "react";
 //   }
 // })(Slider);
 
-var item = localStorage.getItem("searchdata");
-console.log(item.thelocation);
+var item = JSON.parse(localStorage.getItem("filters"));
 
 class FilterBox extends Component {
   constructor(props) {
@@ -188,7 +187,8 @@ class FilterBox extends Component {
             </div>
 
             <hr />
-            {/* <label className="filterText" for="priceRange">
+            
+            { /*<label className="filterText" for="priceRange">
               Price:{" "}
             </label>
             <MySlider
@@ -196,8 +196,11 @@ class FilterBox extends Component {
                 index === 0 ? "Minimum price" : "Maximum price"
               }
               defaultValue={[20, 40]}
-            /> */}
-
+            /> */
+            } 
+            
+          
+          
             <button
               className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
               type="submit"
