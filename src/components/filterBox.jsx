@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
 
@@ -41,24 +42,58 @@ import React, { Component } from "react";
 //   }
 // })(Slider);
 
-var item = JSON.parse(localStorage.getItem("filters"));
-
 class FilterBox extends Component {
   constructor(props) {
     super(props);
-   
-    this.state.location = item.location;
 
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
+    this.reloadSearch = this.reloadSearch.bind(this);
   }
   state = {
-    location: ""
+    location: null
   };
+
+  componentDidMount() {
+    var item = JSON.parse(localStorage.getItem("filters"));
+    this.setState({ location: item.location });
+  }
 
   handleChangeLocation(event) {
     this.setState({
       location: event.target.value
     });
+  }
+
+  reloadSearch() {
+    axios
+      .post("http://localhost:8000/api/properties/search", {
+        id: null,
+        minprice: null,
+        maxprice: null,
+        sqm: null,
+        location: this.state.location,
+        bedrooms: null,
+        bathrooms: null,
+        property_type: null,
+        floor: null,
+        sale_type: null,
+        furnitured: null,
+        heating_type: null,
+        minbuilt_year: null,
+        maxbuilt_year: null,
+        parking: null
+      })
+      .then(res => {
+        let filterboxInfo = {
+          location: this.state.location,
+          minprice: this.state.minprice,
+          maxprice: this.state.maxprice
+        };
+        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+
+        let filteringResults = res.data;
+        localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+      });
   }
 
   render() {
@@ -187,8 +222,8 @@ class FilterBox extends Component {
             </div>
 
             <hr />
-            
-            { /*<label className="filterText" for="priceRange">
+
+            {/*<label className="filterText" for="priceRange">
               Price:{" "}
             </label>
             <MySlider
@@ -196,14 +231,12 @@ class FilterBox extends Component {
                 index === 0 ? "Minimum price" : "Maximum price"
               }
               defaultValue={[20, 40]}
-            /> */
-            } 
-            
-          
-          
+            /> */}
+
             <button
               className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
               type="submit"
+              onClick={this.reloadSearch}
             >
               Reload
             </button>
