@@ -66,7 +66,7 @@ class FilterBox extends Component {
 
   reloadSearch() {
     axios
-      .post("http://localhost:8000/api/properties/search", {
+      .post("http://localhost:8000/api/properties/search", {  //https://housecat-skgcode-api.herokuapp.com/api/properties/search
         id: null,
         minprice: null,
         maxprice: null,

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import House from "./house";
 import axios from "axios";
-//var cors = require('cors');
 
 var styleBox = {
   width: "100%",
@@ -43,7 +41,7 @@ class Header extends Component {
 
 
   handleSubmit() {
-    axios.post('http://localhost:8000/api/properties/search',  {
+    axios.post('http://localhost:8000/api/properties/search',  { //https://housecat-skgcode-api.herokuapp.com/api/properties/search
         "id":null,
         "minprice":this.state.minprice,
         "maxprice":this.state.minprice,
@@ -77,16 +75,7 @@ class Header extends Component {
       window.open("/results", "_self"); //to open new page
     });
   }
-/*
-  keepFilters(){
-    let filterboxInfo = {
-      "location": "athina",
-      minprice:200,
-      maxprice:300,
-    }
-    localStorage.setItem("filters",filterboxInfo);
-  }
-*/
+
   render() {
     return (
       <React.Fragment>

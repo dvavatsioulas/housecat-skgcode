@@ -57,10 +57,9 @@
   width: 70%;
 }
 
-.navbarClass {
-  position: sticky;
+.navbarItems {
   top: 0;
-  font-size: 25px;
+  font-size: 18px;
   color: white;
 }
 .container {
@@ -105,6 +104,7 @@ cite {
   font-size: 25px;
 }
 .filterBox {
+  float: left;
   width: 25%;
   position: sticky;
   top: 0;
@@ -122,4 +122,11 @@ cite {
 .filterText {
   margin-top: 50px;
   font-size: 20px;
+}
+.houses {
+  list-style: none;
+  float: left;
+  width: 25%;
+  text-align: center;
+  margin-top: 100px;
 }
