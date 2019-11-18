@@ -1,17 +1,39 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 
 class NavBarV2 extends Component {
+  constructor(props) {
+    super(props);
 
-//   handleRent (){
-//     axios.get('https://housecat-skgcode-api.herokuapp.com/api/properties/sale_type=1').then(res => {
-//     let filterboxInfo = {
-//       location: this.state.location,
-//       minprice: this.state.minprice,
-//       maxprice: this.state.maxprice
-//     }
-//   }
-// }
+    this.handleRent = this.handleRent.bind(this);
+  }
+
+  handleRent (){
+    axios.get('https://housecat-skgcode-api.herokuapp.com/api/properties/saletype=0').then(res => {
+      let filteringResults = res.data;
+      localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+      localStorage.setItem("filters","rent");
+      // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
+       setTimeout( () => {
+        this.setState({ position: 1 });
+       }, 2000);
+       
+       window.open("/results", "_self"); //to open new page
+  });
+}
+
+  handleBuy(){
+    axios.get('https://housecat-skgcode-api.herokuapp.com/api/properties/saletype=1').then(res => {
+      let filteringResults = res.data;
+      localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+      // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
+      setTimeout( () => {
+        this.setState({ position: 1 });
+       }, 2000);
+       console.log(res.data);
+       window.open("/results", "_self"); //to open new page
+  });
+}
 
 
   render() {
@@ -26,10 +48,10 @@ class NavBarV2 extends Component {
       <div className="collapse navbar-collapse navbar-inverse justify-content-end" id="navbars" > 
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/rent" onClick={this.handleRent}>Rent <span class="sr-only">(current)</span></a>
+            <a className="nav-link" onClick={this.handleRent}>Rent <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item"> 
-            <a class="nav-link" href="/buy">Buy</a>
+            <a class="nav-link" onClick={this.handleBuy}>Buy</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="/add">Add House</a>
