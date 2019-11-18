@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
+
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
 
@@ -41,11 +41,11 @@ import React, { Component } from "react";
 //     height: 3
 //   }
 // })(Slider);
-=======
+
 import axios from "axios";
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
->>>>>>> 7df7d48d4bb9bea088912a570ff2a2edbce976cb
+
 
 // const MySlider = withStyles({
 //   root: {
@@ -285,12 +285,12 @@ class FilterBox extends Component {
             </div>
 
             <hr />
-<<<<<<< HEAD
+
             {/* <label className="filterText" for="priceRange">
-=======
+
 
             {/*<label className="filterText" for="priceRange">
->>>>>>> 7df7d48d4bb9bea088912a570ff2a2edbce976cb
+
               Price:{" "}
             </label>
             <MySlider
@@ -299,8 +299,7 @@ class FilterBox extends Component {
               }
               defaultValue={[20, 40]}
             /> */}
-<<<<<<< HEAD
-=======
+
             <div className="d-flex flex-row">
               <div className="md-form small p-2">
                 <p className="text-center filterText">From:</p>
@@ -321,7 +320,7 @@ class FilterBox extends Component {
                 />
               </div>
             </div>
->>>>>>> 7df7d48d4bb9bea088912a570ff2a2edbce976cb
+
 
             <button
               className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
