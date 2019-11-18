@@ -5,7 +5,7 @@ import uuid from 'uuid';
 import Message from "./chatbot_messages";
 
 
-const front_handle_intents= require('./front_hanle_intents_function.js')
+const front_handle_intents= require('./chatbot_functions/front_hanle_intents_function.js')
 
 const cookies = new Cookies();
 var mydata =[];
@@ -43,7 +43,7 @@ class Chatbot extends Component {
     
     this.setState({messages: [...this.state.messages, says]});
 
-    const res = await axios.post('https://housecat-skgcode-api.herokuapp.com/df_text_query', {text: queryText, userID: cookies.get('userID')});
+    const res = await axios.post('http://localhost:8000/df_text_query', {text: queryText, userID: cookies.get('userID')});
     console.log(res.data.intent.displayName)
     for (let msg of res.data.fulfillmentMessages){
       says = {
@@ -67,10 +67,43 @@ class Chatbot extends Component {
         console.log("Messages Deleted")
     }
     
+    var final_params=front_handle_intents.final_params
+    if(final_params!=null){
+      axios.post('http://localhost:8000/api/properties/search',  {
+            "id":null,
+            "minprice":final_params.minprice,
+            "maxprice":final_params.minprice,
+            "sqm": null,
+            "location":final_params.location,
+            "bedrooms":null,
+            "bathrooms":null,
+            "property_type":final_params.property_type,
+            "floor":null,
+            "sale_type":final_params.sale_type,
+            "furnitured":null,
+            "heating_type":null,
+            "minbuilt_year":null,
+            "maxbuilt_year":null,
+            "parking":null
+        }).then(res => {
+          
+          //localStorage.setItem("filters",JSON.stringify(final_params));
+          let filteringResults = res.data;
+          localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+          
+          // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
+          setTimeout( () => {
+           this.setState({ position: 1 });
+          }, 2000);
+          
+          window.open("/results", "_self"); //to open new page
+        });
+     }
+
   }
   async df_event_query(eventName){
 
-    const res = await axios.post('https://housecat-skgcode-api.herokuapp.com/df_event_query', {event: eventName, userID: cookies.get('userID')});
+    const res = await axios.post('http://localhost:8000/df_event_query', {event: eventName, userID: cookies.get('userID')});
 
     if (res.data.intent.displayName === 'End Intent'){
       console.log("END INTENT")

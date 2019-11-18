@@ -1,0 +1,19 @@
+exports.initialize_parameters = function(){
+    let userSearchedParams = {
+        minprice:null,
+        maxprice:null,
+		sqm: null,
+		location:null,
+		bedrooms:null,
+		bathrooms:null,
+		property_type:null,
+		floor:null,
+		sale_type:null,
+		furnitured:null,
+		heating_type:null,
+		minbuilt_year:null,
+		maxbuilt_year:null,
+		parking:null
+    };
+    return userSearchedParams;
+}
