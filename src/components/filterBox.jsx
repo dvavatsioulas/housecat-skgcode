@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
 
@@ -40,24 +41,122 @@ import React, { Component } from "react";
 //     height: 3
 //   }
 // })(Slider);
+=======
+import axios from "axios";
+// import Slider from "@material-ui/core/Slider";
+// import { withStyles, makeStyles } from "@material-ui/core/styles";
+>>>>>>> 7df7d48d4bb9bea088912a570ff2a2edbce976cb
 
-var item = JSON.parse(localStorage.getItem("searchData"));
+// const MySlider = withStyles({
+//   root: {
+//     color: "#3a8589",
+//     height: 3,
+//     padding: "13px 0"
+//   },
+//   thumb: {
+//     height: 27,
+//     width: 27,
+//     backgroundColor: "#fff",
+//     border: "1px solid currentColor",
+//     marginTop: -12,
+//     marginLeft: -13,
+//     boxShadow: "#ebebeb 0px 2px 2px",
+//     "&:focus,&:hover,&$active": {
+//       boxShadow: "#ccc 0px 2px 3px 1px"
+//     },
+//     "& .bar": {
+//       height: 9,
+//       width: 1,
+//       backgroundColor: "currentColor",
+//       marginLeft: 1,
+//       marginRight: 1
+//     }
+//   },
+//   active: {},
+//   valueLabel: {
+//     left: "calc(-50% + 4px)"
+//   },
+//   track: {
+//     height: 3
+//   },
+//   rail: {
+//     color: "#d8d8d8",
+//     opacity: 1,
+//     height: 3
+//   }
+// })(Slider);
 
 class FilterBox extends Component {
   constructor(props) {
     super(props);
-    this.state.location = item.location;
 
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
+    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
+    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
+    this.reloadSearch = this.reloadSearch.bind(this);
   }
   state = {
-    location: ""
+    location: null,
+    minprice: null,
+    maxprice: null
   };
+
+  componentDidMount() {
+    var item = JSON.parse(localStorage.getItem("filters"));
+    this.setState({
+      location: item.location,
+      minprice: item.minprice,
+      maxprice: item.maxprice
+    });
+  }
 
   handleChangeLocation(event) {
     this.setState({
       location: event.target.value
     });
+  }
+  handleChangeMaxPrice(event) {
+    this.setState({
+      maxprice: event.target.value
+    });
+  }
+  handleChangeMinPrice(event) {
+    this.setState({
+      minprice: event.target.value
+    });
+  }
+
+  reloadSearch() {
+    axios
+      .post("http://localhost:8000/api/properties/search", {
+        //https://housecat-skgcode-api.herokuapp.com/api/properties/search
+        id: null,
+        minprice: this.state.minprice,
+        maxprice: this.state.maxprice,
+        sqm: null,
+        location: this.state.location,
+        bedrooms: null,
+        bathrooms: null,
+        property_type: null,
+        floor: null,
+        sale_type: null,
+        furnitured: null,
+        heating_type: null,
+        minbuilt_year: null,
+        maxbuilt_year: null,
+        parking: null
+      })
+      .then(res => {
+        let filterboxInfo = {
+          location: this.state.location,
+          minprice: this.state.minprice,
+          maxprice: this.state.maxprice
+        };
+        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+
+        let filteringResults = res.data;
+        localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+      });
   }
 
   render() {
@@ -67,7 +166,7 @@ class FilterBox extends Component {
           <strong>Filters</strong>
         </h3>
 
-        <div className="card-body px-lg-5 pt-0">
+        <div className="card-body px-small-5 pt-0">
           <form>
             <div className="md-form mt-3 ">
               <input
@@ -186,7 +285,12 @@ class FilterBox extends Component {
             </div>
 
             <hr />
+<<<<<<< HEAD
             {/* <label className="filterText" for="priceRange">
+=======
+
+            {/*<label className="filterText" for="priceRange">
+>>>>>>> 7df7d48d4bb9bea088912a570ff2a2edbce976cb
               Price:{" "}
             </label>
             <MySlider
@@ -195,10 +299,34 @@ class FilterBox extends Component {
               }
               defaultValue={[20, 40]}
             /> */}
+<<<<<<< HEAD
+=======
+            <div className="d-flex flex-row">
+              <div className="md-form small p-2">
+                <p className="text-center filterText">From:</p>
+                <input
+                  id="minprice"
+                  type="text"
+                  onChange={this.handleChangeMinPrice}
+                  value={this.state.minprice}
+                />
+              </div>
+              <div className="md-form small p-2">
+                <p className="text-center filterText">To:</p>
+                <input
+                  id="maxprice"
+                  type="text"
+                  onChange={this.handleChangeMaxPrice}
+                  value={this.state.maxprice}
+                />
+              </div>
+            </div>
+>>>>>>> 7df7d48d4bb9bea088912a570ff2a2edbce976cb
 
             <button
               className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
               type="submit"
+              onClick={this.reloadSearch}
             >
               Reload
             </button>

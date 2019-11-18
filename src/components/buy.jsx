@@ -4,7 +4,7 @@ class Buy extends Component {
   render() {
     return (
       <div className="ToBuy">
-        <h1> Our syggestions </h1>
+        <h1> Our suggestions </h1>
       </div>
     );
   }

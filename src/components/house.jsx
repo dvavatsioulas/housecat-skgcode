@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 class House extends Component {
   state = {
     houses: []
   };
-
-  componentDidMount() {
-    axios.get(`http://192.168.26.213:8000/properties`).then(res => {
-      const houses = res.data;
-      this.setState({ houses });
-    });
+  
+  componentDidMount(){
+   var houses = JSON.parse(localStorage.getItem("searchdata")); 
+   this.setState({ houses });
   }
 
   render() {
