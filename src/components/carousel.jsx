@@ -42,8 +42,8 @@ class Carousel extends Component {
       handleSubmit() {
         axios.post('https://housecat-skgcode-api.herokuapp.com/api/properties/search',  {
             "id":null,
-            "minprice":this.state.minprice,
-            "maxprice":this.state.minprice,
+            "minprice":null,
+            "maxprice":null,
             "sqm": null,
             "location":this.state.location,
             "bedrooms":null,
@@ -57,11 +57,10 @@ class Carousel extends Component {
             "maxbuilt_year":null,
             "parking":null
         }).then(res => {
-    
           let filterboxInfo = {
             location: this.state.location,
-            minprice: this.state.minprice,
-            maxprice: this.state.maxprice
+            // minprice: this.state.minprice,
+            // maxprice: this.state.maxprice
           }
           localStorage.setItem("filters",JSON.stringify(filterboxInfo));
     

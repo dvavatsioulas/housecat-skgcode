@@ -2,6 +2,18 @@ import React, { Component } from "react";
 
 
 class NavBarV2 extends Component {
+
+//   handleRent (){
+//     axios.get('https://housecat-skgcode-api.herokuapp.com/api/properties/sale_type=1').then(res => {
+//     let filterboxInfo = {
+//       location: this.state.location,
+//       minprice: this.state.minprice,
+//       maxprice: this.state.maxprice
+//     }
+//   }
+// }
+
+
   render() {
     return (
       //bg-dark instead of black
@@ -11,10 +23,10 @@ class NavBarV2 extends Component {
         <img src="black-cat.png" alt="logo"  />
       </a>
 
-      <div class="collapse navbar-collapse navbar-inverse justify-content-end" id="navbars" > 
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Rent <span class="sr-only">(current)</span></a>
+      <div className="collapse navbar-collapse navbar-inverse justify-content-end" id="navbars" > 
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <a className="nav-link" href="/rent" onClick={this.handleRent}>Rent <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item"> 
             <a class="nav-link" href="/buy">Buy</a>

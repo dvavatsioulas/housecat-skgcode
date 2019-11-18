@@ -66,7 +66,6 @@ class Header extends Component {
           maxprice: this.state.maxprice
         };
         localStorage.setItem("filters", JSON.stringify(filterboxInfo));
-
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete

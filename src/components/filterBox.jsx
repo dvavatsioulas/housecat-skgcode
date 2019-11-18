@@ -106,8 +106,8 @@ class FilterBox extends Component {
     var item = JSON.parse(localStorage.getItem("filters"));
     this.setState({
       location: item.location,
-      minprice: item.minprice,
-      maxprice: item.maxprice
+      // minprice: item.minprice,
+      // maxprice: item.maxprice
     });
   }
 
@@ -128,36 +128,43 @@ class FilterBox extends Component {
   }
 
   reloadSearch() {
-    axios
-      .post("https://housecat-skgcode-api.herokuapp.com/api/properties/search", {
-        //https://housecat-skgcode-api.herokuapp.com/api/properties/search
-        id: null,
-        minprice: this.state.minprice,
-        maxprice: this.state.maxprice,
-        sqm: null,
-        location: this.state.location,
-        bedrooms: null,
-        bathrooms: null,
-        property_type: null,
-        floor: null,
-        sale_type: null,
-        furnitured: null,
-        heating_type: null,
-        minbuilt_year: null,
-        maxbuilt_year: null,
-        parking: null
-      })
-      .then(res => {
+    axios.post('https://housecat-skgcode-api.herokuapp.com/api/properties/search',  {
+            "id":null,
+            "minprice":null,
+            "maxprice":null,
+            "sqm": null,
+            "location":this.state.location,
+            "bedrooms":null,
+            "bathrooms":null,
+            "property_type":null,
+            "floor":null,
+            "sale_type":null,
+            "furnitured":null,
+            "heating_type":null,
+            "minbuilt_year":null,
+            "maxbuilt_year":null,
+            "parking":null
+        }).then(res => {
+          if (res.status === 200) {
+            let filteringResults = res.data;
+            localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+          } else if (res.status === 204) {
+            localStorage.setItem("searchdata", res.data);
+          } else {
+            // Other problem!
+          }
+        });
         let filterboxInfo = {
           location: this.state.location,
-          minprice: this.state.minprice,
-          maxprice: this.state.maxprice
-        };
-        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
-
-        let filteringResults = res.data;
-        localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-      });
+          // minprice: this.state.minprice,
+          // maxprice: this.state.maxprice
+        }
+        localStorage.setItem("filters",JSON.stringify(filterboxInfo));
+         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
+         setTimeout( () => {
+          this.setState({ position: 1 });
+         }, 2000);
+         window.open("/results", "_self"); //to open new page
   }
 
   render() {
@@ -174,9 +181,8 @@ class FilterBox extends Component {
                 type="text"
                 id="locationFilter"
                 className="form-control filterText"
-                placeholder="Location"
+                placeholder={this.state.location}
                 onChange={this.handleChangeLocation}
-                value={this.state.location}
               />
             </div>
             <div>
@@ -325,7 +331,6 @@ class FilterBox extends Component {
 
             <button
               className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
-              type="submit"
               onClick={this.reloadSearch}
             >
               Reload
