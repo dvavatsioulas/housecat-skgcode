@@ -51,7 +51,7 @@
 }
 
 .filter-block {
-  position: absolute;
+  position: sticky;
   bottom: 190px;
   left: 250px;
   width: 70%;
@@ -139,4 +139,13 @@ cite {
   width: 25%;
   text-align: center;
   margin-top: 100px;
+}
+
+.house {
+  list-style: none;
+  padding-top: 100px;
+}
+
+.block-example{
+  margin-bottom: 20px;
 }
