@@ -43,7 +43,7 @@ class Chatbot extends Component {
     
     this.setState({messages: [...this.state.messages, says]});
 
-    const res = await axios.post('http://localhost:8000/df_text_query', {text: queryText, userID: cookies.get('userID')});
+    const res = await axios.post('https://housecat-skgcode-api.herokuapp.com/df_text_query', {text: queryText, userID: cookies.get('userID')});
     console.log(res.data.intent.displayName)
     for (let msg of res.data.fulfillmentMessages){
       says = {
@@ -70,7 +70,7 @@ class Chatbot extends Component {
   }
   async df_event_query(eventName){
 
-    const res = await axios.post('http://localhost:8000/df_event_query', {event: eventName, userID: cookies.get('userID')});
+    const res = await axios.post('https://housecat-skgcode-api.herokuapp.com/df_event_query', {event: eventName, userID: cookies.get('userID')});
 
     if (res.data.intent.displayName === 'End Intent'){
       console.log("END INTENT")

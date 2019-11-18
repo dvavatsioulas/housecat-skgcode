@@ -40,7 +40,7 @@ class Carousel extends Component {
       }
     
       handleSubmit() {
-        axios.post('http://localhost:8000/api/properties/search',  { //https://housecat-skgcode-api.herokuapp.com/api/properties/search
+        axios.post('https://housecat-skgcode-api.herokuapp.com/api/properties/search',  {
             "id":null,
             "minprice":this.state.minprice,
             "maxprice":this.state.minprice,
