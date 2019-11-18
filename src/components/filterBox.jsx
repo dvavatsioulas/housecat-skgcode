@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -42,7 +43,7 @@ import React, { Component } from "react";
 //   }
 // })(Slider);
 
-import axios from "axios";
+
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
 
@@ -128,7 +129,7 @@ class FilterBox extends Component {
 
   reloadSearch() {
     axios
-      .post("http://localhost:8000/api/properties/search", {
+      .post("https://housecat-skgcode-api.herokuapp.com/api/properties/search", {
         //https://housecat-skgcode-api.herokuapp.com/api/properties/search
         id: null,
         minprice: this.state.minprice,
