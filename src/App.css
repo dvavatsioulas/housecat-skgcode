@@ -51,7 +51,7 @@
 }
 
 .filter-block {
-  position: sticky;
+  position: absolute;
   bottom: 190px;
   left: 250px;
   width: 70%;
@@ -123,14 +123,15 @@ cite {
   margin-top: 30px;
   font-size: 20px;
 }
-.formBox {
+.AddHouse {
   width: 80%;
   height: 100%;
   position: center;
   top: 10%;
   padding-left: 25%;
   margin-bottom: 5%;
-  margin-top: 5%;
+  margin-top: 20%;
+  margin-left: 5%;
 }
 
 .houses {
@@ -140,12 +141,17 @@ cite {
   text-align: center;
   margin-top: 100px;
 }
-
-.house {
-  list-style: none;
-  padding-top: 100px;
+.card{
+  width: 80%;
+  height: 100%;
+  position: center;
+  top: 10%;
+  padding-left: 25%;
+  margin-bottom: 5%;
+  margin-top: 10%;
+  margin-left: 5%;
 }
-
-.block-example{
-  margin-bottom: 20px;
+.form-row{
+  margin-top: 10%;
+  margin-left: 5%;
 }
