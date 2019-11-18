@@ -69,7 +69,7 @@ class Chatbot extends Component {
     
     var final_params=front_handle_intents.final_params
     if(final_params!=null){
-      axios.post('http://localhost:8000/api/properties/search',  {
+      axios.post('https://housecat-skgcode-api.herokuapp.com/api/properties/search',  {
             "id":null,
             "minprice":final_params.minprice,
             "maxprice":final_params.minprice,
@@ -103,7 +103,7 @@ class Chatbot extends Component {
   }
   async df_event_query(eventName){
 
-    const res = await axios.post('http://localhost:8000/df_event_query', {event: eventName, userID: cookies.get('userID')});
+    const res = await axios.post('https://housecat-skgcode-api.herokuapp.com/api/df_event_query', {event: eventName, userID: cookies.get('userID')});
 
     if (res.data.intent.displayName === 'End Intent'){
       console.log("END INTENT")
