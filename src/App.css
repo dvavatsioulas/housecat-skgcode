@@ -123,3 +123,12 @@ cite {
   margin-top: 50px;
   font-size: 20px;
 }
+.formBox {
+  width: 80%;
+  height: 100%;
+  position: center;
+  top: 10%;
+  padding-left: 25%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+}

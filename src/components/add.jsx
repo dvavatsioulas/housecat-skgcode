@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./navbar";
 import Footer from "./footer";
+import AddHouse from "./form";
 
 class Add extends React.Component {
    
@@ -8,8 +9,10 @@ class Add extends React.Component {
        return (
         <React.Fragment>
         <NavBar/>
+        <AddHouse/>
         <Footer/>
         </React.Fragment>
+
        );
   }
 }
