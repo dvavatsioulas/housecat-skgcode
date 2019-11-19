@@ -51,7 +51,7 @@
 }
 
 .filter-block {
-  position: absolute;
+  position: sticky;
   bottom: 190px;
   left: 250px;
   width: 70%;
@@ -133,7 +133,9 @@ cite {
   margin-top: 20%;
   margin-left: 5%;
 }
-
+.houseDetails{
+  list-style: none;
+}
 .houses {
   list-style: none;
   float: left;
@@ -141,7 +143,15 @@ cite {
   text-align: center;
   margin-top: 100px;
 }
-.card{
+.house {
+  list-style: none;
+  padding-top: 100px;
+}
+
+.block-example{
+  margin-bottom: 20px;
+}
+/* .card{
   width: 80%;
   height: 100%;
   position: center;
@@ -150,8 +160,17 @@ cite {
   margin-bottom: 5%;
   margin-top: 10%;
   margin-left: 5%;
-}
-.form-row{
+} */
+/* .form-row{
   margin-top: 10%;
   margin-left: 5%;
+} */
+#carouselExampleIndicators{
+  z-index: 0;
 }
+.houseDetails li{
+  font-size:medium;
+}
+/* .textcard{
+  height:50px;
+} */
