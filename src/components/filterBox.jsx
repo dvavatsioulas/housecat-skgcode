@@ -85,8 +85,6 @@ import House from "./house";
 //     height: 3
 //   }
 // })(Slider);
-
-var item = JSON.parse(localStorage.getItem("filters"));
 class FilterBox extends Component {
   constructor(props) {
     super(props);
@@ -97,8 +95,13 @@ class FilterBox extends Component {
     this.reloadSearch = this.reloadSearch.bind(this);
   }
   state = {
-    location: item.location
+    location: null
   };
+
+  componentDidMount() {
+    var item = JSON.parse(localStorage.getItem("filters"));
+    this.setState({ location: item.location });
+  }
 
   handleChangeLocation(event) {
     this.setState({
@@ -117,6 +120,7 @@ class FilterBox extends Component {
   }
 
   reloadSearch() {
+    var reloaded = false;
     axios
       .post(
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
@@ -141,6 +145,11 @@ class FilterBox extends Component {
       .then(res => {
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+        reloaded = true;
+        if (reloaded) {
+          window.open("/results", "_self"); //to open new page
+          reloaded = false;
+        }
       });
 
     let filterboxInfo = {
