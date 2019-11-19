@@ -4,10 +4,11 @@ class House extends Component {
   state = {
     houses: []
   };
-  
-  componentDidMount(){
-   var houses = JSON.parse(localStorage.getItem("searchdata")); 
-   this.setState({ houses });
+
+  componentDidMount() {
+    var houses = JSON.parse(localStorage.getItem("searchdata"));
+    console.log(houses);
+    this.setState({ houses });
   }
 
   render() {
@@ -45,35 +46,39 @@ class House extends Component {
     //     ))}
     //   </ul>
     // );
-    return(
+    return (
       <ul class="container-fluid house">
-         {this.state.houses.map(house => (
+        {this.state.houses.map(house => (
           <li class="block-example" key={house.id}>
             <div>
               <div class="card-group row">
                 <div class="col-md-4">
-                  <img src={house.img_url} class="card-img img-fluid img-thumbnail" alt="house image"></img>
+                  <img
+                    src={house.img_url}
+                    class="card-img img-fluid img-thumbnail"
+                    alt="house image"
+                  ></img>
                 </div>
                 <div class="col-md-7">
                   <div class="card-body">
-                  <tr>
-                   <td>{house.sqm} m²</td>
-                   <td>{house.price} €</td>
-                   <td>{house.location}</td>
-                 </tr>
-                 <tr>
-                   <td>bedrooms: {house.bedrooms}</td>
-                   <td>bathrooms: {house.bathrooms}</td>
-                   <td>floor: {house.floor}</td>
-                 </tr>
-                 <tr>
-                   <td>heating: {house.heating_type}</td>
-                   <td>built: {house.built_year}</td>
-                 </tr>
-                 <tr>
-                   <td>phone: {house.phone}</td>
-                   <td>email: {house.email}</td>
-                 </tr>
+                    <tr>
+                      <td>{house.sqm} m²</td>
+                      <td>{house.price} €</td>
+                      <td>{house.location}</td>
+                    </tr>
+                    <tr>
+                      <td>bedrooms: {house.bedrooms}</td>
+                      <td>bathrooms: {house.bathrooms}</td>
+                      <td>floor: {house.floor}</td>
+                    </tr>
+                    <tr>
+                      <td>heating: {house.heating_type}</td>
+                      <td>built: {house.built_year}</td>
+                    </tr>
+                    <tr>
+                      <td>phone: {house.phone}</td>
+                      <td>email: {house.email}</td>
+                    </tr>
                   </div>
                 </div>
               </div>
@@ -81,8 +86,7 @@ class House extends Component {
           </li>
         ))}
       </ul>
-
-  );
+    );
   }
 }
 
