@@ -5,7 +5,7 @@
 .popup {
   position: sticky;
   bottom: 0;
-  margin-left: 1200px;
+  float: right;
   cursor: pointer;
   outline: black;
   -webkit-user-select: none;
@@ -173,4 +173,4 @@ cite {
 }
 /* .textcard{
   height:50px;
-} */
+} */ 
