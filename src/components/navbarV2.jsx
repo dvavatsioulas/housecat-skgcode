@@ -6,6 +6,7 @@ class NavBarV2 extends Component {
     super(props);
 
     this.handleRent = this.handleRent.bind(this);
+    this.handleBuy = this.handleBuy.bind(this);
   }
 
   handleRent() {
@@ -16,13 +17,12 @@ class NavBarV2 extends Component {
       .then(res => {
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-        localStorage.setItem("filters", "rent");
-        // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
-        setTimeout(() => {
-          this.setState({ position: 1 });
-        }, 2000);
-
-        window.open("/results", "_self"); //to open new page
+        localStorage.setItem("filters", res.data);
+        // // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
+        // setTimeout(() => {
+        //   this.setState({ position: 1 });
+        // }, 2000);
+        //window.open("/results", "_self"); //to open new page
       });
   }
 
@@ -34,12 +34,12 @@ class NavBarV2 extends Component {
       .then(res => {
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+        localStorage.setItem("filters", res.data);
         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
-        setTimeout(() => {
-          this.setState({ position: 1 });
-        }, 2000);
-        console.log(res.data);
-        window.open("/results", "_self"); //to open new page
+        // setTimeout(() => {
+        //   this.setState({ position: 1 });
+        // }, 2000);
+        // window.open("/results", "_self"); //to open new page
       });
   }
 
