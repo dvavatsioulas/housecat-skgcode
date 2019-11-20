@@ -81,13 +81,12 @@ class Carousel extends Component {
 
   render() {
     return (
-      <div>
+      <div class="slide-wrapper">
         <div
           id="carouselExampleIndicators"
-          class="carousel slide"
+          class="carousel slide homepage-feature"
           data-ride="carousel"
         >
-          {/* carousel-fade */}
           <ol class="carousel-indicators">
             <li
               data-target="#carouselExampleIndicators"
@@ -100,21 +99,21 @@ class Carousel extends Component {
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
-                class="d-block w-100"
+                class="d-block w-100 carousel-img"
                 src="image3.jpg"
                 alt="First slide"
               ></img>
             </div>
             <div class="carousel-item">
               <img
-                class="d-block w-100"
+                class="d-block w-100 carousel-img"
                 src="newBackground.jpg"
                 alt="Second slide"
               ></img>
             </div>
             <div class="carousel-item">
               <img
-                class="d-block w-100"
+                class="d-block w-100 carousel-img"
                 src="backgroundHouse.jpg"
                 alt="Third slide"
               ></img>
@@ -139,63 +138,44 @@ class Carousel extends Component {
             <span class="sr-only">Next</span>
           </a>
         </div>
-
         <div className="filter-block">
-          <div className="rounded-pill" style={styleBox}>
-            <div className="d-flex flex-row ">
-              <input
-                id="location"
-                className="p-2 flex-grow-1 h4"
-                type="text"
-                placeholder="Thessaloniki, Greece"
-                onChange={this.handleChangeLocation}
-                value={this.state.location}
-              />
-              <input
-                id="minprice"
-                className="p-2 h5"
-                type="text"
-                placeholder="280€"
-                onChange={this.handleChangeMinPrice}
-                value={this.state.minprice}
-              />
-              <input
-                id="maxprice"
-                className="p-2 h5"
-                type="text"
-                placeholder="400€"
-                onChange={this.handleChangeMaxPrice}
-                value={this.state.maxprice}
-              />
-              <div className="p-2">
-                <button
-                  className="btn btn-outline-white"
-                  onClick={this.handleSubmit}
-                >
-                  Search
-                </button>
+            <div className="rounded-pill" style={styleBox}>
+              <div className="d-flex flex-row ">
+                <input
+                  id="location"
+                  className="p-2 flex-grow-1 h4"
+                  type="text"
+                  placeholder="Thessaloniki, Greece"
+                  onChange={this.handleChangeLocation}
+                  value={this.state.location}
+                />
+                <input
+                  id="minprice"
+                  className="p-2 h5"
+                  type="text"
+                  placeholder="280€"
+                  onChange={this.handleChangeMinPrice}
+                  value={this.state.minprice}
+                />
+                <input
+                  id="maxprice"
+                  className="p-2 h5"
+                  type="text"
+                  placeholder="400€"
+                  onChange={this.handleChangeMaxPrice}
+                  value={this.state.maxprice}
+                />
+                <div className="p-2">
+                  <button
+                    className="btn btn-outline-white"
+                    onClick={this.handleSubmit}
+                  >
+                    Search
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* <div className="filter-block filter-fluid">
-                    <div className="rounded-pill" style={styleBox}> */}
-        {/* <div class="input-group">
-                            <select class="custom-select" id="inputGroupSelect04" id="location" onChange={this.handleChangeLocation} value={this.state.location} class="form-control">
-                                <option selected>Thessaloniki</option>
-                                <option value="1">Athina</option>
-                                <option value="2">Kavala</option>
-                                <option value="3">Larisa</option>
-                            </select>
-                            <input id="minprice" type="text" placeholder="280€" onChange={this.handleChangeMinPrice}value={this.state.minprice} class="form-control"></input>
-                            <input id="maxprice" type="text" placeholder="400€" onChange={this.handleChangeMinPrice}value={this.state.minprice} class="form-control"></input>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Button</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
       </div>
     );
   }

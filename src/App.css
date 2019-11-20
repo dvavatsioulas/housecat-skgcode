@@ -50,13 +50,6 @@
   opacity: 0.9;
 }
 
-.filter-block {
-  position: sticky;
-  bottom: 190px;
-  left: 250px;
-  width: 70%;
-}
-
 .navbarItems {
   top: 0;
   font-size: 18px;
@@ -163,6 +156,7 @@ cite {
   margin-top: 10%;
   margin-left: 5%;
 } */
+
 #carouselExampleIndicators {
   z-index: 0;
 }
@@ -172,4 +166,22 @@ cite {
 .noHouseText {
   font-size: 30px;
   margin: 50px;
+}
+.carousel-img {
+  width: 100%;
+  height: 750px;
+  background-size: cover;
+}
+.slide-wrapper {
+  position: relative
+}
+@media (min-width: 768px) { 
+  .filter-block {
+      position: absolute;
+      bottom: 0;
+      padding: 20px;
+      left: 15%;
+      align-content: center;
+      width: 70%;
+  }
 }
