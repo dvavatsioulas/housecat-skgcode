@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import House from "./house";
+import { conditionalExpression } from "@babel/types";
 
 // import Slider from "@material-ui/core/Slider";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -99,8 +100,12 @@ class FilterBox extends Component {
   };
 
   componentDidMount() {
-    var item = JSON.parse(localStorage.getItem("filters"));
-    this.setState({ location: item.location });
+    if (localStorage.getItem("filters") == "") {
+      this.setState({ location: "Location" });
+    } else {
+      var item = JSON.parse(localStorage.getItem("filters"));
+      this.setState({ location: item.location });
+    }
   }
 
   handleChangeLocation(event) {
@@ -143,19 +148,24 @@ class FilterBox extends Component {
         }
       )
       .then(res => {
-        let filteringResults = res.data;
-        localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-        reloaded = true;
-        if (reloaded) {
-          window.open("/results", "_self"); //to open new page
-          reloaded = false;
+        if (res.status == 200) {
+          let filteringResults = res.data;
+          localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+          reloaded = true;
+          if (reloaded) {
+            window.open("/results", "_self"); //to open new page
+            reloaded = false;
+          }
+          let filterboxInfo = {
+            location: this.state.location
+          };
+          localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+        } else if (res.status == 204) {
+          localStorage.setItem("searchdata", res.data);
+          localStorage.setItem("filters", "");
+          window.open("/results", "_self");
         }
       });
-
-    let filterboxInfo = {
-      location: this.state.location
-    };
-    localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
 
   render() {

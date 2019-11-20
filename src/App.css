@@ -131,7 +131,7 @@ cite {
   margin-top: 20%;
   margin-left: 5%;
 }
-.houseDetails{
+.houseDetails {
   list-style: none;
 }
 .houses {
@@ -146,7 +146,7 @@ cite {
   padding-top: 50px;
 }
 
-.block-example{
+.block-example {
   margin-bottom: 20px;
 }
 /* .card{
@@ -163,9 +163,13 @@ cite {
   margin-top: 10%;
   margin-left: 5%;
 } */
-#carouselExampleIndicators{
+#carouselExampleIndicators {
   z-index: 0;
 }
-.houseDetails li{
-  font-size:medium;
+.houseDetails li {
+  font-size: medium;
+}
+.noHouseText {
+  font-size: 30px;
+  margin: 50px;
 }

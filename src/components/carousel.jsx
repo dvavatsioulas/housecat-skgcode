@@ -48,7 +48,7 @@ class Carousel extends Component {
           minprice: null,
           maxprice: null,
           sqm: null,
-          " location": this.state.location,
+          location: this.state.location,
           bedrooms: null,
           bathrooms: null,
           property_type: null,
@@ -62,20 +62,20 @@ class Carousel extends Component {
         }
       )
       .then(res => {
-        let filterboxInfo = {
-          location: this.state.location
-          // minprice: this.state.minprice,
-          // maxprice: this.state.maxprice
-        };
-        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+        if (res.status == 200) {
+          let filteringResults = res.data;
+          localStorage.setItem("searchdata", JSON.stringify(filteringResults));
 
-        let filteringResults = res.data;
-        localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-        // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
-        setTimeout(() => {
-          this.setState({ position: 1 });
-        }, 2000);
-        window.open("/results", "_self"); //to open new page
+          window.open("/results", "_self"); //to open new page
+
+          let filterboxInfo = {
+            location: this.state.location
+          };
+          localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+        } else if (res.status == 204) {
+          localStorage.setItem("searchdata", res.data);
+          window.open("/results", "_self");
+        }
       });
   }
 
