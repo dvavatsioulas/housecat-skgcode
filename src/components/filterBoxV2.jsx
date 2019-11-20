@@ -71,8 +71,8 @@ class FilterBoxV2 extends Component {
         });
         let filterboxInfo = {
           location: this.state.location,
-          // minprice: this.state.minprice,
-          // maxprice: this.state.maxprice
+          minprice: this.state.minprice,
+          maxprice: this.state.maxprice
         }
         localStorage.setItem("filters",JSON.stringify(filterboxInfo));
          // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
@@ -84,313 +84,93 @@ class FilterBoxV2 extends Component {
 
   render() {
     return (
-      // <div className="card filterBox">
-      //   <h3 className="card-header black white-text py-4">
-      //     <strong>Filters</strong>
-      //   </h3>
-
-      //   <div className="card-body px-small-5 pt-0">
-      //     <form>
-      //       <div className="md-form mt-3 ">
-      //         <input
-      //           type="text"
-      //           id="locationFilter"
-      //           className="form-control filterText"
-      //           placeholder={this.state.location}
-      //           onChange={this.handleChangeLocation}
-      //         />
-      //       </div>
-      //       <div>
-      //         <div className="text-center">
-      //           <p className="filterText">What is the purpose? </p>
-      //           <div className="custom-control custom-radio custom-control-inline">
-      //             <input
-      //               type="radio"
-      //               className="custom-control-input "
-      //               id="defaultInline1"
-      //               name="inlineDefaultRadiosExample"
-      //             />
-      //             <label class="custom-control-label" for="defaultInline1">
-      //               Rent
-      //             </label>
-      //           </div>
-      //           <div class="custom-control custom-radio custom-control-inline">
-      //             <input
-      //               type="radio"
-      //               class="custom-control-input"
-      //               id="defaultInline2"
-      //               name="inlineDefaultRadiosExample"
-      //             />
-      //             <label class="custom-control-label" for="defaultInline2">
-      //               Buy
-      //             </label>
-      //           </div>
-      //         </div>
-      //       </div>
-
-      //       <hr />
-      //       <div className="d-flex flex-row">
-      //         <div className="p-2 dropdownBox">
-      //           <span>Bedrooms</span>
-      //           <select class="mdb-select">
-      //             <option value="" disabled>
-      //               Choose
-      //             </option>
-      //             <option value="1" selected>
-      //               1
-      //             </option>
-      //             <option value="2">2</option>
-      //             <option value="3">3</option>
-      //             <option value="4">4</option>
-      //           </select>
-      //         </div>
-      //         <div className="p-2 dropdownBox">
-      //           <span>Floor</span>
-      //           <select class="mdb-select">
-      //             <option value="" disabled>
-      //               Choose
-      //             </option>
-      //             <option value="1" selected>
-      //               1
-      //             </option>
-      //             <option value="2">2</option>
-      //             <option value="3">3</option>
-      //             <option value="4">4</option>
-      //           </select>
-      //         </div>
-      //       </div>
-
-      //       <hr />
-      //       <p className="text-center filterText">Anything else?</p>
-      //       <div className="d-flex flex-row">
-      //         <div className="d-flex flex-column checkboxes">
-      //           <div className="custom-control custom-checkbox p-2">
-      //             <input
-      //               type="checkbox"
-      //               class="custom-control-input"
-      //               id="furnished"
-      //             />
-      //             <label class="custom-control-label" for="furnished">
-      //               Furnished
-      //             </label>
-      //           </div>
-      //           <div className="custom-control custom-checkbox p-2">
-      //             <input
-      //               type="checkbox"
-      //               class="custom-control-input"
-      //               id="parkingSpot"
-      //             />
-      //             <label className="custom-control-label" for="parkingSpot">
-      //               Parking spot
-      //             </label>
-      //           </div>
-      //         </div>
-
-      //         <div className="d-flex flex-column checkboxes">
-      //           <div className="custom-control custom-checkbox p-2">
-      //             <input
-      //               type="checkbox"
-      //               class="custom-control-input"
-      //               id="garden"
-      //             />
-      //             <label class="custom-control-label" for="garden">
-      //               Garden
-      //             </label>
-      //           </div>
-      //           <div className="custom-control custom-checkbox p-2">
-      //             <input type="checkbox" class="custom-control-input" id="ac" />
-      //             <label class="custom-control-label" for="ac">
-      //               A/C
-      //             </label>
-      //           </div>
-      //         </div>
-      //       </div>
-
-      //       <hr />
-
-      //       {/* <label className="filterText" for="priceRange">
-
-
-      //       {/*<label className="filterText" for="priceRange">
-
-      //         Price:{" "}
-      //       </label>
-      //       <MySlider
-      //         getAriaLabel={index =>
-      //           index === 0 ? "Minimum price" : "Maximum price"
-      //         }
-      //         defaultValue={[20, 40]}
-      //       /> */}
-
-      //       <div className="d-flex flex-row">
-      //         <div className="md-form small p-2">
-      //           <p className="text-center filterText">From:</p>
-      //           <input
-      //             id="minprice"
-      //             type="text"
-      //             onChange={this.handleChangeMinPrice}
-      //             value={this.state.minprice}
-      //           />
-      //         </div>
-      //         <div className="md-form small p-2">
-      //           <p className="text-center filterText">To:</p>
-      //           <input
-      //             id="maxprice"
-      //             type="text"
-      //             onChange={this.handleChangeMaxPrice}
-      //             value={this.state.maxprice}
-      //           />
-      //         </div>
-      //       </div>
-
-
-      //       <button
-      //         className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
-      //         onClick={this.reloadSearch}
-      //       >
-      //         Reload
-      //       </button>
-      //     </form>
-      //   </div>
-      // </div>
-      <form>
-        <div className="card filterBox">
-          <h3 className="card-header black white-text py-4">
-            <strong>Filters</strong>
-          </h3>
-
-          <div className="card-body px-small-5 pt-0">
-            <form>
-              <div>
-                <div className="md-form mt-3">
-                  <input
-                    type="text"
-                    id="locationFilter"
-                    className="form-control filterText"
-                    placeholder={this.state.location}
-                    onChange={this.handleChangeLocation}
-                  />
-                </div>
-              </div>
-              <div className="form-group text-center">
-                <label>What is the purpose?</label><br/>
-                <div class="form-group form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"></input>
-                  <label class="form-check-label" for="inlineRadio1">Rent</label>
-                </div>
-                <div class="form-group form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"></input>
-                  <label class="form-check-label" for="inlineRadio2">Buy</label>
-                </div>
-              </div>
-            
-              <hr />
-
-              <div class="form-group form-row text-center">
-                <div class="col-md-4 mb-3">
-                  <label>Bedrooms</label>
-                  <select class="custom-select">
-                    <option disabled>Choose</option>
-                    <option selected value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                  <label>Floor</label>
-                  <select class="custom-select">
-                  <option disabled>Choose</option>
-                    <option selected value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-                  </div>
-              </div>
-        
-              
-
-              <hr />
-              <p className="text-center filterText">Anything else?</p>
-              <div className="d-flex flex-row">
-                <div className="d-flex flex-column checkboxes">
-                  <div className="custom-control custom-checkbox p-2">
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="furnished"
-                    />
-                    <label class="custom-control-label" for="furnished">
-                      Furnished
-                    </label>
-                  </div>
-                  <div className="custom-control custom-checkbox p-2">
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="parkingSpot"
-                    />
-                    <label className="custom-control-label" for="parkingSpot">
-                      Parking spot
-                    </label>
-                  </div>
-                </div>
-
-                <div className="d-flex flex-column checkboxes">
-                  <div className="custom-control custom-checkbox p-2">
-                    <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="garden"
-                    />
-                    <label class="custom-control-label" for="garden">
-                      Garden
-                    </label>
-                  </div>
-                  <div className="custom-control custom-checkbox p-2">
-                    <input type="checkbox" class="custom-control-input" id="ac" />
-                    <label class="custom-control-label" for="ac">
-                      A/C
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <hr />
-
-              <div className="d-flex flex-row">
-                <div className="md-form small p-2">
-                  <p className="text-center filterText">From:</p>
-                  <input
-                    id="minprice"
-                    type="text"
-                    onChange={this.handleChangeMinPrice}
-                    value={this.state.minprice}
-                  />
-                </div>
-                <div className="md-form small p-2">
-                  <p className="text-center filterText">To:</p>
-                  <input
-                    id="maxprice"
-                    type="text"
-                    onChange={this.handleChangeMaxPrice}
-                    value={this.state.maxprice}
-                  />
-                </div>
-              </div>
-
-
-              <button
-                className="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect filterText"
-                onClick={this.reloadSearch}
-              >
-                Reload
-              </button>
-            </form>
+      <div className="d-flex p-2 filterBox bd-highlight">
+        <form>
+          <p className="black white-text">Filters</p>
+          <div className="form-group text-center">
+            <div className="md-form mt-3">
+              <input type="text" id="locationFilter" className="form-control filterText" placeholder={this.state.location} onChange={this.handleChangeLocation}/>
+            </div>
           </div>
-        </div>
-      </form>
+          <div className="form-group text-center">
+            <label>What is the purpose?</label><br/>
+            <div class="form-group form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"></input>
+              <label class="form-check-label" for="inlineRadio1">Rent</label>
+            </div>
+            <div class="form-group form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"></input>
+              <label class="form-check-label" for="inlineRadio2">Buy</label>
+            </div>
+          </div>
+            
+          <hr />
 
+          <div class="form-group form-row text-center">
+            <div class="col-md-4 mb-3">
+              <label>Bedrooms</label>
+              <select class="custom-select">
+                <option disabled>Choose</option>
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label>Floor</label>
+              <select class="custom-select">
+                <option disabled>Choose</option>
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
 
+          <hr />
+
+          <div className="form-group text-center">
+            <label>Anything else?</label><br/>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="furnished" value="option2"/>
+              <label class="cform-check-label" for="furnished">Furnished</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="parkingSpot" value="option2"/>
+              <label class="form-check-label" for="parkingSpot">Parking spot</label>
+            </div>
+            <br/>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="heating" value="option2"/>
+              <label class="form-check-label" for="heating">Heating</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="garden" value="option2"/>
+              <label class="form-check-label" for="garden">Garden</label>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="form-group form-row text-center">
+            <div className="md-form small p-2">
+              <p className="text-center filterText">From:</p>
+              <input id="minprice" type="text" onChange={this.handleChangeMinPrice} value={this.state.minprice}/>
+            </div>
+            <div className="md-form small p-2">
+              <p className="text-center filterText">To:</p>
+              <input id="maxprice" type="text" onChange={this.handleChangeMaxPrice} value={this.state.maxprice}/>
+            </div>
+          </div>
+
+          <button
+            className="btn btn-outline-info btn-rounded btn-block "
+            onClick={this.reloadSearch}
+          >
+            Reload
+          </button>
+        </form>
+      </div>
     );
   }
 }

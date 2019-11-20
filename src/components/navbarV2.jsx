@@ -46,7 +46,7 @@ class NavBarV2 extends Component {
   render() {
     return (
       //bg-dark instead of black
-      <nav class="navbar fixed-top navbar-expand-md navbar-dark black scrolling-navbar">
+      <nav class="navbar sticky-top navbar-expand-md navbar-dark black scrolling-navbar">
         <a className="navbar-brand img-fluid" alt="Responsive image" href="/">
           <img src="black-cat.png" alt="logo" />
         </a>

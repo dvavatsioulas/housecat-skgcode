@@ -34,7 +34,7 @@ class LastHouses extends Component {
                   height="200px"
                 />
                 <div class="card-body">
-                  <h4 class="card-title d-flex justify-content-center textcard">
+                  <h4 class="card-title d-flex justify-content-center">
                   {house.property_type_title} at {house.location}
                   </h4>
                   <p id="about" class="card-text">
@@ -53,8 +53,6 @@ class LastHouses extends Component {
           </div>
           
       </React.Fragment>
-
-      
     );
   }
 }
