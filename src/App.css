@@ -209,3 +209,17 @@ cite {
   margin-top: 5%;
   margin-left: 10%;
   bottom: 5%;}
+
+  .housesDiv{
+    min-height: 800px;
+  }
+  .contactForm{
+    margin-left: 10px;
+  }
+  .navbarMore{
+    padding-right: 40px;
+    font-size:large;
+  }
+  .dropdownStyle{
+    margin-right: 40px;
+  }
