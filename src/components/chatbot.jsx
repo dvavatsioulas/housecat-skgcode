@@ -242,7 +242,7 @@ class Chatbot extends Component {
             <div className="card-body" style={{ minHeight: 375, maxHeight: 375, width:'100%', overflow: 'auto'}} >
             <div className="row-sm-8">
               <div className="col">
-                <div className="row" style={{margin: 0, paddingBottom: '2%', paddingTop: '2%', height: '96%'}}>
+                <div className="row" style={{margin: 0, paddingBottom: '12%', paddingTop: '2%', height: '96%'}}>
                   {this.renderMessages(this.state.messages)}
                   <div  ref={(el)=> {this.messagesEnd = el;}} 
                       style={{float: 'left', clear: "both"}}>
@@ -252,7 +252,7 @@ class Chatbot extends Component {
               </div>
             </div>
             <div className="row-sm-2" >
-                  <input style={{bottom:0 ,marginBottom: 10, paddingLeft: '1%', paddingRight: '1%', width: '98%', paddingBottom: '2%', paddingTop: '2%', height: '96%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
+                  <input style={{position:"absolute",bottom:0 ,marginBottom: 10, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '90%', paddingBottom: '2%', paddingTop: '2%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
             </div>  
           </div>
         </div>
