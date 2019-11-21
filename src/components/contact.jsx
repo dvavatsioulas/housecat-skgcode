@@ -15,7 +15,7 @@ class Contact extends Component {
           help you.
         </p>
 
-        <div class="row">
+        <div class="row contactForm">
           <div class="col-md-9 mb-md-0 mb-5">
             <form
               id="contact-form"

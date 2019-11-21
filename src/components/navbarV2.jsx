@@ -52,7 +52,7 @@ class NavBarV2 extends Component {
         </a>
 
         <div
-          className="collapse navbar-collapse navbar-inverse justify-content-end"
+          className="collapse navbar-collapse navbar-inverse justify-content-end navbarMore"
           id="navbars"
         >
           <ul className="navbar-nav">
@@ -71,7 +71,7 @@ class NavBarV2 extends Component {
                 Add House
               </a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown dropdownStyle">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -83,8 +83,7 @@ class NavBarV2 extends Component {
                 More
               </a>
               <div
-                class="dropdown-menu dropdown-menu-right"
-                aria-labelledby="dropdown04"
+                class="dropdown-menu"
               >
                 <a class="dropdown-item" href="/FAQ">
                   FAQ

@@ -18,7 +18,8 @@ class Footer extends Component {
     return (
       <footer className="page-footer font-small footer-dark black pt-4">
         <div className="container-fluid text-center text-md-left">
-          <div class="row justify-content-between">
+          <div class="row">
+          {/* justify-content-between  gia na paei to search sthn akrh*/}
             <hr className="clearfix w-100 d-md-none pb-3" />
 
             <div className="col-md-6 mt-md-0 mt-3">
