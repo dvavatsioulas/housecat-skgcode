@@ -25,7 +25,7 @@ class House extends Component {
       );
     } else {
       return (
-        <div className="d-flex p-8 bd-highlight">
+        <div className="d-flex p-8 bd-highlight housesDiv">
           <ul class="houses">
             {this.state.houses.map(house => (
               <li class="block-example house" key={house.id}>
@@ -40,28 +40,16 @@ class House extends Component {
                     </div>
                     <div class="col-md-8 ">
                       <div class="card-body houseDetails">
-                        <h3>{ house.property_type +" "+ house.sqm +"m² for " + house.sale_type}</h3>
-                        <p>{house.location}</p>
-                        <p>{house.description}</p>
-                        <p>{house.price} €   {house.sqm} m²   {house.bedrooms} bedrooms </p>
-                        {/* <tr>
-                          <td>{house.sqm} m²</td>
-                          <td>{house.price} €</td>
-                          <td>{house.location}</td>
-                        </tr>
-                        <tr>
-                          <td>bedrooms: {house.bedrooms}</td>
-                          <td>bathrooms: {house.bathrooms}</td>
-                          <td>floor: {house.floor}</td>
-                        </tr>
-                        <tr>
-                          <td>heating: {house.heating_type}</td>
-                          <td>built: {house.built_year}</td>
-                        </tr>
-                        <tr>
-                          <td>phone: {house.phone}</td>
-                          <td>email: {house.email}</td>
-                        </tr> */}
+                        <p id="housetitle">{ house.property_type_title +" "+ house.sqm +"m² for " + house.sale_type_title}</p>
+                        <p style={{fontSize:'20px',fontStyle:'initial'}}>{house.location}</p>
+                        <p style={{fontSize:'24px'}}><strong>{house.price}€</strong></p>
+                        <p style={{fontSize:'17px'}}>{house.description}</p>
+                        <ul className="row">
+                          <li style={{marginRight:'30px',fontSize:'17px'}}>Bedrooms: {house.bedrooms}</li>
+                          <li style={{fontSize:'17px'}}>Floor: {house.floor}</li>
+                        </ul>
+                        <a class="btn btn-info d-flex justify-content-center float-right" style={{width:'30%', marginBottom:'10px'}}>More details</a>
+
                       </div>
                     </div>
                   </div>

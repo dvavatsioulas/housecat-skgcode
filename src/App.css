@@ -129,14 +129,14 @@ cite {
 }
 .houses {
   list-style: none;
-  width: 70%;
+  width: 80%;
   padding-top: 50px;
   margin-left: 80px;
 }
 .house {
   list-style: none;
   border-left: 4px solid #333333;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   padding-left: 5px;
 }
 .house:hover {
@@ -178,7 +178,8 @@ cite {
   margin-bottom: 800px;
 }
 .house-img{
-  height: 250px;
+  height: 100%;
+  
 }
 .carousel-img {
   width: 100%;
@@ -222,4 +223,9 @@ cite {
   }
   .dropdownStyle{
     margin-right: 40px;
+  }
+  #housetitle{
+    font-size: xx-large;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
   }
