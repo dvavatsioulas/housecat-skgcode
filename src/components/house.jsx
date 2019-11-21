@@ -12,6 +12,7 @@ class House extends Component {
       this.setState({ houses });
     }
   }
+  
 
   render() {
     if (localStorage.getItem("searchdata") == "") {
@@ -25,21 +26,25 @@ class House extends Component {
     } else {
       return (
         <div className="d-flex p-8 bd-highlight">
-          <ul class="house">
+          <ul class="houses">
             {this.state.houses.map(house => (
-              <li class="block-example" key={house.id}>
+              <li class="block-example house" key={house.id}>
                 <div>
-                  <div class="card-group row">
+                  <div class="card-group row ">
                     <div class="col-md-4">
                       <img
                         src={house.img_url}
-                        class="card-img img-fluid img-thumbnail"
+                        class="card-img img-fluid house-img"
                         alt="house image"
                       ></img>
                     </div>
-                    <div class="col-md-7">
-                      <div class="card-body">
-                        <tr>
+                    <div class="col-md-8 ">
+                      <div class="card-body houseDetails">
+                        <h3>{ house.property_type +" "+ house.sqm +"m² for " + house.sale_type}</h3>
+                        <p>{house.location}</p>
+                        <p>{house.description}</p>
+                        <p>{house.price} €   {house.sqm} m²   {house.bedrooms} bedrooms </p>
+                        {/* <tr>
                           <td>{house.sqm} m²</td>
                           <td>{house.price} €</td>
                           <td>{house.location}</td>
@@ -56,7 +61,7 @@ class House extends Component {
                         <tr>
                           <td>phone: {house.phone}</td>
                           <td>email: {house.email}</td>
-                        </tr>
+                        </tr> */}
                       </div>
                     </div>
                   </div>
