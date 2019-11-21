@@ -207,7 +207,7 @@ class Chatbot extends Component {
     return (
       <React.Fragment>
 
-        <button className="btn btn-dark popup" onClick={mybuttonFunction} style={{bottom: 10}}>
+        <button className="btn btn-dark popup" onClick={mybuttonFunction}>
           Need help?
         </button >
 

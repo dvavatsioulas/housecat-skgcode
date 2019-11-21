@@ -4,8 +4,8 @@
 
 .popup {
   position: sticky;
-  bottom: 0;
-  margin-left: 1200px;
+  bottom: 10px;
+  left:90%;
   cursor: pointer;
   outline: black;
   -webkit-user-select: none;
