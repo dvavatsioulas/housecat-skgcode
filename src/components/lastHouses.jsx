@@ -38,7 +38,7 @@ class LastHouses extends Component {
                   {house.property_type_title} at {house.location}
                   </h4>
                   <p id="about" class="card-text">
-                  <ul className="houseDetails"> 
+                  <ul className="house3Details"> 
                    <li><strong>Sqm:</strong> {house.sqm} m²</li>
                    <li><strong>Price:</strong> {house.price} €</li>
                    <li><strong>For:</strong> {house.sale_type_title}</li>

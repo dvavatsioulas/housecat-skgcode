@@ -25,20 +25,20 @@ class House extends Component {
     } else {
       return (
         <div className="d-flex p-8 bd-highlight">
-          <ul class="house">
+          <ul class="houses">
             {this.state.houses.map(house => (
-              <li class="block-example" key={house.id}>
+              <li class="block-example house" key={house.id}>
                 <div>
-                  <div class="card-group row">
+                  <div class="card-group row ">
                     <div class="col-md-4">
                       <img
                         src={house.img_url}
-                        class="card-img img-fluid img-thumbnail"
+                        class="card-img img-fluid house-img"
                         alt="house image"
                       ></img>
                     </div>
-                    <div class="col-md-7">
-                      <div class="card-body">
+                    <div class="col-md-7 ">
+                      <div class="card-body houseDetails">
                         <tr>
                           <td>{house.sqm} m²</td>
                           <td>{house.price} €</td>

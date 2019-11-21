@@ -124,20 +124,27 @@ cite {
   margin-top: 20%;
   margin-left: 5%;
 }
-.houseDetails {
+.house3Details {
   list-style: none;
 }
 .houses {
   list-style: none;
-  float: left;
-  width: 25%;
-  text-align: center;
-  margin-top: 100px;
+  width: 70%;
+  padding-top: 50px;
+  margin-left: 80px;
 }
 .house {
   list-style: none;
-  padding-top: 50px;
+  border-left: 4px solid #333333;
+  
+   padding-left: 5px; 
 }
+.houseDetails{
+  height: 100%;
+  margin-left: -13px;
+  border: 1px solid #333333;
+}
+
 
 .block-example {
   margin-bottom: 20px;
@@ -166,6 +173,9 @@ cite {
 .noHouseText {
   font-size: 30px;
   margin: 50px;
+}
+.house-img{
+  height: 250px;
 }
 .carousel-img {
   width: 100%;
