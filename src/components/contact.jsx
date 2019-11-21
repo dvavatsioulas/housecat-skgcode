@@ -88,7 +88,7 @@ class Contact extends Component {
             <div class="text-center">
               <a
                 class="btn btn-info"
-                onclick="document.getElementById('contact-form').submit();"
+                onClick="document.getElementById('contact-form').submit();"
               >
                 Send
               </a>
