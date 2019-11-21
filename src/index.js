@@ -9,7 +9,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import Add from "./components/add";
 import Results from "./components/results";
-
+import FAQ from "./components/FAQ";
 const routing = (
   <Router>
     <Switch>
@@ -18,6 +18,7 @@ const routing = (
       <Route exact path="/add" component={Add} />
       <Route exact path="/results" component={Results} />
       <Route exact path="/" component={App} />
+      <Route exact path="/FAQ" component={FAQ} />
     </Switch>
   </Router>
 );

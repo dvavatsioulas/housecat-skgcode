@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
+import NavBarV2 from "./navbarV2";
 import Footer from "./footer";
 import AddHouse from "./form";
 
@@ -8,7 +8,7 @@ class Add extends React.Component {
     render() { 
        return (
         <React.Fragment>
-        <NavBar/>
+        <NavBarV2/>
         <AddHouse/>
         <Footer/>
         </React.Fragment>

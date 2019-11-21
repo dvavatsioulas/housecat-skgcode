@@ -67,7 +67,7 @@ class NavBarV2 extends Component {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="/add">
+              <a class="nav-link " href="/add">
                 Add House
               </a>
             </li>
@@ -86,7 +86,7 @@ class NavBarV2 extends Component {
                 class="dropdown-menu dropdown-menu-right"
                 aria-labelledby="dropdown04"
               >
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/FAQ">
                   FAQ
                 </a>
                 <a class="dropdown-item" href="#about">

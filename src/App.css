@@ -142,30 +142,30 @@ cite {
 .block-example {
   margin-bottom: 20px;
 }
-/* .card{
-  width: 80%;
-  height: 100%;
-  position: center;
-  top: 10%;
-  padding-left: 25%;
-  margin-bottom: 5%;
-  margin-top: 10%;
-  margin-left: 5%;
-} */
-/* .form-row{
-  margin-top: 10%;
-  margin-left: 5%;
-} */
+
 
 #carouselExampleIndicators {
   z-index: 0;
 }
+.FAQ{
+  position: center;
+  margin-top: 10%;
+  margin-left:10%;
+  margin-right:10%;
+  margin-bottom: 25%;
+  padding-left: 4%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
 .houseDetails li {
   font-size: medium;
 }
 .noHouseText {
   font-size: 30px;
   margin: 50px;
+  margin-bottom: 800px;
 }
 .carousel-img {
   width: 100%;
@@ -185,3 +185,14 @@ cite {
       width: 70%;
   }
 }
+.addHouse{
+  position: sticky;
+  width: 80%;
+  height: 100%;
+  position: center;
+  top: 15%;
+  padding-left: 2%;
+  margin-bottom: 15%;
+  margin-top: 5%;
+  margin-left: 10%;
+  bottom: 5%;}
