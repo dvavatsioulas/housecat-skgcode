@@ -131,8 +131,8 @@ class FilterBox extends Component {
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
         {
           id: null,
-          minprice: null,
-          maxprice: null,
+          minprice: this.state.minprice,
+          maxprice: this.state.maxprice,
           sqm: null,
           location: this.state.location,
           bedrooms: null,
