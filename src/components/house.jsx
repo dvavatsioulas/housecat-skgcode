@@ -12,6 +12,7 @@ class House extends Component {
       this.setState({ houses });
     }
   }
+  
 
   render() {
     if (localStorage.getItem("searchdata") == "") {
@@ -37,9 +38,13 @@ class House extends Component {
                         alt="house image"
                       ></img>
                     </div>
-                    <div class="col-md-7 ">
+                    <div class="col-md-8 ">
                       <div class="card-body houseDetails">
-                        <tr>
+                        <h3>{ house.property_type +" "+ house.sqm +"m² for " + house.sale_type}</h3>
+                        <p>{house.location}</p>
+                        <p>{house.description}</p>
+                        <p>{house.price} €   {house.sqm} m²   {house.bedrooms} bedrooms </p>
+                        {/* <tr>
                           <td>{house.sqm} m²</td>
                           <td>{house.price} €</td>
                           <td>{house.location}</td>
@@ -56,7 +61,7 @@ class House extends Component {
                         <tr>
                           <td>phone: {house.phone}</td>
                           <td>email: {house.email}</td>
-                        </tr>
+                        </tr> */}
                       </div>
                     </div>
                   </div>

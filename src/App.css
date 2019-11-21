@@ -136,8 +136,11 @@ cite {
 .house {
   list-style: none;
   border-left: 4px solid #333333;
-  
-   padding-left: 5px; 
+  margin-bottom: 30px;
+  padding-left: 5px;
+}
+.house:hover {
+  background-color: #e6f7ff;
 }
 .houseDetails{
   height: 100%;
