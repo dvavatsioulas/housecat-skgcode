@@ -14,12 +14,16 @@ exports.front_handle_intents = function(res){
     if (res.data.intent.displayName === 'FAQ 2 Intent - no thanks'){
         next_event='end_intent'
     }
+
     if (res.data.intent.displayName === 'End Intent'){
         console.log("END INTENT")
-        delete_messages=true;
+        //delete_messages=true;
     }
-    if (res.data.intent.displayName === 'Renter Intent - got housetype - got saletype - got location - yes'){
-        console.log("I AM HERE1")
+    if (res.data.intent.displayName === 'FAQ more - yes'){
+        window.location = "/#contact";
+    }
+    if (res.data.intent.displayName === 'Renter Intent - got housetype - got saletype - got location - got price - yes'){
+
         let initial_params=initial_params_fun.initialize_parameters()
 
         handle_params.handle_params(res, initial_params)

@@ -1,9 +1,15 @@
 exports.handle_params = function(responses, initial_params){
     
     var parameters = responses.data.outputContexts[0].parameters.fields
-    
+    console.log(parameters)
     initial_params.location=parameters.City.stringValue
     
+    initial_params.minprice=0;    
+    if (parameters.max_price.structValue.fields.amount.numberValue<0){
+        initial_params.maxprice=-parameters.max_price.structValue.fields.amount.numberValue
+    }else{
+        initial_params.maxprice=parameters.max_price.structValue.fields.amount.numberValue
+    }
     if(parameters.HouseType.stringValue==="a house"){
         initial_params.property_type=1
     }else{

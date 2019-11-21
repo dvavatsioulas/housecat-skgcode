@@ -4,8 +4,8 @@ import Cookies from 'universal-cookie';
 import uuid from 'uuid';
 import Message from "./chatbot_messages";
 
-//const api_address='http://localhost:8000'
-const api_address='https://housecat-skgcode-api.herokuapp.com'
+const api_address='http://localhost:8000'
+//const api_address='https://housecat-skgcode-api.herokuapp.com'
 
 const front_handle_intents= require('./chatbot_functions/front_hanle_intents_function.js')
 
@@ -70,11 +70,12 @@ class Chatbot extends Component {
     }
 
     var final_params=front_handle_intents.final_params
+    console.log(final_params)
     if(final_params!=null){
       axios.post(api_address+'/api/properties/search',  {
             "id":null,
             "minprice":final_params.minprice,
-            "maxprice":final_params.minprice,
+            "maxprice":final_params.maxprice,
             "sqm": null,
             "location":final_params.location,
             "bedrooms":null,
@@ -89,9 +90,18 @@ class Chatbot extends Component {
             "parking":null
         }).then(res => {
 
-          //localStorage.setItem("filters",JSON.stringify(final_params));
-          let filteringResults = res.data;
-          localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+          if (res.status == 200) {
+            let filteringResults = res.data;
+            localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+
+            let filterboxInfo = {
+              location: this.state.location
+            };
+            localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+         
+          } else if (res.status == 204) {
+            localStorage.setItem("searchdata", res.data);
+          }
 
           // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
           setTimeout( () => {
@@ -169,7 +179,7 @@ class Chatbot extends Component {
   show() {
     var popup = document.getElementById("myPopup");
     this.setState({showBot: true});
-    popup.style.display='block'
+    popup.style.display='inline-block'
   }
 
   hide() {
@@ -197,7 +207,6 @@ class Chatbot extends Component {
   render() {
 
     var mybuttonFunction
-    console.log(this.state.showBot)
 
     if (this.state.showBot){
         mybuttonFunction=this.hide
@@ -211,7 +220,7 @@ class Chatbot extends Component {
           Need help?
         </button >
 
-        <span className="popuptext" id="myPopup">
+        <span className="popuptext" id="myPopup" style={{display:"inline-block", position:"sticky"}}>
 
           <div className="card mb-2 bg-light text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 50, right: 0, border: '1px solid lightgray'}}>
             <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 125, maxHeight: 125}}>
@@ -243,7 +252,7 @@ class Chatbot extends Component {
               </div>
             </div>
             <div className="row-sm-2" >
-                  <input style={{marginBottom: 10, paddingLeft: '1%', paddingRight: '1%', width: '98%', paddingBottom: '2%', paddingTop: '2%', height: '96%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
+                  <input style={{bottom:0 ,marginBottom: 10, paddingLeft: '1%', paddingRight: '1%', width: '98%', paddingBottom: '2%', paddingTop: '2%', height: '96%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
             </div>  
           </div>
         </div>
