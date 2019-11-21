@@ -91,8 +91,6 @@ class FilterBox extends Component {
     super(props);
 
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
-    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
-    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.reloadSearch = this.reloadSearch.bind(this);
   }
   state = {
@@ -104,23 +102,13 @@ class FilterBox extends Component {
       this.setState({ location: "Location" });
     } else {
       var item = JSON.parse(localStorage.getItem("filters"));
-      this.setState({ location: item.location });
+      this.setState({ location: item.location});
     }
   }
 
   handleChangeLocation(event) {
     this.setState({
       location: event.target.value
-    });
-  }
-  handleChangeMaxPrice(event) {
-    this.setState({
-      maxprice: event.target.value
-    });
-  }
-  handleChangeMinPrice(event) {
-    this.setState({
-      minprice: event.target.value
     });
   }
 
@@ -131,8 +119,8 @@ class FilterBox extends Component {
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
         {
           id: null,
-          minprice: this.state.minprice,
-          maxprice: this.state.maxprice,
+          minprice: null,
+          maxprice: null,
           sqm: null,
           location: this.state.location,
           bedrooms: null,
