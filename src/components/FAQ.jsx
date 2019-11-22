@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Footer from "./footer";
 import NavBarV2 from "../components/navbarV2";
+import Chatbot from "./chatbot";
 
 
 class FAQ extends Component{
@@ -23,6 +24,7 @@ class FAQ extends Component{
 
                
         </div> 
+           <Chatbot/>
            <Footer/>
           </React.Fragment>
           
