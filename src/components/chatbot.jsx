@@ -52,8 +52,28 @@ class Chatbot extends Component {
         speaks: 'bot',
         msg: msg
       }
-      this.setState({messages: [...this.state.messages, says]});
-
+      let delays={
+        speaks: 'bot',
+        msg : {
+          text: {
+            text: '...'
+          }
+        } 
+      }
+      //ADD Bot Delay
+      let time
+      time= 3000/336*msg.text.text[0].length
+      if (time < 750){
+        time = 750
+      }
+      console.log("TIME: "+ time +"LENGTH: "+msg.text.text[0].length)
+      this.setState({messages: [...this.state.messages, delays]});
+      setTimeout( () => {
+        this.setState({ position: 1 });
+       }, time);
+      var last_msg=this.state.messages.length
+      this.state.messages[last_msg-1]=says 
+      //this.setState({messages: [...this.state.messages, says]});
     }
 
     front_handle_intents.front_handle_intents(res)

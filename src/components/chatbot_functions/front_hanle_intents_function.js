@@ -11,16 +11,19 @@ exports.front_handle_intents = function(res){
     if (res.data.intent.displayName === 'FAQ 2 Intent - yes'){
         window.location = "/results";
     }
+    if (res.data.intent.displayName === 'FAQ more - yes' || res.data.intent.displayName === 'FAQ 5 Intent - yes'){
+        window.location = "/#contact";
+    }
     if (res.data.intent.displayName === 'FAQ 2 Intent - no thanks'){
         next_event='end_intent'
     }
-
     if (res.data.intent.displayName === 'End Intent'){
         console.log("END INTENT")
         //delete_messages=true;
     }
-    if (res.data.intent.displayName === 'FAQ more - yes'){
-        window.location = "/#contact";
+    //Search Intents
+    if (res.data.intent.displayName === 'More Filters Intent'){
+        //TODO!!
     }
     if (res.data.intent.displayName === 'Renter Intent - got housetype - saletype - location - price - sqm'){
 
