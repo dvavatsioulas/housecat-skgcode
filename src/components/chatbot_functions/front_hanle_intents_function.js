@@ -22,7 +22,7 @@ exports.front_handle_intents = function(res){
     if (res.data.intent.displayName === 'FAQ more - yes'){
         window.location = "/#contact";
     }
-    if (res.data.intent.displayName === 'Renter Intent - got housetype - got saletype - got location - got price - yes'){
+    if (res.data.intent.displayName === 'Renter Intent - got housetype - saletype - location - price - sqm'){
 
         let initial_params=initial_params_fun.initialize_parameters()
 
