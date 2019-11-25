@@ -76,7 +76,7 @@ class Chatbot extends Component {
             "id":null,
             "minprice":final_params.minprice,
             "maxprice":final_params.maxprice,
-            "sqm": null,
+            "sqm": final_params.sqm,
             "location":final_params.location,
             "bedrooms":null,
             "bathrooms":null,
