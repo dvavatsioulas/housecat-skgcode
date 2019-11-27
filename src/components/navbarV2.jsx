@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ReactDOM from "react-dom";
 
 class NavBarV2 extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class NavBarV2 extends Component {
   render() {
     return (
       //bg-dark instead of black
-      <nav class="navbar sticky-top navbar-expand-md navbar-dark black scrolling-navbar">
+      <nav class="navbar navbar-expand-md navbar-dark black scrolling-navbar">
         <a className="navbar-brand img-fluid" alt="Responsive image" href="/">
           <img src="black-cat.png" alt="logo" />
         </a>
@@ -116,3 +117,5 @@ class NavBarV2 extends Component {
 }
 
 export default NavBarV2;
+
+ReactDOM.render(<NavBarV2 />, document.getElementById('fixedNavbar'));

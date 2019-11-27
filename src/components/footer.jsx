@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
 import {
   MDBContainer,
   MDBRow,
@@ -16,7 +18,7 @@ class Footer extends Component {
   state = {};
   render() {
     return (
-      <footer className="page-footer font-small footer-dark black pt-4">
+      <footer className="page-footer bottom font-small footer-dark black pt-4">
         <div className="container-fluid text-center text-md-left">
           <div class="row">
           {/* justify-content-between  gia na paei to search sthn akrh*/}
@@ -65,3 +67,5 @@ class Footer extends Component {
 }
 
 export default Footer;
+
+ReactDOM.render(<Footer />, document.getElementById('fixedFooter'));
