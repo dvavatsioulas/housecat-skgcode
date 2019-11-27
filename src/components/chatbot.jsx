@@ -3,9 +3,11 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 import uuid from 'uuid';
 import Message from "./chatbot_messages";
+import QuickReplies from './quickReplies'
 
-//const api_address='http://localhost:8000'
-const api_address='https://housecat-skgcode-api.herokuapp.com'
+
+const api_address='http://localhost:8000'
+//const api_address='https://housecat-skgcode-api.herokuapp.com'
 
 const front_handle_intents= require('./chatbot_functions/front_hanle_intents_function.js')
 
@@ -61,12 +63,12 @@ class Chatbot extends Component {
         } 
       }
       //ADD Bot Delay
-      let time
-      time= 3000/336*msg.text.text[0].length
+      let time=750
+      //time= 3000/336*msg.text.text[0].length
       if (time < 750){
         time = 750
       }
-      console.log("TIME: "+ time +"LENGTH: "+msg.text.text[0].length)
+      //console.log("TIME: "+ time +"LENGTH: "+msg.text.text[0].length)
       this.setState({messages: [...this.state.messages, delays]});
       setTimeout( () => {
         this.setState({ position: 1 });
@@ -189,13 +191,25 @@ class Chatbot extends Component {
   renderMessages(stateMessages){
     if (stateMessages){
       return stateMessages.map((message, i)=>{
-        return <Message key={i} speaks={message.speaks} text={message.msg.text.text} />
+        return this.renderOneMessage(message, i);
       })
     }else{
         return null
     }
   }
-
+  renderOneMessage(message, i) {
+    if (message.msg && message.msg.text && message.msg.text.text) {
+        return <Message key={i} speaks={message.speaks} text={message.msg.text.text}/>;
+    }else if(message.msg && message.msg.payload && message.msg.payload.fields && message.msg.payload.fields.quick_replies){
+      return <QuickReplies
+        text={message.msg.payload.fields.text ? message.msg.payload.fields.text : null}
+        key={i}
+        replyClick={this._handleQuickReplyPayload}
+        speaks={message.speaks}
+        payload={message.msg.payload.fields.quick_replies.listValue.values}
+      />;
+    }
+  }
   show() {
     var popup = document.getElementById("myPopup");
     this.setState({showBot: true});
