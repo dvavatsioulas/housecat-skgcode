@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import  {Link} from "react-router-dom";
 class LastHouses extends Component {
   
   state = {
@@ -44,8 +44,8 @@ class LastHouses extends Component {
                    <li><strong>For:</strong> {house.sale_type}</li>
                  </ul>
                   </p>
-                  {/* We have to add redirect to detail view page on this button */}
-                  <a class="btn btn-info d-flex justify-content-center">More details</a>
+
+                  <Link to={`/houses/${house.id}`} class="btn btn-info d-flex justify-content-center">More details</Link>
                 </div>
               </div>
             </div>

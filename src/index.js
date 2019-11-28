@@ -10,6 +10,8 @@ import * as serviceWorker from "./serviceWorker";
 import Add from "./components/add";
 import Results from "./components/results";
 import FAQ from "./components/FAQ";
+import DetailView from "./components/detailview";
+
 const routing = (
   <Router>
     <Switch>
@@ -17,6 +19,7 @@ const routing = (
       <Route exact path="/results" component={Results} />
       <Route exact path="/" component={App} />
       <Route exact path="/FAQ" component={FAQ} />
+      <Route exact path="/houses/:id" component={DetailView} />
     </Switch>
   </Router>
 );

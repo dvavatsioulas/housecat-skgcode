@@ -2,7 +2,8 @@ exports.initialize_parameters = function(){
     let userSearchedParams = {
         minprice:null,
         maxprice:null,
-		sqm: null,
+		minsqm:null,
+		maxsqm:null,
 		location:null,
 		bedrooms:null,
 		bathrooms:null,
@@ -11,8 +12,7 @@ exports.initialize_parameters = function(){
 		sale_type:null,
 		furnitured:null,
 		heating_type:null,
-		minbuilt_year:null,
-		maxbuilt_year:null,
+		minbuiltyear:null,
 		parking:null
     };
     return userSearchedParams;
