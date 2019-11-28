@@ -8,14 +8,26 @@ class FilterBox extends Component {
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
     this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
-    this.handleBuyRentChange = this.handleBuyRentChange.bind(this);
+    this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
+    this.handleHeatingChange = this.handleHeatingChange.bind(this)
+    this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
+    this.handleBedroomChange = this.handleBedroomChange.bind(this);
+    this.handleFloorChange = this.handleFloorChange.bind(this);
+    this.handleParkingChecked = this.handleParkingChecked.bind(this);
+    this.handleFurnituredChecked = this.handleFurnituredChecked.bind(this);
     this.reloadSearch = this.reloadSearch.bind(this);
   }
   state = {
     location: null,
     minprice: null,
     maxprice: null,
-    selectedRentBuy: null,
+    saleType: null,
+    bedrooms: null,
+    floor: null,
+    propertyType: null,
+    heating: null,
+    parking: null,
+    furnitured: null
   };
 
   componentDidMount() {
@@ -23,10 +35,22 @@ class FilterBox extends Component {
       this.setState({ location: "Location" });
     } else {
       var item = JSON.parse(localStorage.getItem("filters"));
+      // var parkingCheck, furnituredCheck;
+      // if (item.parking === "yes"){
+      //   this.setState({parking: true})
+      // }
+      // if(item.furnitured === "yes"){
+      //   this.setState({furnitured: true})
+      // }
       this.setState({ location: item.location, 
                       minprice : item.minprice, 
                       maxprice: item.maxprice,
-                      selectedRentBuy: item.sale_type});
+                      saleType: item.sale_type,
+                      bedrooms: item.bedrooms,
+                      floor: item.floor,
+                      propertyType : item.property_type,
+                      heating: item.heating_type,
+                      });
     }
   }
 
@@ -45,10 +69,40 @@ class FilterBox extends Component {
       minprice: event.target.value
     });
   }
-  handleBuyRentChange = changeEvent => {
+  handleSaleTypeChange (changeEvent) {
     this.setState({
-      selectedRentBuy: changeEvent.target.value
+      saleType: changeEvent.target.value
     });
+  };
+  handlePropertyTypeChange (changeEvent) {
+    this.setState({
+      propertyType: changeEvent.target.value
+    });
+  };
+  handleHeatingChange (changeEvent) {
+    this.setState({
+      heating: changeEvent.target.value
+    });
+  };
+  handleBedroomChange (event) {
+    this.setState({bedrooms: event.target.value});
+  };
+  handleFloorChange (event) {
+    this.setState({floor: event.target.value});
+  };
+  handleParkingChecked(event){
+    if(event.target.checked){
+      this.setState({parking: "yes"});
+    }else{
+      this.setState({parking: "no"});
+    }
+  };
+  handleFurnituredChecked(event){
+    if(event.target.checked){
+      this.setState({furnitured: "yes"});
+    }else{
+      this.setState({furnitured: "no"});
+    }
   };
 
   reloadSearch() {
@@ -62,15 +116,15 @@ class FilterBox extends Component {
           minsqm: null,
           maxsqm: null,
           location: this.state.location,
-          bedrooms: null,
+          bedrooms: this.state.bedrooms,
           bathrooms: null,
-          property_type: null,
-          floor: null,
-          sale_type: this.state.selectedRentBuy,
-          furnitured: null,
-          heating_type: null,
+          property_type: this.state.propertyType,
+          floor: this.state.floor,
+          sale_type: this.state.saleType,
+          furnitured: this.state.furnitured,
+          heating_type: this.state.heating,
           minbuilt_year: null,
-          parking: null
+          parking: this.state.parking
         }
       )
       .then(res => {
@@ -91,7 +145,14 @@ class FilterBox extends Component {
       let filterboxInfo = {
         location: this.state.location,
         minprice: this.state.minprice,
-        maxprice: this.state.maxprice
+        maxprice: this.state.maxprice,
+        sale_type: this.state.selectedRentBuy,
+        bedrooms: this.state.bedrooms,
+        floor: this.state.floor,
+        property_type: this.state.propertyType,
+        heating_type: this.state.heating,
+        parking: this.state.parking,
+        furnitured: this.state.furnitured
       };
       localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
@@ -103,7 +164,7 @@ class FilterBox extends Component {
           <strong>Filters</strong>
         </h3>
 
-        <div className="card-body px-small-5 pt-0">
+        <div className="card-body px-small-5 pt-0 filterText">
           <form>
             <div>
               <div className="md-form mt-3">
@@ -117,31 +178,29 @@ class FilterBox extends Component {
               </div>
             </div>
             <div className="text-center">
-                 <p className="filterText">What is the purpose? </p>
-                 <div className="custom-control custom-radio custom-control-inline">
+                 <p className="filterText">I want to: </p>
+                 <div className="custom-control-inline">
                    
-                  <label class="custom-control-label">
+                  <label>
                   <input
                     type="radio"
-                    
                     value="rent"
-                    
-                    checked={this.state.selectedRentBuy === "rent"}
-                    onChange={this.handleBuyRentChange}
+                    checked={this.state.saleType === "rent"}
+                    onChange={this.handleSaleTypeChange}
                   />
                     Rent
                   </label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
+                <div className="custom-control-inline">
                   
-                  <label class="custom-control-label">
+                  <label >
                   <input
                     type="radio"
                     
                     value="sale"
                     
-                    checked={this.state.selectedRentBuy === "sale"}
-                    onChange={this.handleBuyRentChange}
+                    checked={this.state.saleType === "sale"}
+                    onChange={this.handleSaleTypeChange}
                   />
                     Buy
                   </label>
@@ -150,10 +209,39 @@ class FilterBox extends Component {
 
             <hr />
 
-            <div class="form-group form-row text-center">
-              <div class="col-md-4 mb-3" style={{marginLeft:'15%'}}>
+            <div className="text-center">
+                 <p className="filterText">I am looking for:  </p>
+                 <div className="custom-control-inline">
+                   
+                  <label className="filterText">
+                  <input
+                    type="radio"
+                    value="apartment"
+                    checked={this.state.propertyType === "apartment"}
+                    onChange={this.handlePropertyTypeChange}
+                  />
+                    Apartment
+                  </label>
+                </div>
+                <div className="custom-control-inline">
+                  
+                  <label className="filterText">
+                  <input
+                    type="radio"
+                    value="house"
+                    checked={this.state.propertyType === "house"}
+                    onChange={this.handlePropertyTypeChange}
+                  />
+                    House
+                  </label>
+                </div>
+              </div>
+
+            <div className="form-group form-row text-center filterText">
+              <div className="col-md-4 mb-3" style={{marginLeft:'15%'}}>
                 <label>Bedrooms</label>
-                <select class="custom-select">
+                <select className="custom-select" value={this.state.bedrooms} 
+                     onChange={this.handleBedroomChange} >
                   <option disabled>Choose</option>
                   <option selected value="1">
                     1
@@ -164,7 +252,8 @@ class FilterBox extends Component {
               </div>
               <div class="col-md-4 mb-3">
                 <label>Floor</label>
-                <select class="custom-select">
+                <select class="custom-select" value={this.state.floor} 
+                     onChange={this.handleFloorChange}>
                   <option disabled>Choose</option>
                   <option selected value="1">
                     1
@@ -177,49 +266,28 @@ class FilterBox extends Component {
 
             <hr />
             <p className="text-center filterText">Anything else?</p>
-            <div className="d-flex flex-row" style={{marginRight:'9%'}}>
-              <div className="d-flex flex-column checkboxes">
-                <div className="custom-control custom-checkbox p-2">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="furnished"
-                  />
-                  <label class="custom-control-label" for="furnished">
-                    Furnished
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox p-2">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="parkingSpot"
-                  />
-                  <label className="custom-control-label" for="parkingSpot">
-                    Parking spot
-                  </label>
-                </div>
-              </div>
-
-              <div className="d-flex flex-column checkboxes">
-                <div className="custom-control custom-checkbox p-2">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="garden"
-                  />
-                  <label class="custom-control-label" for="garden">
-                    Garden
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox p-2">
-                  <input type="checkbox" class="custom-control-input" id="ac" />
-                  <label class="custom-control-label" for="ac">
-                    A/C
-                  </label>
-                </div>
+            <div className="form-group form-row text-center filterText">
+              <div className="d-flex flex-row"> 
+                <label className="p-2">Heating</label>
+                <select className="custom-select" value={this.state.heating} 
+                     onChange={this.handleHeatingChange} >
+                  <option disabled>Choose</option>
+                  <option selected value="gas"> Gas </option>
+                  <option value="diesel">Diesel</option>
+                </select>
               </div>
             </div>
+
+
+            <div className="custom-control custom-switch">
+              <input type="checkbox" className="custom-control-input" id="parking" onChange={this.handleParkingChecked}/>
+              <label className="custom-control-label" for="parking">Parking Spot</label>
+            </div>
+            <div className="custom-control custom-switch">
+              <input type="checkbox" className="custom-control-input" id="furnitured" onChange={this.handleFurnituredChecked}/>
+              <label className="custom-control-label" for="furnitured">Furnitured</label>
+            </div>
+            
 
             <hr />
 

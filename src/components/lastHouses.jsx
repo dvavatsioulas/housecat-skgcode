@@ -35,13 +35,13 @@ class LastHouses extends Component {
                 />
                 <div class="card-body">
                   <h4 class="card-title d-flex justify-content-center">
-                  {house.property_type_title} at {house.location}
+                  {house.property_type} at {house.location}
                   </h4>
                   <p id="about" class="card-text">
                   <ul className="house3Details"> 
                    <li><strong>Sqm:</strong> {house.sqm} m²</li>
                    <li><strong>Price:</strong> {house.price} €</li>
-                   <li><strong>For:</strong> {house.sale_type_title}</li>
+                   <li><strong>For:</strong> {house.sale_type}</li>
                  </ul>
                   </p>
                   {/* We have to add redirect to detail view page on this button */}
