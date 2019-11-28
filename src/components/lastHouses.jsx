@@ -9,7 +9,7 @@ class LastHouses extends Component {
 
   componentDidMount(){
     
-      axios.get(`https://housecat-skgcode-api.herokuapp.com/api/3properties`).then(res => {
+      axios.get(`https://housecat-skgcode-api.herokuapp.com/api/properties/3properties`).then(res => {
         const houses = res.data;
         this.setState({ houses });
     });

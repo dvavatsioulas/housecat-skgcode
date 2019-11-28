@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import axios from "axios";
-import House from "./house";
-import { conditionalExpression } from "@babel/types";
 
 class FilterBox extends Component {
   constructor(props) {
     super(props);
 
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
+    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
+    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
+    this.handleBuyRentChange = this.handleBuyRentChange.bind(this);
     this.reloadSearch = this.reloadSearch.bind(this);
   }
   state = {
-    location: null
+    location: null,
+    minprice: null,
+    maxprice: null,
+    selectedRentBuy: null,
   };
 
   componentDidMount() {
@@ -19,7 +23,10 @@ class FilterBox extends Component {
       this.setState({ location: "Location" });
     } else {
       var item = JSON.parse(localStorage.getItem("filters"));
-      this.setState({ location: item.location});
+      this.setState({ location: item.location, 
+                      minprice : item.minprice, 
+                      maxprice: item.maxprice,
+                      selectedRentBuy: item.sale_type});
     }
   }
 
@@ -28,6 +35,21 @@ class FilterBox extends Component {
       location: event.target.value
     });
   }
+  handleChangeMaxPrice(event) {
+    this.setState({
+      maxprice: event.target.value
+    });
+  }
+  handleChangeMinPrice(event) {
+    this.setState({
+      minprice: event.target.value
+    });
+  }
+  handleBuyRentChange = changeEvent => {
+    this.setState({
+      selectedRentBuy: changeEvent.target.value
+    });
+  };
 
   reloadSearch() {
     var reloaded = false;
@@ -35,20 +57,19 @@ class FilterBox extends Component {
       .post(
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
         {
-          id: null,
-          minprice: null,
-          maxprice: null,
-          sqm: null,
+          minprice: this.state.minprice,
+          maxprice: this.state.maxprice,
+          minsqm: null,
+          maxsqm: null,
           location: this.state.location,
           bedrooms: null,
           bathrooms: null,
           property_type: null,
           floor: null,
-          sale_type: null,
+          sale_type: this.state.selectedRentBuy,
           furnitured: null,
           heating_type: null,
           minbuilt_year: null,
-          maxbuilt_year: null,
           parking: null
         }
       )
@@ -61,16 +82,18 @@ class FilterBox extends Component {
             window.open("/results", "_self"); //to open new page
             reloaded = false;
           }
-          let filterboxInfo = {
-            location: this.state.location
-          };
-          localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+          
         } else if (res.status == 204) {
           localStorage.setItem("searchdata", res.data);
-          localStorage.setItem("filters", "");
           window.open("/results", "_self");
         }
       });
+      let filterboxInfo = {
+        location: this.state.location,
+        minprice: this.state.minprice,
+        maxprice: this.state.maxprice
+      };
+      localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
 
   render() {
@@ -96,24 +119,30 @@ class FilterBox extends Component {
             <div className="text-center">
                  <p className="filterText">What is the purpose? </p>
                  <div className="custom-control custom-radio custom-control-inline">
-                   <input
+                   
+                  <label class="custom-control-label">
+                  <input
                     type="radio"
-                    className="custom-control-input "
-                    id="defaultInline1"
-                    name="inlineDefaultRadiosExample"
+                    
+                    value="rent"
+                    
+                    checked={this.state.selectedRentBuy === "rent"}
+                    onChange={this.handleBuyRentChange}
                   />
-                  <label class="custom-control-label" for="defaultInline1">
                     Rent
                   </label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
+                  
+                  <label class="custom-control-label">
                   <input
                     type="radio"
-                    class="custom-control-input"
-                    id="defaultInline2"
-                    name="inlineDefaultRadiosExample"
+                    
+                    value="sale"
+                    
+                    checked={this.state.selectedRentBuy === "sale"}
+                    onChange={this.handleBuyRentChange}
                   />
-                  <label class="custom-control-label" for="defaultInline2">
                     Buy
                   </label>
                 </div>
@@ -201,7 +230,7 @@ class FilterBox extends Component {
                   id="minprice"
                   type="text"
                   onChange={this.handleChangeMinPrice}
-                  value={this.state.minprice}
+                  placeholder={this.state.minprice}
                 />
               </div>
               <div className="md-form small p-2">
@@ -210,7 +239,7 @@ class FilterBox extends Component {
                   id="maxprice"
                   type="text"
                   onChange={this.handleChangeMaxPrice}
-                  value={this.state.maxprice}
+                  placeholder={this.state.maxprice}
                 />
               </div>
             </div>

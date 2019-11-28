@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { isTemplateElement } from "@babel/types";
 
 var styleBox = {
   width: "100%",
@@ -40,14 +41,16 @@ class Carousel extends Component {
   }
 
   handleSubmit() {
+    console.log(this.state.minprice);
+    console.log(this.state.maxprice);
     axios
       .post(
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
         {
-          id: null,
-          minprice: null,
-          maxprice: null,
-          sqm: null,
+          minprice: this.state.minprice,
+          maxprice: this.state.maxprice,
+          minsqm: null,
+          maxsqm: null,
           location: this.state.location,
           bedrooms: null,
           bathrooms: null,
@@ -57,7 +60,6 @@ class Carousel extends Component {
           furnitured: null,
           heating_type: null,
           minbuilt_year: null,
-          maxbuilt_year: null,
           parking: null
         }
       )
@@ -69,7 +71,9 @@ class Carousel extends Component {
           window.open("/results", "_self"); //to open new page
 
           let filterboxInfo = {
-            location: this.state.location
+            location: this.state.location,
+            minprice: this.state.minprice,
+            maxprice: this.state.maxprice
           };
           localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         } else if (res.status == 204) {

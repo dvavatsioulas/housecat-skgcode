@@ -40,7 +40,7 @@ class House extends Component {
                     </div>
                     <div class="col-md-8 ">
                       <div class="card-body houseDetails">
-                        <p id="housetitle">{ house.property_type_title +" "+ house.sqm +"m² for " + house.sale_type_title}</p>
+                        <p id="housetitle">{ house.property_type +" "+ house.sqm +"m² for " + house.sale_type}</p>
                         <p class="fas fa-map-marker-alt" style={{fontSize:'24px',fontStyle:'initial'}}> {house.location} {house.price}€</p>
                         <p style={{fontSize:'17px'}}>{house.description}</p>
                         <ul className="row">
