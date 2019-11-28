@@ -23,13 +23,7 @@ class DetailView extends React.Component {
                 <div class="col-sm-12">
                 <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
                     <div class="carousel-item-b">
-                    <img src="img/slide-2.jpg" alt=""></img>
-                    </div>
-                    <div class="carousel-item-b">
-                    <img src="img/slide-3.jpg" alt=""></img>
-                    </div>
-                    <div class="carousel-item-b">
-                    <img src="img/slide-1.jpg" alt=""></img>
+                    <img style={{width:"100%", height:"100%"}} src={this.state.house.img_url} alt=""></img>
                     </div>
                 </div>
                 <div class="row justify-content-between">
@@ -56,7 +50,7 @@ class DetailView extends React.Component {
                         <ul class="list">
                             <li class="d-flex justify-content-between">
                             <strong>Property ID:</strong>
-                            <span>1134</span>
+                            <span>{this.state.house.id}</span>
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Location:</strong>
@@ -64,29 +58,29 @@ class DetailView extends React.Component {
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Property Type:</strong>
-                            <span>House</span>
+                            <span>{this.state.house.property_type}</span>
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Status:</strong>
-                            <span>Sale</span>
+                            <span>{this.state.house.sale_type}</span>
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Area:</strong>
-                            <span>340m
+                            <span>{this.state.house.sqm}m
                                 <sup>2</sup>
                             </span>
                             </li>
                             <li class="d-flex justify-content-between">
-                            <strong>Beds:</strong>
-                            <span>4</span>
+                            <strong>Bedrooms:</strong>
+                            <span>{this.state.house.bedrooms}</span>
                             </li>
                             <li class="d-flex justify-content-between">
-                            <strong>Baths:</strong>
-                            <span>2</span>
+                            <strong>Bathrooms:</strong>
+                            <span>{this.state.house.bathrooms}</span>
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Garage:</strong>
-                            <span>1</span>
+                            <span>{this.state.house.parking}</span>
                             </li>
                         </ul>
                         </div>
@@ -102,17 +96,13 @@ class DetailView extends React.Component {
                     </div>
                     <div class="property-description">
                         <p class="description color-text-a">
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit
-                        neque, auctor sit amet
-                        aliquam vel, ullamcorper sit amet ligula. Cras ultricies ligula sed magna dictum porta.
-                        Curabitur aliquet quam id dui posuere blandit. Mauris blandit aliquet elit, eget tincidunt
-                        nibh pulvinar quam id dui posuere blandit.
+                            {this.state.house.description}
                         </p>
-                        <p class="description color-text-a no-margin">
+                        {/* <p class="description color-text-a no-margin">
                         Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
                         malesuada. Quisque velit nisi,
                         pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-                        </p>
+                        </p> */}
                     </div>
                     <div class="row section-t3">
                         <div class="col-sm-12">
