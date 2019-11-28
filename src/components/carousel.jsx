@@ -149,7 +149,7 @@ class Carousel extends Component {
                   id="location"
                   className="p-2 flex-grow-1 h4"
                   type="text"
-                  placeholder="Thessaloniki, Greece"
+                  placeholder="e.g. Thessaloniki"
                   onChange={this.handleChangeLocation}
                   value={this.state.location}
                 />
@@ -157,7 +157,7 @@ class Carousel extends Component {
                   id="minprice"
                   className="p-2 h5"
                   type="text"
-                  placeholder="280€"
+                  placeholder="e.g. 200€"
                   onChange={this.handleChangeMinPrice}
                   value={this.state.minprice}
                 />
@@ -165,7 +165,7 @@ class Carousel extends Component {
                   id="maxprice"
                   className="p-2 h5"
                   type="text"
-                  placeholder="400€"
+                  placeholder="e.g. 400€"
                   onChange={this.handleChangeMaxPrice}
                   value={this.state.maxprice}
                 />
