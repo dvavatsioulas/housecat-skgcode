@@ -95,10 +95,10 @@ class Chatbot extends Component {
     console.log(final_params)
     if(final_params!=null){
       axios.post(api_address+'/api/properties/search',  {
-            "id":null,
             "minprice":final_params.minprice,
             "maxprice":final_params.maxprice,
-            "sqm": final_params.sqm,
+            "minsqm": final_params.minsqm,
+            "maxsqm":null,
             "location":final_params.location,
             "bedrooms":null,
             "bathrooms":null,
@@ -107,8 +107,7 @@ class Chatbot extends Component {
             "sale_type":final_params.sale_type,
             "furnitured":null,
             "heating_type":null,
-            "minbuilt_year":null,
-            "maxbuilt_year":null,
+            "minbuiltyear":null,
             "parking":null
         }).then(res => {
 
@@ -257,23 +256,19 @@ class Chatbot extends Component {
         <span className="popuptext" id="myPopup" style={{display:"inline-block", position:"sticky"}}>
 
           <div className="card mb-2 bg-light text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 50, right: 0, border: '1px solid lightgray'}}>
-            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 125, maxHeight: 125}}>
+            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50}}>
               <div className="row">
-                <div className="col-sm-4">
-                  <img  src="https://yt3.ggpht.com/a/AGF-l7_5_gsypJpmcfZFJlo7QlWEGHixtwrEuzgEaw=s900-c-k-c0xffffffff-no-rj-mo" class="img-fluid" alt="Responsive image"/>
-                </div>
-                <div className="col-sm-7 bg-black text-white" style={{textAlign: 'center'}}>
+                <div className="col-sm-10 bg-black text-white" style={{textAlign: 'center'}}>
                   <h5>Cat-bot </h5>
-                  <p style={{textAlign: 'justify', alignSelf: 'stretch', fontSize:"80%"}}>Hello mortal,  I am Garfield and I am here to help you find a house. Say hi I don't bite.</p>
                 </div>
-                <div className="col-sm-1">
+                <div className="col-sm-2">
                   <button type="button" className="close text-white" aria-label="Close" onClick={this.hide}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
               </div>
             </div>
-            <div className="card-body" style={{ minHeight: 375, maxHeight: 375, width:'100%', overflow: 'auto'}} >
+            <div className="card-body" style={{ minHeight: 450, maxHeight: 450, width:'100%', overflow: 'auto'}} >
             <div className="row-sm-8">
               <div className="col">
                 <div className="row" style={{margin: 0, paddingBottom: '12%', paddingTop: '2%', height: '96%'}}>
