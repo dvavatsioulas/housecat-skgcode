@@ -89,10 +89,10 @@ class NavBarV2 extends Component {
                 <a class="dropdown-item" href="/FAQ">
                   FAQ
                 </a>
-                <a class="dropdown-item" href="#about">
+                <a class="dropdown-item" href="https://housecat-skgcode.herokuapp.com/#about">
                   About Us
                 </a>
-                <a class="dropdown-item" href="#contact">
+                <a class="dropdown-item" href="https://housecat-skgcode.herokuapp.com/#contact">
                   Contact
                 </a>
               </div>

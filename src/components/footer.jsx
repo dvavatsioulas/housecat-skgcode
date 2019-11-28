@@ -30,7 +30,7 @@ class Footer extends Component {
               </h5>
 
               <MDBContainer>
-                <MDBBtn size="xlg" tag="a" floating social="fb">
+                <MDBBtn size="xlg" tag="a" floating social="fb" target="_blank" href="https://www.facebook.com/skgcode/">
                   <MDBIcon fab icon="facebook-f" />
                 </MDBBtn>
                 <MDBBtn size="xlg" tag="a" floating social="tw">
@@ -39,7 +39,7 @@ class Footer extends Component {
                 <MDBBtn size="xlg" tag="a" floating social="gplus">
                   <MDBIcon fab icon="google-plus-g" />
                 </MDBBtn>
-                <MDBBtn size="xlg" tag="a" floating social="li">
+                <MDBBtn size="xlg" tag="a" floating social="li" target="_blank" href="https://www.linkedin.com/company/skgcode/">
                   <MDBIcon fab icon="linkedin-in" />
                 </MDBBtn>
               </MDBContainer>

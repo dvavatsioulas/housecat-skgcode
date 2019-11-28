@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-class About extends React.Component {
+class About extends Component {
   render() {
     return (
       <React.Fragment>
-        <hr className="strong black" />
+        <hr id="about" className="strong black" />
         <blockquote className="blockquote text-center homePageStyle">
           <h1 className="display-4">About us</h1>
           <p>
