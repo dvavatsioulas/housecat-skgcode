@@ -3,18 +3,16 @@ import axios from "axios";
 
 class DetailView extends React.Component {
 
-    // state = {
-    //     houses: []
-    //   };
-
-    // componentDidMount(){
-    
-    //     axios.get(`https://housecat-skgcode-api.herokuapp.com/api/properties/id=2`).then(res => {
-    //       const houses = res.data;
-    //       this.setState( houses );
-    //   });
-      
-    // }
+     state = { house: {} };
+     componentDidMount(){
+        var baseURL="https://housecat-skgcode-api.herokuapp.com/api/properties/id=";
+        var idFromURL=this.props.match.params.id;
+        axios.get(baseURL.concat(idFromURL)).then(res => {
+           var house = res.data;
+           var thisHouse = house[0];
+           this.setState( {house: thisHouse} );
+       });
+     }
    
     render() { 
        return (
@@ -62,7 +60,7 @@ class DetailView extends React.Component {
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Location:</strong>
-                            <span>Chicago, IL 606543</span>
+                            <span>{this.state.house.location}</span>
                             </li>
                             <li class="d-flex justify-content-between">
                             <strong>Property Type:</strong>
