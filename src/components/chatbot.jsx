@@ -6,8 +6,8 @@ import Message from "./chatbot_messages";
 import QuickReplies from './quickReplies'
 
 
-const api_address='http://localhost:8000'
-//const api_address='https://housecat-skgcode-api.herokuapp.com'
+//const api_address='http://localhost:8000'
+const api_address='https://housecat-skgcode-api.herokuapp.com'
 
 const front_handle_intents= require('./chatbot_functions/front_hanle_intents_function.js')
 
