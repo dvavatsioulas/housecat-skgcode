@@ -14,7 +14,8 @@ class DetailView extends React.Component {
        });
      }
    
-    render() { 
+    render() {
+       var locationMap= "https://maps.google.com/maps?q="+ this.state.house.location +"&t=&z=14&ie=UTF8&iwloc=&output=embed"
        return (
         <React.Fragment>
         <section class="property-single nav-arrow-b">
@@ -23,7 +24,7 @@ class DetailView extends React.Component {
                 <div class="col-sm-12">
                 <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
                     <div class="carousel-item-b">
-                    <img style={{width:"100%", height:"100%"}} src={this.state.house.img_url} alt=""></img>
+                    <img style={{width:"100%", height:"100%", marginBottom:"8%"}} src={this.state.house.img_url} alt=""></img>
                     </div>
                 </div>
                 <div class="row justify-content-between">
@@ -31,7 +32,7 @@ class DetailView extends React.Component {
                     <div class="property-price d-flex justify-content-center foo">
                         <div class="card-header-c d-flex">
                         <div class="card-box-ico">
-                            <span class="ion-money">$</span>
+                            <span class="ion-money">€</span>
                         </div>
                         <div class="card-title-c align-self-center">
                             <h5 class="title-c">15000</h5>
@@ -127,35 +128,36 @@ class DetailView extends React.Component {
                     </div>
                 </div>
                 </div>
-                <div class="col-md-10 offset-md-1">
+                <div class="col-md-10 offset-md-1" style={{marginBottom:"6%"}}>
                     <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                        <a class="nav-link active" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab"
-                            aria-controls="pills-video" aria-selected="true">Video</a>
+                        {/* <li class="nav-item">
+                        <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab"
+                            aria-controls="pills-video" aria-selected="false">Video</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" id="pills-plans-tab" data-toggle="pill" href="#pills-plans" role="tab" aria-controls="pills-plans"
                             aria-selected="false">Floor Plans</a>
-                        </li>
+                        </li> */}
                         <li class="nav-item">
-                        <a class="nav-link" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map"
-                            aria-selected="false">Ubication</a>
+                        <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map"
+                            aria-selected="false">Location</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                        {/* <div class="tab-pane fade " id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
                         <iframe src="https://player.vimeo.com/video/73221098" width="100%" height="460" frameborder="0"
                             webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                         </div>
                         <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
                         <img src="img/plan2.jpg" alt="" class="img-fluid"></img>
-                        </div>
-                        <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1ses-419!2sve!4v1510329142834"
+                        </div> */}
+                        <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+                        <iframe src={locationMap}
                             width="100%" height="460" frameborder="0" style={{border:"0"}} allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-12">
                 <div class="row section-t3">
                     <div class="col-sm-12">
