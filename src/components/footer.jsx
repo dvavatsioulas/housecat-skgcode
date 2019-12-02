@@ -44,14 +44,7 @@ class Footer extends Component {
                 </MDBBtn>
               </MDBContainer>
             </div>
-            <div className="col-md-4 mt-md-4 mt-2">
-            <div className="d-flex justify-content-center">
-              <form class="form-inline">
-                <input class="form-control p-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3 p-2" type="submit">Search</button>
-              </form>
-            </div>
-            </div>
+            
           </div>
         </div>
 

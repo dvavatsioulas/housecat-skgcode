@@ -1,13 +1,28 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { isTemplateElement } from "@babel/types";
+import {
+  fade,
+  ThemeProvider,
+  withStyles,
+  makeStyles,
+  createMuiTheme,
+} from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Box from '@material-ui/core/Box';
+import { sizing } from '@material-ui/system';
+
+var locations = ["Athens", "Halkidiki", "Kavala", "Larisa", "Patra", "Thessaloniki"];
 
 var styleBox = {
   width: "100%",
   height: "100%",
-  padding: "50px",
-  border: "2px solid white",
-  background: "linear-gradient(to left, rgba(255,0,0,0), #331900)"
+  padding: "25px",
+  border: "2px solid black",
+  background: "rgb(255,255, 255, 0.88)"
 };
 
 class Carousel extends Component {
@@ -41,6 +56,7 @@ class Carousel extends Component {
   }
 
   handleSubmit() {
+    console.log(this.state.location);
     console.log(this.state.minprice);
     console.log(this.state.maxprice);
     axios
@@ -143,43 +159,34 @@ class Carousel extends Component {
           </a>
         </div>
         <div className="filter-block">
-            <div className="rounded-pill" style={styleBox}>
-              <div className="d-flex flex-row ">
-                <input
-                  id="location"
-                  className="p-2 flex-grow-1 h4"
-                  type="text"
-                  placeholder="e.g. Thessaloniki"
-                  onChange={this.handleChangeLocation}
-                  value={this.state.location}
+          <div className="rounded-pill" style={styleBox}>
+            <Box display="flex" flexDirection="row" width={1}>
+
+              <Box width={0.5} id="locationbox">
+                <Autocomplete freeSolo
+                  options={locations}
+
+                  renderInput={params => (
+                    <TextField {...params} label="Location" variant="outlined" id="location" style={{ width: "100%" }} />
+                  )}
+                  
                 />
-                <input
-                  id="minprice"
-                  className="p-2 h5"
-                  type="text"
-                  placeholder="e.g. 200€"
-                  onChange={this.handleChangeMinPrice}
-                  value={this.state.minprice}
-                />
-                <input
-                  id="maxprice"
-                  className="p-2 h5"
-                  type="text"
-                  placeholder="e.g. 400€"
-                  onChange={this.handleChangeMaxPrice}
-                  value={this.state.maxprice}
-                />
-                <div className="p-2">
-                  <button
-                    className="btn btn-outline-white"
-                    onClick={this.handleSubmit}
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </div>
+              </Box>
+
+              <Box width={0.15} id="minpricebox" class="flex-grow bd-highlight">
+                <TextField id="minprice" label="Minimum Price" variant="outlined" style={{ width: "100%" }} />
+              </Box>
+
+              <Box width={0.15} id="maxpricebox" class="flex-grow bd-highlight">
+                <TextField id="maxprice" label="Maximum Price" variant="outlined" style={{ width: "100%" }} />
+              </Box>
+
+              <Box width={0.2} class="flex-fill bd-highlight">
+                <button style={{ width: "100%" }} className="btn btn-outline-black" onClick={this.handleSubmit} >Search</button>
+              </Box>
+            </Box>
           </div>
+        </div>
       </div>
     );
   }

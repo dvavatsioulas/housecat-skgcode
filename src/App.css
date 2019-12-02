@@ -50,9 +50,9 @@
   opacity: 0.9;
 }
 
-.navbarItems {
+.navbar-nav {
   top: 0;
-  font-size: 18px;
+  font-size: 25px;
   color: white;
 }
 .container {
@@ -224,4 +224,21 @@ cite {
     font-size: xx-large;
     text-align: center;
     font-family: "Times New Roman", Times, serif;
+  }
+
+  #locationInput{
+    color: white;
+    outline-color: white;
+  }
+
+  #locationbox{
+    margin-right: 5px;
+  }
+
+  #minpricebox{
+    margin-right: 5px;
+  }
+
+  #maxpricebox{
+    margin-right: 5px;
   }
