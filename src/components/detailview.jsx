@@ -12,20 +12,16 @@ class DetailView extends React.Component {
            var house = res.data;
            var thisHouse = house[0];
            this.setState( {house: thisHouse} );
+        });
+        var agentId = parseInt(1 + (Math.random() * 6));
+        var contactURL=`https://housecat-skgcode-api.herokuapp.com/api/agents/id=${agentId}`;
+        axios.get(contactURL).then(res => {
+           var agent = res.data;
+           var thisAgent = agent[0];
+           this.setState( {agent: thisAgent} );
        });
      }
 
-    //  componentDidMount(){
-    //     var agentId = parseInt(1 + (Math.random() * 5));
-    //     console.log(agentId);
-    //     var contactURL=`https://housecat-skgcode-api.herokuapp.com/api/agents/id=${agentId}`;
-    //     axios.get(contactURL).then(res => {
-    //        var agent = res.data;
-    //        var thisAgent = agent[0];
-    //        this.setState( {agent: thisAgent} );
-    //    });
-    //  }
-   
    
     render() {
        var locationMap= "https://maps.google.com/maps?q="+ this.state.house.location +"&t=&z=14&ie=UTF8&iwloc=&output=embed"
@@ -168,8 +164,8 @@ class DetailView extends React.Component {
                             <span class="color-text-a">{this.state.agent.email}</span>
                         </li>
                         <li class="d-flex justify-content-between">
-                            <strong>Facebook:</strong>
-                            <span class="color-text-a">{this.state.agent.social}</span>
+                            <strong>Social:</strong>
+                            <a href={this.state.agent.social} target="_blank" title="Facebook"><i class="fab fa-facebook-square"></i></a>
                         </li>
                         </ul>
                     </div>
