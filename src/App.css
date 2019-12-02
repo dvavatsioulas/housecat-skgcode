@@ -135,7 +135,7 @@ cite {
 }
 .house {
   list-style: none;
-  border-left: 4px solid #333333;
+  border-left: 4px solid #2ABBAC;
   margin-bottom: 40px;
   padding-left: 5px;
 }
@@ -241,4 +241,9 @@ cite {
 
   #maxpricebox{
     margin-right: 5px;
+  }
+  .DVtitles{
+    border-left: 5px solid #2ABBAC;
+    padding-left: 5px;
+    border-bottom: 1px solid #2ABBAC;
   }

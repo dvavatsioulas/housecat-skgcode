@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import uuid from 'uuid';
 import Message from "./chatbot_messages";
 import QuickReplies from './quickReplies'
+import { final_params } from "./chatbot_functions/front_hanle_intents_function";
 
 
 //const api_address='http://localhost:8000'
@@ -26,7 +27,9 @@ class Chatbot extends Component {
 
     this.state={
       messages: [],
-      showBot: false
+      showBot: false,
+      final_params: null,
+      redirect_window: null
     }
 
     if (cookies.get('userID') === undefined){
@@ -63,19 +66,23 @@ class Chatbot extends Component {
         } 
       }
       //ADD Bot Delay
-      let time=750
-      //time= 3000/336*msg.text.text[0].length
-      if (time < 750){
-        time = 750
+      let time=650
+
+      if (msg.message==="text"){
+        time= 3000/336*msg.text.text[0].length + 2000
       }
-      //console.log("TIME: "+ time +"LENGTH: "+msg.text.text[0].length)
+      if (time < 650){
+        time = 650
+      }
+
       this.setState({messages: [...this.state.messages, delays]});
-      setTimeout( () => {
-        this.setState({ position: 1 });
-       }, time);
+      
+      this.mytimeOutFunctiion(time)
+      
       var last_msg=this.state.messages.length
-      this.state.messages[last_msg-1]=says 
-      //this.setState({messages: [...this.state.messages, says]});
+      this.state.messages.splice(last_msg-1, 1) 
+      this.state.messages[last_msg-1]=says
+
     }
 
     front_handle_intents.front_handle_intents(res)
@@ -90,9 +97,41 @@ class Chatbot extends Component {
         this.state.messages=[]
         console.log("Messages Deleted")
     }
+    
+    this.state.final_params=front_handle_intents.final_params   
+    this.state.redirect_window=front_handle_intents.redirect_window
+  }
 
-    var final_params=front_handle_intents.final_params
-    console.log(final_params)
+  async df_event_query(eventName){
+
+    const res = await axios.post(api_address+'/df_event_query', {event: eventName, userID: cookies.get('userID')});
+
+    if (res.data.intent.displayName === 'End Intent'){
+      console.log("END INTENT")
+      localStorage.removeItem('chatmessages');
+      mydata=[]
+      this.state.messages=[]
+    }
+
+    for (let msg of res.data.fulfillmentMessages){
+      let says = {
+          speaks: 'bot',
+          msg: msg
+      }
+      this.setState({messages: [...this.state.messages, says]})
+    }
+  }
+  mytimeOutFunctiion(time){
+    setTimeout( () => {
+      console.log("TIME: "+ time )
+      this.setState({ position: 1 });
+    }, time);
+  }
+  myFunction(final_params, redirect_window) {
+    if (redirect_window!=null){
+      window.location=redirect_window
+      this.state.redirect_window=null
+    }
     if(final_params!=null){
       axios.post(api_address+'/api/properties/search',  {
             "minprice":final_params.minprice,
@@ -128,39 +167,14 @@ class Chatbot extends Component {
           setTimeout( () => {
            this.setState({ position: 1 });
           }, 2000);
-
+          
           window.open("/results", "_self"); //to open new page
         });
      }
-
-  }
-  async df_event_query(eventName){
-
-    const res = await axios.post(api_address+'/df_event_query', {event: eventName, userID: cookies.get('userID')});
-
-    if (res.data.intent.displayName === 'End Intent'){
-      console.log("END INTENT")
-      localStorage.removeItem('chatmessages');
-      mydata=[]
-      this.state.messages=[]
-    }
-
-    for (let msg of res.data.fulfillmentMessages){
-      let says = {
-          speaks: 'bot',
-          msg: msg
-      }
-      this.setState({messages: [...this.state.messages, says]})
-
-    }
-  }
-
-  myFunction() {
-      //NOTHING HERE
   }
 
   componentDidMount(){
-
+        this.state.redirect_window=null
         //this.df_event_query('faq_more')
 
         var popup = document.getElementById("myPopup");
@@ -182,6 +196,8 @@ class Chatbot extends Component {
   }
 
   componentDidUpdate(){
+      this.myFunction(this.state.final_params, this.state.redirect_window)
+
       this.messagesEnd.scrollIntoView({behaviour: "smooth"})
       localStorage.setItem("chatmessages", JSON.stringify(this.state.messages))
 
