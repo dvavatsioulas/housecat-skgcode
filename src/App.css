@@ -52,8 +52,9 @@
 
 .navbar-nav {
   top: 0;
-  font-size: 25px;
   color: white;
+  padding-right: 13%;
+  font-size: x-large;
 }
 .container {
   padding: 0;
@@ -211,11 +212,8 @@ cite {
     min-height: 800px;
   }
   .contactForm{
-    margin-left: 10px;
-  }
-  .navbarMore{
-    padding-right: 40px;
-    font-size:large;
+    margin-left: 15%;
+    margin-right: 15%;
   }
   .dropdownStyle{
     margin-right: 40px;
