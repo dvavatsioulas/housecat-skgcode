@@ -1,30 +1,44 @@
 exports.handle_params = function(responses, initial_params){
     
-    var parameters = responses.data.outputContexts[2].parameters.fields
-
-    initial_params.location=parameters.City.stringValue
-
-    initial_params.minprice=0;    
-    if (parameters.max_price.structValue.fields.amount.numberValue<0){
-        initial_params.maxprice=-parameters.max_price.structValue.fields.amount.numberValue
+    var parameters = responses.data.outputContexts[0].parameters.fields
+    if (parameters.City.stringValue===""){
+        initial_params.location=null
     }else{
-        initial_params.maxprice=parameters.max_price.structValue.fields.amount.numberValue
+        initial_params.location=parameters.City.stringValue
     }
-
-    if(parameters.min_sqm.structValue.fields.amount.numberValue <0 ){
-        initial_params.minsqm = -parameters.min_sqm.structValue.fields.amount.numberValue
+    console.log(parameters)
+    initial_params.minprice=0;    
+    if (parameters.max_price.stringValue===""){
+        initial_params.max_price=null
     }else{
-        initial_params.minsqm = parameters.min_sqm.structValue.fields.amount.numberValue
+        if (parameters.max_price.structValue.fields.amount.numberValue<0){
+            initial_params.maxprice=-parameters.max_price.structValue.fields.amount.numberValue
+        }else{
+            initial_params.maxprice=parameters.max_price.structValue.fields.amount.numberValue
+        }
+    }
+    if (parameters.min_sqm.stringValue===""){
+        initial_params.max_price=null
+    }else{
+        if(parameters.min_sqm.structValue.fields.amount.numberValue <0 ){
+            initial_params.minsqm = -parameters.min_sqm.structValue.fields.amount.numberValue
+        }else{
+            initial_params.minsqm = parameters.min_sqm.structValue.fields.amount.numberValue
+        }
     }
 
     if(parameters.HouseType.stringValue==="a house"){
         initial_params.property_type="House"
+    }else if (parameters.HouseType.stringValue===""){
+        initial_params.property_type=null
     }else{
         initial_params.property_type="Apartment"
     }
 
     if(parameters.SaleType.stringValue==="rent"){
         initial_params.sale_type="Rent"
+    }else if (parameters.SaleType.stringValue===""){
+        initial_params.sale_type=null
     }else{
         initial_params.sale_type="Sale"
     }
