@@ -173,12 +173,12 @@ class Carousel extends Component {
                 />
               </Box>
 
-              <Box width={0.15} id="minpricebox" class="flex-grow bd-highlight">
-                <TextField id="minprice" label="Minimum Price" variant="outlined" style={{ width: "100%" }} />
+                <Box width={0.15} id="minpricebox" class="flex-grow bd-highlight">
+                <TextField id="minprice" label="Minimum Price" variant="outlined" style={{ width: "100%" }}  onChange={this.handleChangeMinPrice} value={this.state.minprice}/>
               </Box>
 
               <Box width={0.15} id="maxpricebox" class="flex-grow bd-highlight">
-                <TextField id="maxprice" label="Maximum Price" variant="outlined" style={{ width: "100%" }} />
+                <TextField id="maxprice" label="Maximum Price" variant="outlined" style={{ width: "100%" }} onChange={this.handleChangeMaxPrice} value={this.state.maxprice}/>
               </Box>
 
               <Box width={0.2} class="flex-fill bd-highlight">
