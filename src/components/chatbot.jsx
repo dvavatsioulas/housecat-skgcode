@@ -5,7 +5,8 @@ import uuid from 'uuid';
 import Message from "./chatbot_messages";
 import QuickReplies from './quickReplies'
 import { final_params } from "./chatbot_functions/front_hanle_intents_function";
-
+import "../message.css";
+import "../chat-window.css";
 
 //const api_address='http://localhost:8000'
 const api_address='https://housecat-skgcode-api.herokuapp.com'
@@ -284,18 +285,11 @@ class Chatbot extends Component {
                 </div>
               </div>
             </div>
-            <div className="card-body" style={{ minHeight: 450, maxHeight: 450, width:'100%', overflow: 'auto'}} >
-            <div className="row-sm-8">
-              <div className="col">
-                <div className="row" style={{margin: 0, paddingBottom: '12%', paddingTop: '2%', height: '96%'}}>
+            <div className="sc-message-list">
                   {this.renderMessages(this.state.messages)}
                   <div  ref={(el)=> {this.messagesEnd = el;}} 
                       style={{float: 'left', clear: "both"}}>
                   </div>
-                </div>                    
-
-              </div>
-            </div>
             <div className="row-sm-2" >
                   <input style={{position:"absolute",bottom:0 ,marginBottom: 10, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '90%', paddingBottom: '2%', paddingTop: '2%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
             </div>  
