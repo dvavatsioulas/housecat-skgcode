@@ -26,7 +26,7 @@ class LastHouses extends Component {
           <div className="d-flex flex-row justify-content-center lastHousesBox">
           {this.state.houses.map(house => (
             <div className="col-md-2" key={house.id}>
-              <div class="card mb-2">
+              <div class="card mb-2" style={{minWidth:130}}>
                 <img
                   class="card-img-top"
                   src={house.img_url}
