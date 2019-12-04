@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Chatbot from "./chatbot";
 
 class DetailView extends React.Component {
 
@@ -33,7 +34,7 @@ class DetailView extends React.Component {
                 <div class="col-sm-12">
                 <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
                     <div class="carousel-item-b">
-                    <img style={{width:"100%", height:"100%", marginBottom:"3%", marginTop:"3%"}} src={this.state.house.img_url} alt=""></img>
+                    <img id="DVimage" src={this.state.house.img_url} alt=""></img>
                     </div>
                 </div>
                 <div class="row justify-content-between">
@@ -124,12 +125,6 @@ class DetailView extends React.Component {
                 </div>
                 </div>
                 <div class="col-md-10 offset-md-1" style={{marginBottom:"6%"}}>
-                    {/* <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                        <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map"
-                            aria-selected="false" style={{backgroundColor :"#2ABBAC", color: "white"}}>Location</a>
-                        </li>
-                    </ul> */}
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                         <iframe src={locationMap}
@@ -204,6 +199,7 @@ class DetailView extends React.Component {
             </div>
             </div>
         </section>
+        <Chatbot/>
         </React.Fragment>
        );
   }
