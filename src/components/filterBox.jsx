@@ -266,8 +266,7 @@ class FilterBox extends Component {
             <div className="text-center">
                  <p className="filterText">I am looking for:  </p>
                  <div className="custom-control-inline">
-                   
-                  <label className="filterText">
+                  <label>
                   <input
                     type="radio"
                     value="apartment"
@@ -279,7 +278,7 @@ class FilterBox extends Component {
                 </div>
                 <div className="custom-control-inline">
                   
-                  <label className="filterText">
+                  <label>
                   <input
                     type="radio"
                     value="house"
@@ -358,7 +357,7 @@ class FilterBox extends Component {
             <hr />
 
             <div className="d-flex flex-row">
-              <div className="md-form small p-2">
+              <div className="md-form small p-1">
                 <p className="text-center filterText">From:</p>
                 <input
                   id="minprice"
@@ -367,7 +366,7 @@ class FilterBox extends Component {
                   placeholder={this.state.minprice}
                 />
               </div>
-              <div className="md-form small p-2">
+              <div className="md-form small p-1">
                 <p className="text-center filterText">To:</p>
                 <input
                   id="maxprice"

@@ -101,6 +101,7 @@ cite {
   float: left;
   position: sticky;
   top: 0;
+  width: 22%;
 }
 .checkboxes {
   margin-left: 60px;
