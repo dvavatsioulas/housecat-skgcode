@@ -4,7 +4,9 @@ import Cookies from 'universal-cookie';
 import uuid from 'uuid';
 import Message from "./chatbot_messages";
 import QuickReplies from './quickReplies'
-
+import { final_params } from "./chatbot_functions/front_hanle_intents_function";
+import "../message.css";
+import "../chat-window.css";
 
 //const api_address='http://localhost:8000'
 const api_address='https://housecat-skgcode-api.herokuapp.com'
@@ -26,7 +28,9 @@ class Chatbot extends Component {
 
     this.state={
       messages: [],
-      showBot: false
+      showBot: false,
+      final_params: null,
+      redirect_window: null
     }
 
     if (cookies.get('userID') === undefined){
@@ -63,19 +67,23 @@ class Chatbot extends Component {
         } 
       }
       //ADD Bot Delay
-      let time=750
-      //time= 3000/336*msg.text.text[0].length
-      if (time < 750){
-        time = 750
+      let time=650
+
+      if (msg.message==="text"){
+        time= 3000/336*msg.text.text[0].length + 2000
       }
-      //console.log("TIME: "+ time +"LENGTH: "+msg.text.text[0].length)
+      if (time < 650){
+        time = 650
+      }
+
       this.setState({messages: [...this.state.messages, delays]});
-      setTimeout( () => {
-        this.setState({ position: 1 });
-       }, time);
+      
+      this.mytimeOutFunctiion(time)
+      
       var last_msg=this.state.messages.length
-      this.state.messages[last_msg-1]=says 
-      //this.setState({messages: [...this.state.messages, says]});
+      this.state.messages.splice(last_msg-1, 1) 
+      this.state.messages[last_msg-1]=says
+
     }
 
     front_handle_intents.front_handle_intents(res)
@@ -90,9 +98,41 @@ class Chatbot extends Component {
         this.state.messages=[]
         console.log("Messages Deleted")
     }
+    
+    this.state.final_params=front_handle_intents.final_params   
+    this.state.redirect_window=front_handle_intents.redirect_window
+  }
 
-    var final_params=front_handle_intents.final_params
-    console.log(final_params)
+  async df_event_query(eventName){
+
+    const res = await axios.post(api_address+'/df_event_query', {event: eventName, userID: cookies.get('userID')});
+
+    if (res.data.intent.displayName === 'End Intent'){
+      console.log("END INTENT")
+      localStorage.removeItem('chatmessages');
+      mydata=[]
+      this.state.messages=[]
+    }
+
+    for (let msg of res.data.fulfillmentMessages){
+      let says = {
+          speaks: 'bot',
+          msg: msg
+      }
+      this.setState({messages: [...this.state.messages, says]})
+    }
+  }
+  mytimeOutFunctiion(time){
+    setTimeout( () => {
+      console.log("TIME: "+ time )
+      this.setState({ position: 1 });
+    }, time);
+  }
+  myFunction(final_params, redirect_window) {
+    if (redirect_window!=null){
+      window.location=redirect_window
+      this.state.redirect_window=null
+    }
     if(final_params!=null){
       axios.post(api_address+'/api/properties/search',  {
             "minprice":final_params.minprice,
@@ -128,39 +168,14 @@ class Chatbot extends Component {
           setTimeout( () => {
            this.setState({ position: 1 });
           }, 2000);
-
+          
           window.open("/results", "_self"); //to open new page
         });
      }
-
-  }
-  async df_event_query(eventName){
-
-    const res = await axios.post(api_address+'/df_event_query', {event: eventName, userID: cookies.get('userID')});
-
-    if (res.data.intent.displayName === 'End Intent'){
-      console.log("END INTENT")
-      localStorage.removeItem('chatmessages');
-      mydata=[]
-      this.state.messages=[]
-    }
-
-    for (let msg of res.data.fulfillmentMessages){
-      let says = {
-          speaks: 'bot',
-          msg: msg
-      }
-      this.setState({messages: [...this.state.messages, says]})
-
-    }
-  }
-
-  myFunction() {
-      //NOTHING HERE
   }
 
   componentDidMount(){
-
+        this.state.redirect_window=null
         //this.df_event_query('faq_more')
 
         var popup = document.getElementById("myPopup");
@@ -182,6 +197,8 @@ class Chatbot extends Component {
   }
 
   componentDidUpdate(){
+      this.myFunction(this.state.final_params, this.state.redirect_window)
+
       this.messagesEnd.scrollIntoView({behaviour: "smooth"})
       localStorage.setItem("chatmessages", JSON.stringify(this.state.messages))
 
@@ -226,7 +243,6 @@ class Chatbot extends Component {
         this.df_text_query(e.target.value);
         e.target.value = '';
     }
-
   }
 
   _handleQuickReplyPayload(event, payload, text) {
@@ -255,8 +271,8 @@ class Chatbot extends Component {
 
         <span className="popuptext" id="myPopup" style={{display:"inline-block", position:"sticky"}}>
 
-          <div className="card mb-2 bg-light text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 50, right: 0, border: '1px solid lightgray'}}>
-            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50}}>
+          <div className="card mb-2 bg-white text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 50, right: 0, border: '1px solid lightgray'}}>
+            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50, cursor: "pointer"}} onClick={this.hide}>
               <div className="row">
                 <div className="col-sm-10 bg-black text-white" style={{textAlign: 'center'}}>
                   <h5>Cat-bot </h5>
@@ -268,21 +284,15 @@ class Chatbot extends Component {
                 </div>
               </div>
             </div>
-            <div className="card-body" style={{ minHeight: 450, maxHeight: 450, width:'100%', overflow: 'auto'}} >
-            <div className="row-sm-8">
-              <div className="col">
-                <div className="row" style={{margin: 0, paddingBottom: '12%', paddingTop: '2%', height: '96%'}}>
+            <div className="sc-message-list">
                   {this.renderMessages(this.state.messages)}
                   <div  ref={(el)=> {this.messagesEnd = el;}} 
                       style={{float: 'left', clear: "both"}}>
                   </div>
-                </div>                    
-
-              </div>
+            <div className="row-sm-2">
+                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '68%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
+                  <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '280px',height: '45px',marginTop: '0px', height: '8%'}}/>
             </div>
-            <div className="row-sm-2" >
-                  <input style={{position:"absolute",bottom:0 ,marginBottom: 10, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '90%', paddingBottom: '2%', paddingTop: '2%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
-            </div>  
           </div>
         </div>
 

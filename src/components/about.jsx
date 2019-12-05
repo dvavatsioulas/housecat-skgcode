@@ -8,7 +8,7 @@ class About extends Component {
         <blockquote className="blockquote text-center homePageStyle">
           <h1 className="display-4">About us</h1>
           <p>
-            We are the best real estate site available and we will make sure
+            We are the best real estate site available and we will make sure<br/>
             that you will find your perfect house or your perfect renter
           </p>
           <footer className="blockquote-footer">

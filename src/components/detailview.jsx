@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Chatbot from "./chatbot";
 
 class DetailView extends React.Component {
 
-     state = { house: {} };
+     state = { house: {}, agent: {} };
+
      componentDidMount(){
         var baseURL="https://housecat-skgcode-api.herokuapp.com/api/properties/id=";
         var idFromURL=this.props.match.params.id;
@@ -11,8 +13,16 @@ class DetailView extends React.Component {
            var house = res.data;
            var thisHouse = house[0];
            this.setState( {house: thisHouse} );
+        });
+        var agentId = parseInt(1 + (Math.random() * 6));
+        var contactURL=`https://housecat-skgcode-api.herokuapp.com/api/agents/id=${agentId}`;
+        axios.get(contactURL).then(res => {
+           var agent = res.data;
+           var thisAgent = agent[0];
+           this.setState( {agent: thisAgent} );
        });
      }
+
    
     render() {
        var locationMap= "https://maps.google.com/maps?q="+ this.state.house.location +"&t=&z=14&ie=UTF8&iwloc=&output=embed"
@@ -24,26 +34,17 @@ class DetailView extends React.Component {
                 <div class="col-sm-12">
                 <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
                     <div class="carousel-item-b">
-                    <img style={{width:"100%", height:"100%", marginBottom:"8%"}} src={this.state.house.img_url} alt=""></img>
+                    <img id="DVimage" src={this.state.house.img_url} alt=""></img>
                     </div>
                 </div>
                 <div class="row justify-content-between">
                     <div class="col-md-5 col-lg-4">
-                    <div class="property-price d-flex justify-content-center foo">
-                        <div class="card-header-c d-flex">
-                        <div class="card-box-ico">
-                            <span class="ion-money">€</span>
-                        </div>
-                        <div class="card-title-c align-self-center">
-                            <h5 class="title-c">15000</h5>
-                        </div>
-                        </div>
-                    </div>
+                        
                     <div class="property-summary">
                         <div class="row">
                         <div class="col-sm-12">
                             <div class="title-box-d section-t4">
-                            <h3 class="title-d">Quick Summary</h3>
+                            <h3 class="title-d DVtitles">Quick Summary</h3>
                             </div>
                         </div>
                         </div>
@@ -72,6 +73,11 @@ class DetailView extends React.Component {
                             </span>
                             </li>
                             <li class="d-flex justify-content-between">
+                            <strong>Price per m<sup>2</sup>:</strong>
+                            <span>€{parseFloat(Math.round((this.state.house.price/this.state.house.sqm) * 100) / 100).toFixed(2)}
+                            </span>
+                            </li>
+                            <li class="d-flex justify-content-between">
                             <strong>Bedrooms:</strong>
                             <span>{this.state.house.bedrooms}</span>
                             </li>
@@ -83,15 +89,30 @@ class DetailView extends React.Component {
                             <strong>Garage:</strong>
                             <span>{this.state.house.parking}</span>
                             </li>
+                            <li class="d-flex justify-content-between">
+                            <strong>Heating:</strong>
+                            <span>{this.state.house.heating_type}</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                            <strong>Furnitured:</strong>
+                            <span>{this.state.house.furnitured}</span>
+                            </li>
                         </ul>
                         </div>
                     </div>
                     </div>
                     <div class="col-md-7 col-lg-7 section-md-t3">
+                        <div class="property-price d-flex justify-content-left foo DVtitles" style={{marginBottom:"5%",fontSize:"30px"}}>
+                            <div class="card-header-c d-flex">
+                                <div class="card-title-c align-self-center">
+                                    <h2 class="title-c">€{this.state.house.price}</h2>
+                                </div>
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="col-sm-12">
                         <div class="title-box-d">
-                            <h3 class="title-d">Property Description</h3>
+                            <h3 class="title-d DVtitles">Property Description</h3>
                         </div>
                         </div>
                     </div>
@@ -99,58 +120,12 @@ class DetailView extends React.Component {
                         <p class="description color-text-a">
                             {this.state.house.description}
                         </p>
-                        {/* <p class="description color-text-a no-margin">
-                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget
-                        malesuada. Quisque velit nisi,
-                        pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-                        </p> */}
-                    </div>
-                    <div class="row section-t3">
-                        <div class="col-sm-12">
-                        <div class="title-box-d">
-                            <h3 class="title-d">Amenities</h3>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="amenities-list color-text-a">
-                        <ul class="list-a no-margin">
-                        <li>Balcony</li>
-                        <li>Outdoor Kitchen</li>
-                        <li>Cable Tv</li>
-                        <li>Deck</li>
-                        <li>Tennis Courts</li>
-                        <li>Internet</li>
-                        <li>Parking</li>
-                        <li>Sun Room</li>
-                        <li>Concrete Flooring</li>
-                        </ul>
                     </div>
                     </div>
                 </div>
                 </div>
                 <div class="col-md-10 offset-md-1" style={{marginBottom:"6%"}}>
-                    <ul class="nav nav-pills-a nav-pills mb-3 section-t3" id="pills-tab" role="tablist">
-                        {/* <li class="nav-item">
-                        <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab"
-                            aria-controls="pills-video" aria-selected="false">Video</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" id="pills-plans-tab" data-toggle="pill" href="#pills-plans" role="tab" aria-controls="pills-plans"
-                            aria-selected="false">Floor Plans</a>
-                        </li> */}
-                        <li class="nav-item">
-                        <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map"
-                            aria-selected="false">Location</a>
-                        </li>
-                    </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        {/* <div class="tab-pane fade " id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-                        <iframe src="https://player.vimeo.com/video/73221098" width="100%" height="460" frameborder="0"
-                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                        </div>
-                        <div class="tab-pane fade" id="pills-plans" role="tabpanel" aria-labelledby="pills-plans-tab">
-                        <img src="img/plan2.jpg" alt="" class="img-fluid"></img>
-                        </div> */}
                         <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                         <iframe src={locationMap}
                             width="100%" height="460" frameborder="0" style={{border:"0"}} allowfullscreen></iframe>
@@ -168,63 +143,26 @@ class DetailView extends React.Component {
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
-                    <img src="img/agent-4.jpg" alt="" class="img-fluid"></img>
+                    <img src={this.state.agent.img} alt="" class="img-fluid"></img>
                     </div>
                     <div class="col-md-6 col-lg-4">
                     <div class="property-agent">
-                        <h4 class="title-agent">Anabella Geller</h4>
-                        <p class="color-text-a">
-                        Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                        dui. Quisque velit nisi,
-                        pretium ut lacinia in, elementum id enim.
-                        </p>
+                        <h4 class="title-agent">{this.state.agent.name}</h4>
+                        <p class="color-text-a">{this.state.agent.description}</p>
                         <ul class="list-unstyled">
                         <li class="d-flex justify-content-between">
                             <strong>Phone:</strong>
-                            <span class="color-text-a">(222) 4568932</span>
-                        </li>
-                        <li class="d-flex justify-content-between">
-                            <strong>Mobile:</strong>
-                            <span class="color-text-a">777 287 378 737</span>
+                            <span class="color-text-a">{this.state.agent.tel}</span>
                         </li>
                         <li class="d-flex justify-content-between">
                             <strong>Email:</strong>
-                            <span class="color-text-a">annabella@example.com</span>
+                            <span class="color-text-a">{this.state.agent.email}</span>
                         </li>
                         <li class="d-flex justify-content-between">
-                            <strong>Skype:</strong>
-                            <span class="color-text-a">Annabela.ge</span>
+                            <strong>Social:</strong>
+                            <a href={this.state.agent.social} target="_blank" title="Facebook"><i class="fab fa-facebook-square"></i></a>
                         </li>
                         </ul>
-                        <div class="socials-a">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            </li>
-                            <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            </li>
-                            <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                            </li>
-                            <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                            </a>
-                            </li>
-                            <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fa fa-dribbble" aria-hidden="true"></i>
-                            </a>
-                            </li>
-                        </ul>
-                        </div>
                     </div>
                     </div>
                     <div class="col-md-12 col-lg-4">
@@ -261,6 +199,7 @@ class DetailView extends React.Component {
             </div>
             </div>
         </section>
+        <Chatbot/>
         </React.Fragment>
        );
   }

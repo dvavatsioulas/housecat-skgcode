@@ -1,13 +1,28 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { isTemplateElement } from "@babel/types";
+import {
+  fade,
+  ThemeProvider,
+  withStyles,
+  makeStyles,
+  createMuiTheme,
+} from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Box from '@material-ui/core/Box';
+import { sizing } from '@material-ui/system';
+
+var locations = ["Athens", "Halkidiki", "Kavala", "Larisa", "Patra", "Thessaloniki"];
 
 var styleBox = {
   width: "100%",
   height: "100%",
-  padding: "50px",
-  border: "2px solid white",
-  background: "linear-gradient(to left, rgba(255,0,0,0), #331900)"
+  padding: "25px",
+  border: "2px solid black",
+  background: "rgb(255,255, 255, 0.88)"
 };
 
 class Carousel extends Component {
@@ -16,53 +31,45 @@ class Carousel extends Component {
     this.state = {
       location: null,
       minprice: null,
-      maxprice: null
+      maxprice: null,
+      saleType: null,
     };
-    this.handleChangeLocation = this.handleChangeLocation.bind(this);
-    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
-    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
+    this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeLocation(event) {
+  handleSaleTypeChange(changeEvent) {
     this.setState({
-      location: event.target.value
+      saleType: changeEvent.target.value
     });
-  }
-  handleChangeMaxPrice(event) {
-    this.setState({
-      maxprice: event.target.value
-    });
-  }
-  handleChangeMinPrice(event) {
-    this.setState({
-      minprice: event.target.value
-    });
-  }
+  };
 
   handleSubmit() {
-    console.log(this.state.minprice);
-    console.log(this.state.maxprice);
-    axios
-      .post(
-        "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
-        {
-          minprice: this.state.minprice,
-          maxprice: this.state.maxprice,
-          minsqm: null,
-          maxsqm: null,
-          location: this.state.location,
-          bedrooms: null,
-          bathrooms: null,
-          property_type: null,
-          floor: null,
-          sale_type: null,
-          furnitured: null,
-          heating_type: null,
-          minbuilt_year: null,
-          parking: null
-        }
-      )
+    if (document.getElementById("locationAC").value == "") { this.state.location = null }
+    else { this.state.location = document.getElementById("locationAC").value }
+    if (document.getElementById("minpricefield").value == "") { this.state.minprice = null }
+    else { this.state.minprice = document.getElementById("minpricefield").value }
+    if (document.getElementById("maxpricefield").value == "") { this.state.maxprice = null }
+    else { this.state.maxprice = document.getElementById("maxpricefield").value }
+    console.log(this.state.location, this.state.minprice, this.state.maxprice);
+
+    axios.post("https://housecat-skgcode-api.herokuapp.com/api/properties/search", {
+      minprice: this.state.minprice,
+      maxprice: this.state.maxprice,
+      minsqm: null,
+      maxsqm: null,
+      location: this.state.location,
+      bedrooms: null,
+      bathrooms: null,
+      property_type: null,
+      floor: null,
+      sale_type: this.state.saleType,
+      furnitured: null,
+      heating_type: null,
+      minbuilt_year: null,
+      parking: null
+    }
+    )
       .then(res => {
         if (res.status == 200) {
           let filteringResults = res.data;
@@ -73,7 +80,9 @@ class Carousel extends Component {
           let filterboxInfo = {
             location: this.state.location,
             minprice: this.state.minprice,
-            maxprice: this.state.maxprice
+            maxprice: this.state.maxprice,
+            sale_type: this.state.saleType,
+
           };
           localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         } else if (res.status == 204) {
@@ -142,44 +151,51 @@ class Carousel extends Component {
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <div className="filter-block">
-            <div className="rounded-pill" style={styleBox}>
-              <div className="d-flex flex-row ">
-                <input
-                  id="location"
-                  className="p-2 flex-grow-1 h4"
-                  type="text"
-                  placeholder="e.g. Thessaloniki"
-                  onChange={this.handleChangeLocation}
-                  value={this.state.location}
+        <div className="filter-block" id="filterbox">
+          <div className="rounded-pill" style={styleBox} id="roundedpill">
+            <Box display="flex" flexDirection="row" width={1}>
+
+              <Box width={0.5} id="locationbox">
+                <Autocomplete freeSolo
+                  options={locations}
+                  id="locationAC"
+                  renderInput={params => (
+                    <TextField {...params} label="Location" variant="outlined" id="locationfield" value={this.state.location} style={{ width: "100%" }} />
+                  )}
                 />
-                <input
-                  id="minprice"
-                  className="p-2 h5"
-                  type="text"
-                  placeholder="e.g. 200€"
-                  onChange={this.handleChangeMinPrice}
-                  value={this.state.minprice}
-                />
-                <input
-                  id="maxprice"
-                  className="p-2 h5"
-                  type="text"
-                  placeholder="e.g. 400€"
-                  onChange={this.handleChangeMaxPrice}
-                  value={this.state.maxprice}
-                />
-                <div className="p-2">
-                  <button
-                    className="btn btn-outline-white"
-                    onClick={this.handleSubmit}
-                  >
-                    Search
-                  </button>
+              </Box>
+              <Box width={0.10} id="minpricebox" class="flex-grow bd-highlight">
+                <TextField id="minpricefield" label="Minimum Price" variant="outlined" style={{ width: "100%" }} value={this.state.minprice} />
+              </Box>
+
+              <Box width={0.10} id="maxpricebox" class="flex-grow bd-highlight">
+                <TextField id="maxpricefield" label="Maximum Price" variant="outlined" style={{ width: "100%" }} value={this.state.maxprice} />
+              </Box >
+
+              <Box width={0.1} id="radiogroup" class="flex-fill bd-highlight">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="rent" value="rent"
+                    checked={this.state.saleType === "rent"}
+                    onChange={this.handleSaleTypeChange} />
+                  <label class="custom-control-label" for="rent">Rent</label>
                 </div>
-              </div>
-            </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="sale" value="sale"
+                    checked={this.state.saleType === "sale"}
+                    onChange={this.handleSaleTypeChange} />
+                  <label class="custom-control-label" for="sale">Buy</label>
+                </div>
+              </Box>
+
+              <Box class="flex-fill bd-highlight">
+                <button className="btn btn-outline-black"
+
+                  id="searchbutton" fullWidth={true} onClick={this.handleSubmit} >Search</button>
+              </Box>
+
+            </Box>
           </div>
+        </div>
       </div>
     );
   }

@@ -4,15 +4,19 @@ exports.front_handle_intents = function(res){
     var delete_messages=false
     var next_event=null;
     var final_params=null
-
+    var redirect_window=null;
+    
     if (res.data.intent.displayName === 'FAQ 1 Intent - yes' || res.data.intent.displayName ==='Landlord Intent - add'){
-        window.location = "/add";
+        redirect_window="/add";
+        //window.location = "/add";
     }
     if (res.data.intent.displayName === 'FAQ 2 Intent - yes'){
-        window.location = "/results";
+        redirect_window="/results";
+        //window.location = "/results";
     }
     if (res.data.intent.displayName === 'FAQ more - yes' || res.data.intent.displayName === 'FAQ 5 Intent - yes'){
-        window.location = "/#contact";
+        redirect_window="/#contact";
+        //window.location = "/#contact";
     }
     if (res.data.intent.displayName === 'FAQ 2 Intent - no thanks'){
         next_event='end_intent'
@@ -25,7 +29,7 @@ exports.front_handle_intents = function(res){
     if (res.data.intent.displayName === 'More Filters Intent'){
         //TODO!!
     }
-    if (res.data.intent.displayName === 'Renter Intent - got housetype - saletype - location - price - sqm'){
+    if (res.data.intent.displayName === 'Renter Intent - got housetype - saletype - location - price - sqm - yes' || res.data.intent.displayName ==='More Filters Intent'){
 
         let initial_params=initial_params_fun.initialize_parameters()
 
@@ -37,4 +41,5 @@ exports.front_handle_intents = function(res){
     }
     module.exports.next_event=next_event
     module.exports.delete_messages=delete_messages
+    module.exports.redirect_window=redirect_window
 } 

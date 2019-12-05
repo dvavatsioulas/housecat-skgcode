@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 import axios from "axios";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+var locations = ["Athens", "Halkidiki", "Kavala", "Larisa", "Patra", "Thessaloniki"];
 
 class FilterBox extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChangeLocation = this.handleChangeLocation.bind(this);
+    //this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
     this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
     this.handleHeatingChange = this.handleHeatingChange.bind(this)
     this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
     this.handleBedroomChange = this.handleBedroomChange.bind(this);
+    this.handleBathroomChange = this.handleBathroomChange.bind(this);
     this.handleFloorChange = this.handleFloorChange.bind(this);
     this.handleParkingChecked = this.handleParkingChecked.bind(this);
     this.handleFurnituredChecked = this.handleFurnituredChecked.bind(this);
     this.reloadSearch = this.reloadSearch.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
   state = {
     location: null,
@@ -24,10 +30,11 @@ class FilterBox extends Component {
     saleType: null,
     bedrooms: null,
     floor: null,
+    bathrooms:null,
     propertyType: null,
     heating: null,
-    parking: null,
-    furnitured: null
+    parking: false,
+    furnitured: false
   };
 
   componentDidMount() {
@@ -35,30 +42,23 @@ class FilterBox extends Component {
       this.setState({ location: "Location" });
     } else {
       var item = JSON.parse(localStorage.getItem("filters"));
-      // var parkingCheck, furnituredCheck;
-      // if (item.parking === "yes"){
-      //   this.setState({parking: true})
-      // }
-      // if(item.furnitured === "yes"){
-      //   this.setState({furnitured: true})
-      // }
       this.setState({ location: item.location, 
                       minprice : item.minprice, 
                       maxprice: item.maxprice,
                       saleType: item.sale_type,
                       bedrooms: item.bedrooms,
+                      bathrooms: item.bathrooms,
                       floor: item.floor,
                       propertyType : item.property_type,
                       heating: item.heating_type,
+                      parking: item.parking,
+                      furnitured: item.furnitured
                       });
     }
+
   }
 
-  handleChangeLocation(event) {
-    this.setState({
-      location: event.target.value
-    });
-  }
+
   handleChangeMaxPrice(event) {
     this.setState({
       maxprice: event.target.value
@@ -87,25 +87,38 @@ class FilterBox extends Component {
   handleBedroomChange (event) {
     this.setState({bedrooms: event.target.value});
   };
+  handleBathroomChange (event) {
+    this.setState({bathrooms: event.target.value});
+  };
   handleFloorChange (event) {
     this.setState({floor: event.target.value});
   };
   handleParkingChecked(event){
-    if(event.target.checked){
-      this.setState({parking: "yes"});
-    }else{
-      this.setState({parking: "no"});
-    }
+   this.setState(prevState => ({ parking: !prevState.parking }));
   };
   handleFurnituredChecked(event){
-    if(event.target.checked){
-      this.setState({furnitured: "yes"});
-    }else{
-      this.setState({furnitured: "no"});
-    }
+    this.setState(prevState => ({ furnitured: !prevState.furnitured }));
   };
 
   reloadSearch() {
+    if (document.getElementById("locationFilter").value == "") { this.state.location = null }
+    else { this.state.location = document.getElementById("locationFilter").value};
+    console.log(this.state.location);
+    var parkingSend;
+    console.log(this.state.parking);
+    if(this.state.parking === true){
+      parkingSend = "yes";
+    }else{
+      parkingSend = "no";
+    }
+    var furnituredSend;
+    console.log(this.state.furnitured);
+    if(this.state.furnitured === true){
+      furnituredSend = "yes";
+    }else{
+      furnituredSend = "no";
+    }
+    
     var reloaded = false;
     axios
       .post(
@@ -117,14 +130,14 @@ class FilterBox extends Component {
           maxsqm: null,
           location: this.state.location,
           bedrooms: this.state.bedrooms,
-          bathrooms: null,
+          bathrooms: this.state.bathrooms,
           property_type: this.state.propertyType,
           floor: this.state.floor,
           sale_type: this.state.saleType,
-          furnitured: this.state.furnitured,
+          furnitured: furnituredSend,
           heating_type: this.state.heating,
           minbuilt_year: null,
-          parking: this.state.parking
+          parking: parkingSend
         }
       )
       .then(res => {
@@ -146,8 +159,9 @@ class FilterBox extends Component {
         location: this.state.location,
         minprice: this.state.minprice,
         maxprice: this.state.maxprice,
-        sale_type: this.state.selectedRentBuy,
+        sale_type: this.state.saleType,
         bedrooms: this.state.bedrooms,
+        bathrooms: this.state.bathrooms,
         floor: this.state.floor,
         property_type: this.state.propertyType,
         heating_type: this.state.heating,
@@ -157,24 +171,69 @@ class FilterBox extends Component {
       localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
 
+  clearFilters(){
+    axios
+      .post(
+        "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
+        {
+          minprice: null,
+          maxprice: null,
+          minsqm: null,
+          maxsqm: null,
+          location:null,
+          bedrooms: null,
+          bathrooms: null,
+          property_type: null,
+          floor: null,
+          sale_type: null,
+          furnitured: null,
+          heating_type: null,
+          minbuilt_year: null,
+          parking: null
+        }
+      )
+      .then(res => {
+       
+        let filteringResults = res.data;
+        localStorage.setItem("searchdata", JSON.stringify(filteringResults));
+        let filterboxInfo = {
+          location: null,
+          minprice: null,
+          maxprice: null,
+          sale_type: null,
+          bedrooms: null,
+          bathrooms: null,
+          floor:null,
+          property_type: null,
+          heating_type: null,
+          parking: null,
+          furnitured: null
+        };
+        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+
+        window.open("/results", "_self"); //to open new page
+        });
+  }
+
   render() {
     return (
       <div className="card filterBox">
-        <h3 className="card-header black white-text py-4">
+        <h3 className="card-header black white-text py-4 p-2">
           <strong>Filters</strong>
         </h3>
-
+        <button className="btn" onClick={this.clearFilters}>Clear all filters</button>
         <div className="card-body px-small-5 pt-0 filterText">
+        <Autocomplete freeSolo
+                  options={locations}
+                  id="locationFilter"
+                  renderInput={params => (
+                    <TextField {...params} label="Location" variant="outlined"  value={this.state.location} style={{ width: "100%" }} />
+                  )}
+                />
           <form>
             <div>
               <div className="md-form mt-3">
-                <input
-                  type="text"
-                  id="locationFilter"
-                  className="form-control filterText"
-                  placeholder={this.state.location}
-                  onChange={this.handleChangeLocation}
-                />
+
               </div>
             </div>
             <div className="text-center">
@@ -212,8 +271,7 @@ class FilterBox extends Component {
             <div className="text-center">
                  <p className="filterText">I am looking for:  </p>
                  <div className="custom-control-inline">
-                   
-                  <label className="filterText">
+                  <label>
                   <input
                     type="radio"
                     value="apartment"
@@ -225,7 +283,7 @@ class FilterBox extends Component {
                 </div>
                 <div className="custom-control-inline">
                   
-                  <label className="filterText">
+                  <label>
                   <input
                     type="radio"
                     value="house"
@@ -238,10 +296,22 @@ class FilterBox extends Component {
               </div>
 
             <div className="form-group form-row text-center filterText">
-              <div className="col-md-4 mb-3" style={{marginLeft:'15%'}}>
+              <div className="col-md-4 mb-3" >
                 <label>Bedrooms</label>
                 <select className="custom-select" value={this.state.bedrooms} 
                      onChange={this.handleBedroomChange} >
+                  <option disabled>Choose</option>
+                  <option selected value="1">
+                    1
+                  </option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Bathrooms</label>
+                <select class="custom-select" value={this.state.bathrooms} 
+                     onChange={this.handleBathroomChange}>
                   <option disabled>Choose</option>
                   <option selected value="1">
                     1
@@ -280,11 +350,11 @@ class FilterBox extends Component {
 
 
             <div className="custom-control custom-switch">
-              <input type="checkbox" className="custom-control-input" id="parking" onChange={this.handleParkingChecked}/>
+              <input type="checkbox" className="custom-control-input" id="parking" checked={this.state.parking} onChange={this.handleParkingChecked}/>
               <label className="custom-control-label" for="parking">Parking Spot</label>
             </div>
             <div className="custom-control custom-switch">
-              <input type="checkbox" className="custom-control-input" id="furnitured" onChange={this.handleFurnituredChecked}/>
+              <input type="checkbox" className="custom-control-input" id="furnitured" checked={this.state.furnitured} onChange={this.handleFurnituredChecked}/>
               <label className="custom-control-label" for="furnitured">Furnitured</label>
             </div>
             
@@ -292,7 +362,7 @@ class FilterBox extends Component {
             <hr />
 
             <div className="d-flex flex-row">
-              <div className="md-form small p-2">
+              <div className="md-form small p-1">
                 <p className="text-center filterText">From:</p>
                 <input
                   id="minprice"
@@ -301,7 +371,7 @@ class FilterBox extends Component {
                   placeholder={this.state.minprice}
                 />
               </div>
-              <div className="md-form small p-2">
+              <div className="md-form small p-1">
                 <p className="text-center filterText">To:</p>
                 <input
                   id="maxprice"
