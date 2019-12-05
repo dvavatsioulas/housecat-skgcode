@@ -34,58 +34,42 @@ class Carousel extends Component {
       maxprice: null,
       saleType: null,
     };
-    this.handleChangeLocation = this.handleChangeLocation.bind(this);
-    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
-    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeLocation(event) {
-    this.setState({
-      location: event.target.value
-    });
-  }
-  handleChangeMaxPrice(event) {
-    this.setState({
-      maxprice: event.target.value
-    });
-  }
-  handleChangeMinPrice(event) {
-    this.setState({
-      minprice: event.target.value
-    });
-  }
-  handleSaleTypeChange (changeEvent) {
+  handleSaleTypeChange(changeEvent) {
     this.setState({
       saleType: changeEvent.target.value
     });
   };
 
   handleSubmit() {
-    console.log(this.state.location);
-    console.log(this.state.minprice);
-    console.log(this.state.maxprice);
-    axios
-      .post(
-        "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
-        {
-          minprice: this.state.minprice,
-          maxprice: this.state.maxprice,
-          minsqm: null,
-          maxsqm: null,
-          location: this.state.location,
-          bedrooms: null,
-          bathrooms: null,
-          property_type: null,
-          floor: null,
-          sale_type: this.state.saleType,
-          furnitured: null,
-          heating_type: null,
-          minbuilt_year: null,
-          parking: null
-        }
-      )
+    if (document.getElementById("locationAC").value == "") { this.state.location = null }
+    else { this.state.location = document.getElementById("locationAC").value }
+    if (document.getElementById("minpricefield").value == "") { this.state.minprice = null }
+    else { this.state.minprice = document.getElementById("minpricefield").value }
+    if (document.getElementById("maxpricefield").value == "") { this.state.maxprice = null }
+    else { this.state.maxprice = document.getElementById("maxpricefield").value }
+    console.log(this.state.location, this.state.minprice, this.state.maxprice);
+
+    axios.post("https://housecat-skgcode-api.herokuapp.com/api/properties/search", {
+      minprice: this.state.minprice,
+      maxprice: this.state.maxprice,
+      minsqm: null,
+      maxsqm: null,
+      location: this.state.location,
+      bedrooms: null,
+      bathrooms: null,
+      property_type: null,
+      floor: null,
+      sale_type: this.state.saleType,
+      furnitured: null,
+      heating_type: null,
+      minbuilt_year: null,
+      parking: null
+    }
+    )
       .then(res => {
         if (res.status == 200) {
           let filteringResults = res.data;
@@ -98,7 +82,7 @@ class Carousel extends Component {
             minprice: this.state.minprice,
             maxprice: this.state.maxprice,
             sale_type: this.state.saleType,
-            
+
           };
           localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         } else if (res.status == 204) {
@@ -167,45 +151,46 @@ class Carousel extends Component {
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <div className="filter-block">
-          <div className="rounded-pill" style={styleBox}>
+        <div className="filter-block" id="filterbox">
+          <div className="rounded-pill" style={styleBox} id="roundedpill">
             <Box display="flex" flexDirection="row" width={1}>
 
               <Box width={0.5} id="locationbox">
                 <Autocomplete freeSolo
                   options={locations}
-
+                  id="locationAC"
                   renderInput={params => (
-                    <TextField {...params} label="Location" variant="outlined" id="location" style={{ width: "100%" }} />
+                    <TextField {...params} label="Location" variant="outlined" id="locationfield" value={this.state.location} style={{ width: "100%" }} />
                   )}
-                  
                 />
               </Box>
-              <Box width={0.15} id="minpricebox" class="flex-grow bd-highlight">
-                <TextField id="minprice" label="Minimum Price" variant="outlined" style={{ width: "100%" }}  onChange={this.handleChangeMinPrice} value={this.state.minprice}/>
+              <Box width={0.10} id="minpricebox" class="flex-grow bd-highlight">
+                <TextField id="minpricefield" label="Minimum Price" variant="outlined" style={{ width: "100%" }} value={this.state.minprice} />
               </Box>
 
-              <Box width={0.15} id="maxpricebox" class="flex-grow bd-highlight">
-                <TextField id="maxprice" label="Maximum Price" variant="outlined" style={{ width: "100%" }} onChange={this.handleChangeMaxPrice} value={this.state.maxprice}/>
+              <Box width={0.10} id="maxpricebox" class="flex-grow bd-highlight">
+                <TextField id="maxpricefield" label="Maximum Price" variant="outlined" style={{ width: "100%" }} value={this.state.maxprice} />
               </Box >
-                 
-              <Box width={0.1}>
-              <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="rent"  value="rent"
+
+              <Box width={0.1} id="radiogroup" class="flex-fill bd-highlight">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="rent" value="rent"
                     checked={this.state.saleType === "rent"}
-                    onChange={this.handleSaleTypeChange}/>
+                    onChange={this.handleSaleTypeChange} />
                   <label class="custom-control-label" for="rent">Rent</label>
-              </div>
-              <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="sale"  value="sale"
+                </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="sale" value="sale"
                     checked={this.state.saleType === "sale"}
-                    onChange={this.handleSaleTypeChange}/>
+                    onChange={this.handleSaleTypeChange} />
                   <label class="custom-control-label" for="sale">Buy</label>
-              </div>
+                </div>
               </Box>
 
-              <Box width={0.2} class="flex-fill bd-highlight">
-                <button style={{ width: "100%" }} className="btn btn-outline-black" onClick={this.handleSubmit} >Search</button>
+              <Box class="flex-fill bd-highlight">
+                <button className="btn btn-outline-black"
+
+                  id="searchbutton" fullWidth={true} onClick={this.handleSubmit} >Search</button>
               </Box>
 
             </Box>
