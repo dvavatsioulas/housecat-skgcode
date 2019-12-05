@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+var locations = ["Athens", "Halkidiki", "Kavala", "Larisa", "Patra", "Thessaloniki"];
 
 class FilterBox extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChangeLocation = this.handleChangeLocation.bind(this);
+    //this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
     this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
@@ -54,11 +58,7 @@ class FilterBox extends Component {
 
   }
 
-  handleChangeLocation(event) {
-    this.setState({
-      location: event.target.value
-    });
-  }
+
   handleChangeMaxPrice(event) {
     this.setState({
       maxprice: event.target.value
@@ -101,6 +101,9 @@ class FilterBox extends Component {
   };
 
   reloadSearch() {
+    if (document.getElementById("locationFilter").value == "") { this.state.location = null }
+    else { this.state.location = document.getElementById("locationFilter").value};
+    console.log(this.state.location);
     var parkingSend;
     console.log(this.state.parking);
     if(this.state.parking === true){
@@ -115,6 +118,7 @@ class FilterBox extends Component {
     }else{
       furnituredSend = "no";
     }
+    
     var reloaded = false;
     axios
       .post(
@@ -219,16 +223,17 @@ class FilterBox extends Component {
         </h3>
         <button className="btn" onClick={this.clearFilters}>Clear all filters</button>
         <div className="card-body px-small-5 pt-0 filterText">
+        <Autocomplete freeSolo
+                  options={locations}
+                  id="locationFilter"
+                  renderInput={params => (
+                    <TextField {...params} label="Location" variant="outlined"  value={this.state.location} style={{ width: "100%" }} />
+                  )}
+                />
           <form>
             <div>
               <div className="md-form mt-3">
-                <input
-                  type="text"
-                  id="locationFilter"
-                  className="form-control filterText"
-                  placeholder={this.state.location}
-                  onChange={this.handleChangeLocation}
-                />
+
               </div>
             </div>
             <div className="text-center">
