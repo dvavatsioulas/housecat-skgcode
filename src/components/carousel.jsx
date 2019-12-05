@@ -31,11 +31,13 @@ class Carousel extends Component {
     this.state = {
       location: null,
       minprice: null,
-      maxprice: null
+      maxprice: null,
+      saleType: null,
     };
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
     this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
+    this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -54,6 +56,11 @@ class Carousel extends Component {
       minprice: event.target.value
     });
   }
+  handleSaleTypeChange (changeEvent) {
+    this.setState({
+      saleType: changeEvent.target.value
+    });
+  };
 
   handleSubmit() {
     console.log(this.state.location);
@@ -72,7 +79,7 @@ class Carousel extends Component {
           bathrooms: null,
           property_type: null,
           floor: null,
-          sale_type: null,
+          sale_type: this.state.saleType,
           furnitured: null,
           heating_type: null,
           minbuilt_year: null,
@@ -89,7 +96,9 @@ class Carousel extends Component {
           let filterboxInfo = {
             location: this.state.location,
             minprice: this.state.minprice,
-            maxprice: this.state.maxprice
+            maxprice: this.state.maxprice,
+            sale_type: this.state.saleType,
+            
           };
           localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         } else if (res.status == 204) {
@@ -172,18 +181,33 @@ class Carousel extends Component {
                   
                 />
               </Box>
-
-                <Box width={0.15} id="minpricebox" class="flex-grow bd-highlight">
+              <Box width={0.15} id="minpricebox" class="flex-grow bd-highlight">
                 <TextField id="minprice" label="Minimum Price" variant="outlined" style={{ width: "100%" }}  onChange={this.handleChangeMinPrice} value={this.state.minprice}/>
               </Box>
 
               <Box width={0.15} id="maxpricebox" class="flex-grow bd-highlight">
                 <TextField id="maxprice" label="Maximum Price" variant="outlined" style={{ width: "100%" }} onChange={this.handleChangeMaxPrice} value={this.state.maxprice}/>
+              </Box >
+                 
+              <Box width={0.1}>
+              <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="rent"  value="rent"
+                    checked={this.state.saleType === "rent"}
+                    onChange={this.handleSaleTypeChange}/>
+                  <label class="custom-control-label" for="rent">Rent</label>
+              </div>
+              <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="sale"  value="sale"
+                    checked={this.state.saleType === "sale"}
+                    onChange={this.handleSaleTypeChange}/>
+                  <label class="custom-control-label" for="sale">Buy</label>
+              </div>
               </Box>
 
               <Box width={0.2} class="flex-fill bd-highlight">
                 <button style={{ width: "100%" }} className="btn btn-outline-black" onClick={this.handleSubmit} >Search</button>
               </Box>
+
             </Box>
           </div>
         </div>
