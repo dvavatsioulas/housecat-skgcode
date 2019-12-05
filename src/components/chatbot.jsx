@@ -290,8 +290,8 @@ class Chatbot extends Component {
                       style={{float: 'left', clear: "both"}}>
                   </div>
             <div className="row-sm-2">
-                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '68%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
-                  <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '280px',height: '45px',marginTop: '0px', height: '8%'}}/>
+                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '65%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
+                  <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '267px',height: '45px',marginTop: '0px', height: '8%'}}/>
             </div>
           </div>
         </div>
