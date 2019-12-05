@@ -243,7 +243,6 @@ class Chatbot extends Component {
         this.df_text_query(e.target.value);
         e.target.value = '';
     }
-
   }
 
   _handleQuickReplyPayload(event, payload, text) {
@@ -272,8 +271,8 @@ class Chatbot extends Component {
 
         <span className="popuptext" id="myPopup" style={{display:"inline-block", position:"sticky"}}>
 
-          <div className="card mb-2 bg-light text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 50, right: 0, border: '1px solid lightgray'}}>
-            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50}}>
+          <div className="card mb-2 bg-white text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 50, right: 0, border: '1px solid lightgray'}}>
+            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50, cursor: "pointer"}} onClick={this.hide}>
               <div className="row">
                 <div className="col-sm-10 bg-black text-white" style={{textAlign: 'center'}}>
                   <h5>Cat-bot </h5>
@@ -290,9 +289,10 @@ class Chatbot extends Component {
                   <div  ref={(el)=> {this.messagesEnd = el;}} 
                       style={{float: 'left', clear: "both"}}>
                   </div>
-            <div className="row-sm-2" >
-                  <input style={{position:"absolute",bottom:0 ,marginBottom: 10, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '90%', paddingBottom: '2%', paddingTop: '2%'}} ref={(input) => { this.talkInput = input; }} placeholder="type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
-            </div>  
+            <div className="row-sm-2">
+                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '68%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
+                  <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '280px',height: '45px',marginTop: '0px', height: '8%'}}/>
+            </div>
           </div>
         </div>
 
