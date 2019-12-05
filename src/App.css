@@ -261,29 +261,30 @@ cite {
   }
 
   #minpricefield, #maxpricefield, #locationfield, #locationAC{
-    font-size:18px;
+    font-size:19px;
   }
 
   #radiogroup{
-    margin-top: 5px;
+    margin-top: 0.1%;
     margin-left: 10px;
     margin-right: 10px;
   }
  
 
   #roundedpill{
-    margin-bottom: 45px;
+    margin-bottom: 3.5%;
     height: 100%;
-    padding: 18px;
+    padding: 1.7% 3.5% 1.1% 4% !important;
     border:2px solid black;
     background: rgba(255,255,255,0.88);
     
   }
 
   #filterbox{
-    width: 67.6%;
-    margin-left: 16%;
+    width: 49.6%;
+    margin-left: 25.15%;
     align-content: center;
+    margin-bottom: 1.5%;
   }
   .containerAdd{ 
     border-radius: 5px;
@@ -299,3 +300,16 @@ cite {
   .form{
     line-height: 10;
     font-size: 20px;
+  }
+
+  #locationAC{
+    padding-top: 1.1% !important;
+  }
+
+  #minpricefield, #maxpricefield{
+    padding-top: 6% !important;
+  }
+
+  #btnDiv{
+    margin-top: -0.3%;
+  }

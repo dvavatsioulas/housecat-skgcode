@@ -187,7 +187,7 @@ class Carousel extends Component {
                 </div>
               </Box>
 
-              <Box class="flex-fill bd-highlight">
+              <Box class="flex-fill bd-highlight" id="btnDiv">
                 <button className="btn btn-outline-black"
 
                   id="searchbutton" fullWidth={true} onClick={this.handleSubmit} >Search</button>
