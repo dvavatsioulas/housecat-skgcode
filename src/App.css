@@ -53,8 +53,8 @@
 .navbarMore {
   top: 0;
   color: white;
-  padding-right: 1%;
-  font-size: x-large;
+  padding-right: 16%;
+  font-size: 20px;
 }
 .container {
   padding: 0;
@@ -101,7 +101,8 @@ cite {
   float: left;
   position: sticky;
   top: 0;
-  width: 22%;
+  width: 19%;
+  margin-left: 11%;
 }
 .checkboxes {
   margin-left: 60px;
@@ -211,6 +212,7 @@ cite {
 
   .housesDiv{
     min-height: 800px;
+    margin-right: 2%;
   }
   .contactForm{
     margin-left: 15%;
