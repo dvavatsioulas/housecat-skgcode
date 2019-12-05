@@ -192,10 +192,9 @@ cite {
   .filter-block {
       position: absolute;
       bottom: 0;
-      padding: 20px;
-      left: 15%;
+      
       align-content: center;
-      width: 70%;
+      width: 100%;
   }
 }
 .addHouse{
@@ -259,4 +258,29 @@ cite {
     background-size: cover;
     position: relative;  
   }
-  
+
+  #minpricefield, #maxpricefield, #locationfield, #locationAC{
+    font-size:18px;
+  }
+
+  #radiogroup{
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+ 
+
+  #roundedpill{
+    margin-bottom: 45px;
+    height: 100%;
+    padding: 18px;
+    border:2px solid black;
+    background: rgba(255,255,255,0.88);
+    
+  }
+
+  #filterbox{
+    width: 60%;
+    margin-left: 20%;
+    align-content: center;
+  }
