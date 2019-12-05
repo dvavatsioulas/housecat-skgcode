@@ -33,11 +33,14 @@ class House extends Component {
                 <div>
                   <div class="card-group row ">
                     <div class="col-md-4">
-                      <img
-                        src={house.img_url}
-                        class="card-img img-fluid house-img"
-                        alt="house image"
-                      ></img>
+                      <Link to={`/houses/${house.id}`} >
+                  <img
+                    class="card-img img-fluid house-img"
+                    src={house.img_url}
+                    alt="Card image cap"
+                    height="150px"
+                  />
+                </Link>
                     </div>
                     <div class="col-md-8 ">
                       <div class="card-body houseDetails">
