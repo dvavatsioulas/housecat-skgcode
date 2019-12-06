@@ -12,6 +12,10 @@ exports.front_handle_intents = function(res){
     }
     if (res.data.intent.displayName === 'FAQ 2 Intent - yes'){
         redirect_window="/results";
+        let filterboxInfo = {
+            location: "Location"
+        };
+        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         //window.location = "/results";
     }
     if (res.data.intent.displayName === 'FAQ more - yes' || res.data.intent.displayName === 'FAQ 5 Intent - yes'){

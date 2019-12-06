@@ -8,8 +8,8 @@ import { final_params } from "./chatbot_functions/front_hanle_intents_function";
 import "../message.css";
 import "../chat-window.css";
 
-//const api_address='http://localhost:8000'
-const api_address='https://housecat-skgcode-api.herokuapp.com'
+const api_address='http://localhost:8000'
+//const api_address='https://housecat-skgcode-api.herokuapp.com'
 
 const front_handle_intents= require('./chatbot_functions/front_hanle_intents_function.js')
 
@@ -66,23 +66,36 @@ class Chatbot extends Component {
           }
         } 
       }
+      let d_text=['.','..','...']
       //ADD Bot Delay
       let time=650
 
       if (msg.message==="text"){
-        time= 3000/336*msg.text.text[0].length + 2000
+        time= 2000/336*msg.text.text[0].length
       }
       if (time < 650){
         time = 650
       }
 
-      this.setState({messages: [...this.state.messages, delays]});
-      
-      this.mytimeOutFunctiion(time)
+      delays.msg.text.text=d_text[0];
+      var t=0;
+      this.myload(delays)
+      await this.mytimeOutFunctiion(200)
+      var last_msg=this.state.messages.length
+      for (var i=200; i<time; i+=200){
+        t++
+        if (t>2){t=0;}
+        delays.msg.text.text=d_text[t];
+        this.state.messages.splice(last_msg-1, 1) 
+        this.myload(delays)
+        await this.mytimeOutFunctiion(200)
+      }
       
       var last_msg=this.state.messages.length
       this.state.messages.splice(last_msg-1, 1) 
-      this.state.messages[last_msg-1]=says
+
+      this.myload(says)
+      await this.mytimeOutFunctiion(time)
 
     }
 
@@ -101,6 +114,7 @@ class Chatbot extends Component {
     
     this.state.final_params=front_handle_intents.final_params   
     this.state.redirect_window=front_handle_intents.redirect_window
+    this.myFunction(this.state.final_params, this.state.redirect_window)
   }
 
   async df_event_query(eventName){
@@ -122,12 +136,14 @@ class Chatbot extends Component {
       this.setState({messages: [...this.state.messages, says]})
     }
   }
-  mytimeOutFunctiion(time){
-    setTimeout( () => {
-      console.log("TIME: "+ time )
-      this.setState({ position: 1 });
-    }, time);
+
+  async myload(msg){    
+    this.setState({messages: [...this.state.messages, msg]});
   }
+  mytimeOutFunctiion(time){
+    return new Promise(res => setTimeout(res, time));
+  }
+
   myFunction(final_params, redirect_window) {
     if (redirect_window!=null){
       window.location=redirect_window
@@ -156,7 +172,7 @@ class Chatbot extends Component {
             localStorage.setItem("searchdata", JSON.stringify(filteringResults));
 
             let filterboxInfo = {
-              location: this.state.location
+              location: "Location"
             };
             localStorage.setItem("filters", JSON.stringify(filterboxInfo));
          
@@ -197,7 +213,7 @@ class Chatbot extends Component {
   }
 
   componentDidUpdate(){
-      this.myFunction(this.state.final_params, this.state.redirect_window)
+      
 
       this.messagesEnd.scrollIntoView({behaviour: "smooth"})
       localStorage.setItem("chatmessages", JSON.stringify(this.state.messages))
