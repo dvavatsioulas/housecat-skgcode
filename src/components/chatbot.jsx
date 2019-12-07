@@ -8,8 +8,8 @@ import { final_params } from "./chatbot_functions/front_hanle_intents_function";
 import "../message.css";
 import "../chat-window.css";
 
-const api_address='http://localhost:8000'
-//const api_address='https://housecat-skgcode-api.herokuapp.com'
+//const api_address='http://localhost:8000'
+const api_address='https://housecat-skgcode-api.herokuapp.com'
 
 const front_handle_intents= require('./chatbot_functions/front_hanle_intents_function.js')
 
