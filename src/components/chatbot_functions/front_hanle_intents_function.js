@@ -33,7 +33,7 @@ exports.front_handle_intents = function(res){
     if (res.data.intent.displayName === 'More Filters Intent'){
         //TODO!!
     }
-    if (res.data.intent.displayName === 'Renter Intent - got housetype - saletype - location - price - sqm - yes' || res.data.intent.displayName ==='More Filters Intent'){
+    if (res.data.intent.displayName === 'Rentee Intent - got housetype - saletype - location - price - sqm - yes' || res.data.intent.displayName ==='More Filters Intent'){
 
         let initial_params=initial_params_fun.initialize_parameters()
 
