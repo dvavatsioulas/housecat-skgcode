@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Box from "@material-ui/core/Box";
 
-var locations = ["Athens", "Halkidiki", "Kavala", "Larisa", "Patra", "Thessaloniki"];
+var locations = [
+  "Athens",
+  "Halkidiki",
+  "Kavala",
+  "Larisa",
+  "Patra",
+  "Thessaloniki"
+];
 
 class FilterBox extends Component {
   constructor(props) {
@@ -13,7 +21,7 @@ class FilterBox extends Component {
     this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
     this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
-    this.handleHeatingChange = this.handleHeatingChange.bind(this)
+    this.handleHeatingChange = this.handleHeatingChange.bind(this);
     this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
     this.handleBedroomChange = this.handleBedroomChange.bind(this);
     this.handleBathroomChange = this.handleBathroomChange.bind(this);
@@ -30,7 +38,7 @@ class FilterBox extends Component {
     saleType: null,
     bedrooms: null,
     floor: null,
-    bathrooms:null,
+    bathrooms: null,
     propertyType: null,
     heating: null,
     parking: false,
@@ -42,22 +50,21 @@ class FilterBox extends Component {
       this.setState({ location: "Location" });
     } else {
       var item = JSON.parse(localStorage.getItem("filters"));
-      this.setState({ location: item.location, 
-                      minprice : item.minprice, 
-                      maxprice: item.maxprice,
-                      saleType: item.sale_type,
-                      bedrooms: item.bedrooms,
-                      bathrooms: item.bathrooms,
-                      floor: item.floor,
-                      propertyType : item.property_type,
-                      heating: item.heating_type,
-                      parking: item.parking,
-                      furnitured: item.furnitured
-                      });
+      this.setState({
+        location: item.location,
+        minprice: item.minprice,
+        maxprice: item.maxprice,
+        saleType: item.sale_type,
+        bedrooms: item.bedrooms,
+        bathrooms: item.bathrooms,
+        floor: item.floor,
+        propertyType: item.property_type,
+        heating: item.heating_type,
+        parking: item.parking,
+        furnitured: item.furnitured
+      });
     }
-
   }
-
 
   handleChangeMaxPrice(event) {
     this.setState({
@@ -69,56 +76,56 @@ class FilterBox extends Component {
       minprice: event.target.value
     });
   }
-  handleSaleTypeChange (changeEvent) {
+  handleSaleTypeChange(changeEvent) {
     this.setState({
       saleType: changeEvent.target.value
     });
-  };
-  handlePropertyTypeChange (changeEvent) {
+  }
+  handlePropertyTypeChange(changeEvent) {
     this.setState({
       propertyType: changeEvent.target.value
     });
-  };
-  handleHeatingChange (changeEvent) {
+  }
+  handleHeatingChange(changeEvent) {
     this.setState({
       heating: changeEvent.target.value
     });
-  };
-  handleBedroomChange (event) {
-    this.setState({bedrooms: event.target.value});
-  };
-  handleBathroomChange (event) {
-    this.setState({bathrooms: event.target.value});
-  };
-  handleFloorChange (event) {
-    this.setState({floor: event.target.value});
-  };
-  handleParkingChecked(event){
-   this.setState(prevState => ({ parking: !prevState.parking }));
-  };
-  handleFurnituredChecked(event){
+  }
+  handleBedroomChange(event) {
+    this.setState({ bedrooms: event.target.value });
+  }
+  handleBathroomChange(event) {
+    this.setState({ bathrooms: event.target.value });
+  }
+  handleFloorChange(event) {
+    this.setState({ floor: event.target.value });
+  }
+  handleParkingChecked(event) {
+    this.setState(prevState => ({ parking: !prevState.parking }));
+  }
+  handleFurnituredChecked(event) {
     this.setState(prevState => ({ furnitured: !prevState.furnitured }));
-  };
+  }
 
   reloadSearch() {
-    if (document.getElementById("locationFilter").value == "") { this.state.location = null }
-    else { this.state.location = document.getElementById("locationFilter").value};
-    console.log(this.state.location);
+    if (document.getElementById("locationFilter").value == "") {
+      this.state.location = null;
+    } else {
+      this.state.location = document.getElementById("locationFilter").value;
+    }
     var parkingSend;
-    console.log(this.state.parking);
-    if(this.state.parking === true){
+    if (this.state.parking === true) {
       parkingSend = "yes";
-    }else{
+    } else {
       parkingSend = "no";
     }
     var furnituredSend;
-    console.log(this.state.furnitured);
-    if(this.state.furnitured === true){
+    if (this.state.furnitured === true) {
       furnituredSend = "yes";
-    }else{
+    } else {
       furnituredSend = "no";
     }
-    
+
     var reloaded = false;
     axios
       .post(
@@ -149,29 +156,28 @@ class FilterBox extends Component {
             window.open("/results", "_self"); //to open new page
             reloaded = false;
           }
-          
         } else if (res.status == 204) {
           localStorage.setItem("searchdata", res.data);
           window.open("/results", "_self");
         }
       });
-      let filterboxInfo = {
-        location: this.state.location,
-        minprice: this.state.minprice,
-        maxprice: this.state.maxprice,
-        sale_type: this.state.saleType,
-        bedrooms: this.state.bedrooms,
-        bathrooms: this.state.bathrooms,
-        floor: this.state.floor,
-        property_type: this.state.propertyType,
-        heating_type: this.state.heating,
-        parking: this.state.parking,
-        furnitured: this.state.furnitured
-      };
-      localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+    let filterboxInfo = {
+      location: this.state.location,
+      minprice: this.state.minprice,
+      maxprice: this.state.maxprice,
+      sale_type: this.state.saleType,
+      bedrooms: this.state.bedrooms,
+      bathrooms: this.state.bathrooms,
+      floor: this.state.floor,
+      property_type: this.state.propertyType,
+      heating_type: this.state.heating,
+      parking: this.state.parking,
+      furnitured: this.state.furnitured
+    };
+    localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
 
-  clearFilters(){
+  clearFilters() {
     axios
       .post(
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
@@ -180,7 +186,7 @@ class FilterBox extends Component {
           maxprice: null,
           minsqm: null,
           maxsqm: null,
-          location:null,
+          location: null,
           bedrooms: null,
           bathrooms: null,
           property_type: null,
@@ -193,7 +199,6 @@ class FilterBox extends Component {
         }
       )
       .then(res => {
-       
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
         let filterboxInfo = {
@@ -203,7 +208,7 @@ class FilterBox extends Component {
           sale_type: null,
           bedrooms: null,
           bathrooms: null,
-          floor:null,
+          floor: null,
           property_type: null,
           heating_type: null,
           parking: null,
@@ -212,7 +217,7 @@ class FilterBox extends Component {
         localStorage.setItem("filters", JSON.stringify(filterboxInfo));
 
         window.open("/results", "_self"); //to open new page
-        });
+      });
   }
 
   render() {
@@ -221,167 +226,252 @@ class FilterBox extends Component {
         <h3 className="card-header black white-text py-4 p-2">
           <strong>Filters</strong>
         </h3>
-        <button className="btn" onClick={this.clearFilters}>Clear all filters</button>
-        <div className="card-body px-small-5 pt-0 filterText">
-        <Autocomplete freeSolo
-                  options={locations}
-                  id="locationFilter"
-                  renderInput={params => (
-                    <TextField {...params} label="Location" variant="outlined"  value={this.state.location} style={{ width: "100%" }} />
-                  )}
-                />
+        <div className="card-body px-small-5 pt-0">
+          <hr />
+          <Autocomplete
+            freeSolo
+            options={locations}
+            id="locationFilter"
+            renderInput={params => (
+              <TextField
+                {...params}
+                label="Location"
+                variant="outlined"
+                value={this.state.location}
+                style={{ width: "100%" }}
+              />
+            )}
+          />
           <form>
             <div>
-              <div className="md-form mt-3">
-
+              <div className="md-form mt-3"></div>
+            </div>
+            <div className="text-center d-flex flex-row">
+              <div className="custom-control-inline p-2">
+                <p className="filterTextDescription"> Purpose: </p>
+              </div>
+              <div class="custom-control-inline custom-radio p-2">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="rent"
+                  value="rent"
+                  checked={this.state.saleType === "rent"}
+                  onChange={this.handleSaleTypeChange}
+                />
+                <label class="custom-control-label filterText" for="rent">
+                  Rent
+                </label>
+              </div>
+              <div class="custom-control-inline custom-radio p-2">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="sale"
+                  value="sale"
+                  checked={this.state.saleType === "sale"}
+                  onChange={this.handleSaleTypeChange}
+                />
+                <label class="custom-control-label filterText" for="sale">
+                  Buy
+                </label>
               </div>
             </div>
-            <div className="text-center">
-                 <p className="filterText">I want to: </p>
-                 <div className="custom-control-inline">
-                   
-                  <label>
-                  <input
-                    type="radio"
-                    value="rent"
-                    checked={this.state.saleType === "rent"}
-                    onChange={this.handleSaleTypeChange}
-                  />
-                    Rent
-                  </label>
-                </div>
-                <div className="custom-control-inline">
-                  
-                  <label >
-                  <input
-                    type="radio"
-                    
-                    value="sale"
-                    
-                    checked={this.state.saleType === "sale"}
-                    onChange={this.handleSaleTypeChange}
-                  />
-                    Buy
-                  </label>
-                </div>
-              </div>
 
             <hr />
 
             <div className="text-center">
-                 <p className="filterText">I am looking for:  </p>
-                 <div className="custom-control-inline">
-                  <label>
+              <div className="text-center d-flex flex-row">
+                <div className="custom-control-inline p-2">
+                  <p className="filterTextDescription"> Type: </p>
+                </div>
+                <div className="custom-control-inline custom-radio p-2">
                   <input
                     type="radio"
+                    class="custom-control-input"
+                    id="apartment"
                     value="apartment"
                     checked={this.state.propertyType === "apartment"}
                     onChange={this.handlePropertyTypeChange}
                   />
+                  <label
+                    className="custom-control-label filterText"
+                    for="apartment"
+                  >
                     Apartment
                   </label>
                 </div>
-                <div className="custom-control-inline">
-                  
-                  <label>
+                <div class="custom-control-inline custom-radio p-2">
                   <input
                     type="radio"
+                    class="custom-control-input"
+                    id="house"
                     value="house"
                     checked={this.state.propertyType === "house"}
                     onChange={this.handlePropertyTypeChange}
                   />
+                  <label
+                    className="custom-control-label filterText"
+                    for="house"
+                  >
                     House
                   </label>
                 </div>
               </div>
+            </div>
+            <hr />
+            <div className="form-group form-row text-center">
+              <div className="d-flex flex-row">
+                <div className="mr-auto p-2">
+                  {" "}
+                  <label className="filterTextDescription">Bedrooms: </label>
+                </div>
+                <div className="p-2">
+                  <select
+                    className="custom-select filterText"
+                    value={this.state.bedrooms}
+                    onChange={this.handleBedroomChange}
+                  >
+                    <option selected disabled>
+                      Choose
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
 
-            <div className="form-group form-row text-center filterText">
-              <div className="col-md-4 mb-3" >
-                <label>Bedrooms</label>
-                <select className="custom-select" value={this.state.bedrooms} 
-                     onChange={this.handleBedroomChange} >
-                  <option disabled>Choose</option>
-                  <option selected value="1">
-                    1
-                  </option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+              <div className="d-flex flex-row">
+                <div className="mr-auto p-2">
+                  {" "}
+                  <label className="filterTextDescription">Bathrooms: </label>
+                </div>
+                <div className="p-2">
+                  <select
+                    className="custom-select filterText"
+                    value={this.state.bathrooms}
+                    onChange={this.handleBathroomChange}
+                  >
+                    <option selected disabled>
+                      Choose
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-4 mb-3">
-                <label>Bathrooms</label>
-                <select class="custom-select" value={this.state.bathrooms} 
-                     onChange={this.handleBathroomChange}>
-                  <option disabled>Choose</option>
-                  <option selected value="1">
-                    1
-                  </option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label>Floor</label>
-                <select class="custom-select" value={this.state.floor} 
-                     onChange={this.handleFloorChange}>
-                  <option disabled>Choose</option>
-                  <option selected value="1">
-                    1
-                  </option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+
+              <div className="d-flex flex-row">
+                <div className="mr-auto p-2">
+                  {" "}
+                  <label className="filterTextDescription">Floor: </label>
+                </div>
+                <div className="p-2">
+                  <select
+                    className="custom-select filterText"
+                    value={this.state.floor}
+                    onChange={this.handleFloorChange}
+                  >
+                    <option selected disabled>
+                      Choose
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
               </div>
             </div>
 
             <hr />
             <p className="text-center filterText">Anything else?</p>
-            <div className="form-group form-row text-center filterText">
-              <div className="d-flex flex-row"> 
-                <label className="p-2">Heating</label>
-                <select className="custom-select" value={this.state.heating} 
-                     onChange={this.handleHeatingChange} >
-                  <option disabled>Choose</option>
-                  <option selected value="gas"> Gas </option>
+            <div className="form-group form-row text-center ">
+              <div className="d-flex flex-row">
+                <label className="p-2 filterTextDescription">Heating: </label>
+                <select
+                  className="custom-select filterText"
+                  value={this.state.heating}
+                  onChange={this.handleHeatingChange}
+                >
+                  <option selected disabled>
+                    Choose
+                  </option>
+                  <option value="gas"> Gas </option>
                   <option value="diesel">Diesel</option>
                 </select>
               </div>
             </div>
 
-
             <div className="custom-control custom-switch">
-              <input type="checkbox" className="custom-control-input" id="parking" checked={this.state.parking} onChange={this.handleParkingChecked}/>
-              <label className="custom-control-label" for="parking">Parking Spot</label>
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="parking"
+                checked={this.state.parking}
+                onChange={this.handleParkingChecked}
+              />
+              <label className="custom-control-label filterText" for="parking">
+                Parking Spot
+              </label>
             </div>
             <div className="custom-control custom-switch">
-              <input type="checkbox" className="custom-control-input" id="furnitured" checked={this.state.furnitured} onChange={this.handleFurnituredChecked}/>
-              <label className="custom-control-label" for="furnitured">Furnitured</label>
+              <input
+                type="checkbox"
+                className="custom-control-input"
+                id="furnitured"
+                checked={this.state.furnitured}
+                onChange={this.handleFurnituredChecked}
+              />
+              <label
+                className="custom-control-label filterText"
+                for="furnitured"
+              >
+                Furnitured
+              </label>
             </div>
-            
 
             <hr />
 
-            <div className="d-flex flex-row">
-              <div className="md-form small p-1">
-                <p className="text-center filterText">From:</p>
-                <input
-                  id="minprice"
-                  type="text"
-                  onChange={this.handleChangeMinPrice}
-                  placeholder={this.state.minprice}
-                />
+            <div className="d-flex flex-fill">
+              <div className="mb-3">
+                <Box
+                  width={0.1}
+                  id="minpricebox"
+                  class="flex-grow bd-highlight"
+                >
+                  <TextField
+                    id="minpricefield"
+                    label="Minimum Price"
+                    variant="outlined"
+                    style={{ width: "100%" }}
+                    value={this.state.minprice}
+                  />
+                </Box>
               </div>
-              <div className="md-form small p-1">
-                <p className="text-center filterText">To:</p>
-                <input
-                  id="maxprice"
-                  type="text"
-                  onChange={this.handleChangeMaxPrice}
-                  placeholder={this.state.maxprice}
-                />
+              <div className="mb-3">
+                <Box
+                  width={0.1}
+                  id="maxpricebox"
+                  class="flex-grow bd-highlight"
+                >
+                  <TextField
+                    id="maxpricefield"
+                    label="Maximum Price"
+                    variant="outlined"
+                    style={{ width: "100%" }}
+                    value={this.state.maxprice}
+                  />
+                </Box>
               </div>
             </div>
           </form>
+          <a>
+            <p className="clearFilters" onClick={this.clearFilters}>
+              Clear all filters
+            </p>
+          </a>
           <button
             className="btn btn-outline-info btn-rounded btn-block "
             onClick={this.reloadSearch}
