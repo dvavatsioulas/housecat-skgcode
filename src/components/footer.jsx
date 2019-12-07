@@ -19,19 +19,19 @@ class Footer extends Component {
   render() {
     return (
       <footer className="page-footer bottom font-small footer-dark black pt-4">
-        <div className="container-fluid text-center text-md-left" id="footerElements">
+        <div className="container-fluid text-center text-md-left">
             <hr className="clearfix w-100 d-md-none pb-3" />
 
             <div className="col-md-6 mt-md-0 mt-3">
-              <h5 className="text-uppercase" style={styleText} id="connectwithus">
-                Connect with us
+              <h5 className="text-uppercase" style={styleText}>
+                Connect with us:
               </h5>
 
               <MDBContainer>
                 <MDBBtn size="xlg" tag="a" floating social="fb" target="_blank" href="https://www.facebook.com/skgcode/">
                   <MDBIcon fab icon="facebook-f" />
                 </MDBBtn>
-                <MDBBtn size="xlg" tag="a" floating social="tw" target="_blank" href="https://www.twitter.com">
+                <MDBBtn size="xlg" tag="a" floating social="tw">
                   <MDBIcon fab icon="twitter" />
                 </MDBBtn>
                 <MDBBtn size="xlg" tag="a" floating social="gplus">
