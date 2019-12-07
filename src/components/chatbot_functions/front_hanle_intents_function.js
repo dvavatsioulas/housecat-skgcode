@@ -6,7 +6,7 @@ exports.front_handle_intents = function(res){
     var final_params=null
     var redirect_window=null;
     
-    if (res.data.intent.displayName === 'FAQ 1 Intent - yes' || res.data.intent.displayName ==='Landlord Intent - add'){
+    if (res.data.intent.displayName === 'FAQ 1 Intent - yes' || res.data.intent.displayName ==='Landlord Intent - add - yes'){
         redirect_window="/add";
         //window.location = "/add";
     }
@@ -33,11 +33,14 @@ exports.front_handle_intents = function(res){
     if (res.data.intent.displayName === 'More Filters Intent'){
         //TODO!!
     }
-    if (res.data.intent.displayName === 'Rentee Intent - got housetype - saletype - location - price - sqm - yes' || res.data.intent.displayName ==='More Filters Intent'){
-
+    if (res.data.intent.displayName === 'Rentee Intent - got housetype - saletype - location - price - sqm - yes' || res.data.intent.displayName ==='More Filters Intent - yes'){
+        var index=4
+        if (res.data.intent.displayName ==='More Filters Intent - yes'){
+            index=0;
+        }
         let initial_params=initial_params_fun.initialize_parameters()
 
-        handle_params.handle_params(res, initial_params)
+        handle_params.handle_params(res, initial_params, index)
         final_params=handle_params.final_params
         module.exports.final_params=final_params
         console.log("DONE")        

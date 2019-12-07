@@ -7,6 +7,7 @@ import QuickReplies from './quickReplies'
 import { final_params } from "./chatbot_functions/front_hanle_intents_function";
 import "../message.css";
 import "../chat-window.css";
+import { ninvoke } from "q";
 
 //const api_address='http://localhost:8000'
 const api_address='https://housecat-skgcode-api.herokuapp.com'
@@ -30,14 +31,15 @@ class Chatbot extends Component {
       messages: [],
       showBot: false,
       final_params: null,
-      redirect_window: null
+      redirect_window: null,
+      input_message: ''
     }
 
     if (cookies.get('userID') === undefined){
       cookies.set('userID', uuid(), {path: '/'});
-
+      localStorage.clear()
     }
-
+    
   }
   async df_text_query(queryText){
     let says = {
@@ -191,8 +193,9 @@ class Chatbot extends Component {
   }
 
   componentDidMount(){
+
         this.state.redirect_window=null
-        //this.df_event_query('faq_more')
+
 
         var popup = document.getElementById("myPopup");
         popup.style.display='none'
@@ -200,6 +203,7 @@ class Chatbot extends Component {
 
         if (localStorage.getItem("chatmessages")===null){
           localStorage.setItem("chatmessages", JSON.stringify(this.state.messages))
+          this.df_event_query('first_message')
         }else{
           mydata=JSON.parse(localStorage.getItem("chatmessages"))
 
@@ -208,16 +212,10 @@ class Chatbot extends Component {
           }
 
         }
-
-
   }
-
-  componentDidUpdate(){
-      
-
+  componentDidUpdate(){ 
       this.messagesEnd.scrollIntoView({behaviour: "smooth"})
       localStorage.setItem("chatmessages", JSON.stringify(this.state.messages))
-
   }
 
   renderMessages(stateMessages){
@@ -257,10 +255,16 @@ class Chatbot extends Component {
   _handleInputKeyPress(e) {
     if (e.key === 'Enter' && e.target.value!='') {
         this.df_text_query(e.target.value);
-        e.target.value = '';
+        this.state.input_message=''
     }
   }
-
+  handleChange = event => {
+    this.setState({ input_message : event.target.value });
+  }
+  sendButton = event =>{
+    this.df_text_query(this.state.input_message);
+    this.state.input_message=''
+  }
   _handleQuickReplyPayload(event, payload, text) {
     event.preventDefault();
     event.stopPropagation();
@@ -306,8 +310,8 @@ class Chatbot extends Component {
                       style={{float: 'left', clear: "both"}}>
                   </div>
             <div className="row-sm-2">
-                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '65%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} id="user_says" type="text" />
-                  <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '267px',height: '45px',marginTop: '0px', height: '8%'}}/>
+                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '65%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} onChange={this.handleChange} id="user_says" type="text" value={this.state.input_message}/>
+                  <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '267px',height: '45px',marginTop: '0px', height: '8%'}} onClick={this.sendButton}/>
             </div>
           </div>
         </div>

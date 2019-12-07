@@ -1,6 +1,6 @@
-exports.handle_params = function(responses, initial_params){
+exports.handle_params = function(responses, initial_params, index){
     
-    var parameters = responses.data.outputContexts[4].parameters.fields
+    var parameters = responses.data.outputContexts[index].parameters.fields
     if (parameters.City.stringValue===""){
         initial_params.location=null
     }else{
