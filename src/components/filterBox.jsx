@@ -223,10 +223,10 @@ class FilterBox extends Component {
   render() {
     return (
       <div className="card filterBox">
-        <h3 className="card-header black white-text py-4 p-2">
-          <strong>Filters</strong>
+        <h3 className="card-header text-center py-2" style={{fontFamily:"Georgia"}}>
+          <strong>~Filters~</strong>
         </h3>
-        <div className="card-body px-small-5 pt-0">
+        <div className="card-body pt-0" style={{height:"60%"}}>
           <hr />
           <Autocomplete
             freeSolo
@@ -242,7 +242,7 @@ class FilterBox extends Component {
               />
             )}
           />
-          <form>
+          <form className="filterboxForm">
             <div>
               <div className="md-form mt-3"></div>
             </div>

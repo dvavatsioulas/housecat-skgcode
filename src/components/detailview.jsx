@@ -109,18 +109,18 @@ class DetailView extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                        <div class="title-box-d">
-                            <h3 class="title-d DVtitles">Property Description</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                            <div class="title-box-d">
+                                <h3 class="title-d DVtitles">Property Description</h3>
+                            </div>
+                            </div>
                         </div>
+                        <div class="property-description">
+                            <p class="description color-text-a">
+                                {this.state.house.description}
+                            </p>
                         </div>
-                    </div>
-                    <div class="property-description">
-                        <p class="description color-text-a">
-                            {this.state.house.description}
-                        </p>
-                    </div>
                     </div>
                 </div>
                 </div>
