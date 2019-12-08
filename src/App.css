@@ -87,22 +87,21 @@
   font-size: 50px;
 }
 .homePageStyle {
-  margin-top: 200px;
-  margin-bottom: 200px;
+  margin-top: 5%;
+  margin-bottom: 5%;
   font-size: 20px;
   align-self: center;
-  width: 99%;
+  width: 100%;
 }
 .homePageStyle > p,
 cite {
   font-size: 25px;
 }
 .filterBox {
-  float: left;
   position: sticky;
-  top: 0;
-  width: 19%;
-  margin-left: 11%;
+  top: 9.9%;
+  margin-left: 32%;
+  margin-right: 8%;
 }
 .checkboxes {
   margin-left: 60px;
@@ -139,9 +138,8 @@ cite {
 }
 .houses {
   list-style: none;
-  width: 80%;
   padding-top: 50px;
-  margin-left: 80px;
+  margin-right: 15%;
 }
 .house {
   list-style: none;
@@ -149,11 +147,9 @@ cite {
   margin-bottom: 40px;
   padding-left: 5px;
 }
-.house:hover {
-  background-color: #e6f7ff;
-}
 .houseDetails {
-  height: 100%;
+  height:250px;
+  min-width: 60%;
   margin-left: -13px;
   border: 1px solid #333333;
 }
@@ -167,10 +163,9 @@ cite {
 }
 .FAQ {
   position: center;
-  margin-top: 10%;
+  margin-top: 5%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 25%;
   padding-left: 4%;
   padding-right: 5%;
   padding-top: 2%;
@@ -179,14 +174,16 @@ cite {
 .noHouseText {
   font-size: 30px;
   margin: 50px;
-  margin-bottom: 800px;
 }
 .house-img {
-  height: 100%;
+  height:250px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
 }
 .carousel-img {
   width: 100%;
-  max-height: 750px;
+  max-height: 650px;
   background-size: cover;
 }
 .slide-wrapper {
@@ -214,13 +211,9 @@ cite {
   bottom: 5%;
 }
 
-.housesDiv {
-  min-height: 800px;
-  margin-right: 2%;
-}
 .contactForm {
-  margin-left: 15%;
-  margin-right: 15%;
+  padding-left: 20%;
+  padding-right: 15%;
 }
 .dropdownStyle {
   margin-right: 40px;
@@ -317,4 +310,27 @@ cite {
 
 #btnDiv {
   margin-top: -0.3%;
+}
+
+.filterboxForm{
+  overflow:scroll;
+  overflow-x:hidden;
+  max-height: 600px;
+}
+
+#houseDesc{
+  margin-left: 5px;
+  margin-right: 15px;
+  font-size: 16px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box; 
+  line-height: 22px;  
+  max-height: 44px;      
+  /* The number of lines to be displayed */ 
+  -webkit-line-clamp: 2;  
+  -webkit-box-orient: vertical; 
+}
+.filterTextDescription{
+  font-size: medium;
 }
