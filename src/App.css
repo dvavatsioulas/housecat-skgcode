@@ -135,6 +135,8 @@ cite {
 }
 .house3Details {
   list-style: none;
+  font-size: initial;
+
 }
 .houses {
   list-style: none;
@@ -348,4 +350,10 @@ cite {
 }
 .filterTextDescription{
   font-size: medium;
+}
+#lastHousesImg{  
+  width: 100%;
+  height: 250px;
+  background-position: center;
+  background-size: cover;
 }
