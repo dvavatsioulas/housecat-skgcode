@@ -165,17 +165,27 @@ cite {
 #carouselExampleIndicators {
   z-index: 0;
 }
-.FAQ {
+.FAQ{
   position: center;
   margin-top: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left:10%;
+  margin-right:10%;
   margin-bottom: 25%;
   padding-left: 4%;
   padding-right: 5%;
   padding-top: 2%;
   padding-bottom: 2%;
+  border-left: 5px solid #2ABBAC;
+  padding-left: 5px;
+  border-bottom: 1px solid #2ABBAC;
+  }
+
+
+.FAQ > a {
+  text-decoration:none ;
+  text-decoration-color: #2ABBAC;
 }
+
 .noHouseText {
   font-size: 30px;
   margin: 50px;
@@ -291,21 +301,25 @@ cite {
   align-content: center;
   margin-bottom: 1.5%;
 }
-.containerAdd {
-  border-radius: 5px;
-  background-color: #e0faee;
-  padding-left: 7%;
+.containerAdd{ 
+  padding-left:2% ;
   padding-right: 7%;
   padding-top: 2%;
   padding-bottom: 2%;
   margin: 25%;
   margin-top: 2%;
-}
-.form {
-  line-height: 10;
-  font-size: 20px;
+  border-left: 5px solid #2ABBAC;
+  /* padding-left: 5px; */
+  border-bottom: 1px solid #2ABBAC;
 }
 
+.form {
+  line-height: 150% !important;
+  font-size: 20px;
+}
+.form > row {
+  display: flex1;
+}
 #locationAC {
   padding-top: 0.8% !important;
 }

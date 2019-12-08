@@ -7,20 +7,121 @@ class FAQ extends Component{
     render() { 
         return (
           <React.Fragment> 
-            <div className="card FAQ">
-              <strong>1. How to add a house or an apartment for selling or renting?  </strong>
-              <p>Eather you can go and click to our AddHouse button on the gight side of our navigation bar or I can redirect you to the page. Would you like me to do that? </p>
-              <strong>2. How do I search for rentals?</strong>
-              <p> If you require any further information, feel free to contact us. Would you like me to redirect you to our contact page? </p>
-              <strong>3. How to use the chatbot?  </strong> 
-              <p>First of all you can tell me if you are a landlord or a renter. Then I can guide you with my questions on what are you searching for. Otherwise if you are just visiting our site you can ask me any questions you have.</p>
-              <strong>4. Are all the houses or apartments available right now?</strong>
-              <p>All the properties that are shown in our site are available and are being verified everyday. You can also check by contacting us.</p>
-              <strong>5. Why the addresses of the rentals are not available?</strong>
-              <p>All the addresses are purposely covered for safety reasons. You can know the specific address of each property after contacting our agency.</p>
-            </div> 
-            <Chatbot/>
-          </React.Fragment>
+            <div className="FAQ ">
+    <div class="panel-group" id="faqAccordion">
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question0">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing"> 1. How to add a house or an apartment for selling or renting?  </a>
+                 </h4>
+            </div>
+            <div id="question0" class="panel-collapse collapse" >
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+                    <p>First click on <b>Add House</b>, which is located at the top-right side of the page. 
+                      Then fill all the fields and when you are done, press the <b>Add</b> button located at the bottom of the page. </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">2. How do I search for rentals?</a>
+              </h4>
+
+            </div>
+            <div id="question1" class="panel-collapse collapse" >
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+
+                    <p>You can click on <b>Rent</b> button located at the navbar and then add more filters from Filter Box at the left.</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question2">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">3. How to use the chatbot? </a>
+              </h4>
+
+            </div>
+            <div id="question2" class="panel-collapse collapse" >
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+
+                    <p>Just click the <b>Need help?</b> button and write what you are looking for.</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question3">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">4. Are all the houses or apartments available right now?</a>
+                </h4>
+            </div>
+            <div id="question3" class="panel-collapse collapse">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+                    <p>All the properties that are shown in our site are available and are being verified everyday. You can also check by contacting us.</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question4">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">5. Why the addresses of the rentals are not available?</a>
+                </h4>
+            </div>
+            <div id="question4" class="panel-collapse collapse">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+                    <p>All the addresses are purposely covered for safety reasons. You can know the specific address of each property after contacting our agency.</p>
+                </div>
+            </div>   
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question5">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">6.Why should I choose housecat-skgcode.com?</a>
+                </h4>
+            </div>
+            <div id="question5" class="panel-collapse collapse">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+                    <p>Founded in 2019 by dynamic business leaders, System of a down has already helped more than 5,000 people find their dream homes through the efforts of more than 500 of our dedicated employees. </p>
+                </div>
+            </div>   
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question6">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">7.In which cities do you offer your services?</a>
+                </h4>
+            </div>
+            <div id="question6" class="panel-collapse collapse">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+                    <p>Our services are available across 6 cities in Greece, namely Athens, Halkidiki, Kavala, Larisa, Patra, Thessaloniki. </p>
+                </div>
+            </div>   
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question7">
+                 <h4 class="panel-title">
+                    <a href="#" class="ing">8.Who should I contact in case I face any issues?</a>
+                </h4>
+            </div>
+            <div id="question7" class="panel-collapse collapse">
+                <div class="panel-body">
+                     <h5><span class="label label-primary">Answer</span></h5>
+                    <p>We have a dedicated customer care service team, which is available at your service seven days a week from 8:30 am to 7:30 pm. You can call them on + 30 2310 666666 or mail customer service at systemofadown@skgcode.com. </p>
+                </div>
+            </div>   
+        </div>
+      </div>  
+    </div>
+  <Chatbot/>
+  </React.Fragment>
           ); 
     }
 }
