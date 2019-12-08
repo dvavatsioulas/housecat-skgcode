@@ -165,19 +165,12 @@ cite {
 }
 .FAQ{
   position: center;
-  margin-top: 10%;
-  margin-left:10%;
-  margin-right:10%;
-  margin-bottom: 25%;
-  padding-left: 4%;
-  padding-right: 5%;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  border-left: 5px solid #2ABBAC;
+  margin-top: 2%;
+  margin-left:15%;
+  margin-right:15%;
+  border-left: 10px solid #2ABBAC;
   padding-left: 5px;
-  border-bottom: 1px solid #2ABBAC;
-  }
-
+}
 
 .FAQ > a {
   text-decoration:none ;
