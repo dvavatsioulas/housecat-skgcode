@@ -189,6 +189,9 @@ render() {
     return (
 <div className="containerAdd">
     <form name="form" className="needs-validation" novalidate>
+        <div class="text-center">
+          <h3 class="dark-grey-text mb-5"><strong>Addd your house</strong></h3>
+        </div>
         <div className="row ">
         <div className="col md-form">
             <label for="validationServer015"> Email : </label><br/>
@@ -223,7 +226,7 @@ render() {
     </div>
     </div>
     <div className="row">
-    <div className="col-md-3">
+    <div className="col-md-6">
          <p >For : </p>
          <div className="custom-control-inline">                  
           <label>
@@ -248,7 +251,7 @@ render() {
             </label>
           </div>
     </div>
-    <div className="col-md-8">
+    <div className="col-md-6">
          <p >Type : </p>
          <div className="custom-control-inline">          
             <label>
@@ -264,7 +267,7 @@ render() {
               <label>
                 <input
                   type="radio"
-                  value="house"
+                  value="House"
                   checked={this.state.propertyType === "House"}
                   onChange={this.handlePropertyTypeChange}/>
                  House
@@ -347,7 +350,7 @@ render() {
         <div className="input-group col-md-12 mb-3 md-form">
         <select 
             className="browser-default custom-select" 
-            id="inputGroupSelect03" 
+            id="inputGroupSelect04" 
             value={this.state.heating} 
             onChange={this.handleHeatingChange} >
               <option selected disabled>Heating type</option>
@@ -419,5 +422,3 @@ render() {
 }
 
 export default AddHouse;
-
- 
