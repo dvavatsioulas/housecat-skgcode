@@ -85,7 +85,8 @@ class Contact extends Component {
               </div>
             </form>
 
-            <div class="text-center">
+            <div style={{float: "right", paddingRight:"32%"}}>
+            {/* <div class="text-center"> gia na erthei 3ana sthn mesh ths formas*/}
               <a
                 class="btn btn-info"
                 onClick="document.getElementById('contact-form').submit();"
@@ -110,7 +111,7 @@ class Contact extends Component {
 
               <li>
                 <i class="fas fa-envelope mt-4 fa-2x"></i>
-                <p>systemofadown@skgcode.com</p>
+                <p>systemofadown@ skgcode.com</p>
               </li>
             </ul>
           </div>
