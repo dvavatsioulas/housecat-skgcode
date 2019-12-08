@@ -1,7 +1,7 @@
 # HouseCat-SKGcode-FrontEnd
-Front-end part for HouseCat
+<h3> Try the app online at: <a href="https://housecat-skgcode.herokuapp.com/">housecat-skgcode.herokuapp.com</a> </h3>  
 
-**HouseCat** is a **real-estate website/web-app** which helps you find your perfect house.  
+**HouseCat** is a **real-estate website/web app** which helps you find your perfect house.  
 Our **chatbot**, named cat-bot, is always there to **answer your questions** and to **assist you** when searching for a house.
 
 # Technologies  
