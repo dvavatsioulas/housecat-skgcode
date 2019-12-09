@@ -372,3 +372,29 @@ cite {
   background-color :#008ae6 !important;
   color: white !important;
 }
+
+.dealer-content{
+  background-color: #4d4d4d;
+  margin-bottom: 5%;
+}
+.property-title{
+  text-align: center;
+  color: white;
+  margin-top: 1%;
+  border-bottom: 1px solid #008ae6;
+}
+
+.widgets{
+  font-size: 25px;
+  margin-bottom: 2%;
+  color: white;
+}
+#DVicons{
+  color: #008ae6;
+}
+.property-info-label{
+  font-size: large;
+}
+.property-info-value{
+  font-size: x-large;
+}
