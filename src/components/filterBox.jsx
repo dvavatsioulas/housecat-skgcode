@@ -63,6 +63,7 @@ class FilterBox extends Component {
         parking: item.parking,
         furnitured: item.furnitured
       });
+      document.getElementById("locationFilter").value = item.location;
     }
   }
 
@@ -112,7 +113,13 @@ class FilterBox extends Component {
       this.state.location = null;
     } else {
       this.state.location = document.getElementById("locationFilter").value;
-    }
+    }if (document.getElementById("minpricefield").value == "") { this.state.minprice = null }
+    else { this.state.minprice = document.getElementById("minpricefield").value }
+    if (document.getElementById("maxpricefield").value == "") { this.state.maxprice = null }
+    else { this.state.maxprice = document.getElementById("maxpricefield").value }
+    
+    console.log(this.state.location, this.state.minprice, this.state.maxprice);
+
     var parkingSend;
     if (this.state.parking === true) {
       parkingSend = "yes";
@@ -125,7 +132,7 @@ class FilterBox extends Component {
     } else {
       furnituredSend = "no";
     }
-
+    console.log(this.state.location, this.state.minprice, this.state.maxprice);
     var reloaded = false;
     axios
       .post(
@@ -148,6 +155,7 @@ class FilterBox extends Component {
         }
       )
       .then(res => {
+        console.log(res.data);
         if (res.status == 200) {
           let filteringResults = res.data;
           localStorage.setItem("searchdata", JSON.stringify(filteringResults));
@@ -158,7 +166,7 @@ class FilterBox extends Component {
           }
         } else if (res.status == 204) {
           localStorage.setItem("searchdata", res.data);
-          window.open("/results", "_self");
+           window.open("/results", "_self");
         }
       });
     let filterboxInfo = {
@@ -235,9 +243,9 @@ class FilterBox extends Component {
             renderInput={params => (
               <TextField
                 {...params}
-                label="Location"
+                 label="Location"
                 variant="outlined"
-                value={this.state.location}
+                placeholder={this.state.location}
                 style={{ width: "100%" }}
               />
             )}
@@ -441,13 +449,9 @@ class FilterBox extends Component {
                   id="minpricebox"
                   class="flex-grow bd-highlight"
                 >
-                  <TextField
-                    id="minpricefield"
-                    label="Minimum Price"
-                    variant="outlined"
-                    style={{ width: "100%" }}
-                    value={this.state.minprice}
-                  />
+                  <TextField id="minpricefield" placeholder={this.state.minprice} label="Minimum Price" variant="outlined" style={{ width: "100%" }} >
+                   
+                  </TextField>
                 </Box>
               </div>
               <div className="mb-3">
@@ -456,25 +460,22 @@ class FilterBox extends Component {
                   id="maxpricebox"
                   class="flex-grow bd-highlight"
                 >
-                  <TextField
-                    id="maxpricefield"
-                    label="Maximum Price"
-                    variant="outlined"
-                    style={{ width: "100%" }}
-                    value={this.state.maxprice}
-                  />
+                   <TextField id="maxpricefield" placeholder={this.state.maxprice} label="Maximum Price" variant="outlined" style={{ width: "100%" }}  >
+                      
+                    </TextField>
                 </Box>
               </div>
             </div>
           </form>
           <a>
-            <p className="clearFilters" onClick={this.clearFilters}>
+            <p className="clearFilters" style={{color:"#008ae6"}}onClick={this.clearFilters}>
               Clear all filters
             </p>
           </a>
           <button
-            className="btn btn-outline-info btn-rounded btn-block "
+            className="btn  btn-rounded btn-block"
             onClick={this.reloadSearch}
+            id="reloadBtn"
           >
             Reload
           </button>

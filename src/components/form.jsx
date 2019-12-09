@@ -435,11 +435,16 @@ render() {
               onChange={this.handleChangePictures}/> 
         </div>
     </div>
-    <button className="btn btn-outline-info btn-rounded btn-block"
+    <button className="btn  btn-rounded btn-block"
      type="submit" 
      onClick={this.runMyFunction }
+<<<<<<< HEAD
      value="Submit "
      >
+=======
+    id="addBtnForm"
+     value="Submit form">
+>>>>>>> 63e8fd4f7e9db7c4d89b4cef829702a9c326e646
        Add
       </button>
     </form>

@@ -145,7 +145,7 @@ cite {
 }
 .house {
   list-style: none;
-  border-left: 4px solid #2abbac;
+  border-left: 4px solid #008ae6;
   margin-bottom: 40px;
   padding-left: 5px;
 }
@@ -168,13 +168,13 @@ cite {
   margin-top: 2%;
   margin-left:15%;
   margin-right:15%;
-  border-left: 10px solid #2ABBAC;
+  border-left: 10px solid #008ae6;
   padding-left: 5px;
 }
 
 .FAQ > a {
   text-decoration:none ;
-  text-decoration-color: #2ABBAC;
+  text-decoration-color: #008ae6;
 }
 
 .noHouseText {
@@ -247,9 +247,9 @@ cite {
   margin-right: 5px;
 }
 .DVtitles {
-  border-left: 5px solid #2abbac;
+  border-left: 5px solid #008ae6;
   padding-left: 5px;
-  border-bottom: 1px solid #2abbac;
+  border-bottom: 1px solid #008ae6;
 }
 #DVimage {
   margin-bottom: 3%;
@@ -297,11 +297,15 @@ cite {
   padding-bottom: 2%;
   margin: 25%;
   margin-top: 2%;
-  border-left: 5px solid #2ABBAC;
+  border-left: 5px solid #008ae6;
   /* padding-left: 5px; */
+<<<<<<< HEAD
   border-bottom: 1px solid #2ABBAC;
   border-top: 0.8px solid gray;
   border-right:1px solid gray;
+=======
+  border-bottom: 1px solid #008ae6;
+>>>>>>> 63e8fd4f7e9db7c4d89b4cef829702a9c326e646
 }
 
 .form {
@@ -353,6 +357,29 @@ cite {
   background-position: center;
   background-size: cover;
 }
+<<<<<<< HEAD
 .form-control{
   margin-top: 4% !important;
+=======
+
+#navbar,#footer,#copyrightText{
+  background-color: #303030;
+}
+
+#rowDiv{
+  width: 100% !important;
+}
+
+ .btn-default{
+ background-color :#008ae6 !important;
+}
+
+/* #buttons1{
+  background-color: #008ae6 !important;
+} */
+
+#submitBtn, #addBtnForm, #reloadBtn{
+  background-color :#008ae6 !important;
+  color: white !important;
+>>>>>>> 63e8fd4f7e9db7c4d89b4cef829702a9c326e646
 }

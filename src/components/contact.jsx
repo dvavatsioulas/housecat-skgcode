@@ -15,7 +15,7 @@ class Contact extends Component {
           help you.
         </p>
 
-        <div class="row contactForm">
+        <div class="row contactForm" id="rowDiv">
           <div class="col-md-9 mb-md-0 mb-5">
             <form
               id="contact-form"
@@ -86,8 +86,9 @@ class Contact extends Component {
             <div style={{float: "right", paddingRight:"32%"}}>
             {/* <div class="text-center"> gia na erthei 3ana sthn mesh ths formas*/}
               <a
-                class="btn btn-info"
+                class="btn "
                 onClick="document.getElementById('contact-form').submit();"
+                id="submitBtn"
               >
                 Send
               </a>
