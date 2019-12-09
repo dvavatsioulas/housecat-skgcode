@@ -6,24 +6,24 @@ exports.handle_params = function(responses, initial_params, index){
     }else{
         initial_params.location=parameters.City.stringValue
     }
-    console.log(parameters)
+    console.log("MY PARAMS: "+JSON.stringify(parameters))
     initial_params.minprice=0;    
-    if (parameters.max_price.stringValue===""){
+    if (parameters.max_price.numberValue===""){
         initial_params.max_price=null
     }else{
-        if (parameters.max_price.structValue.fields.amount.numberValue<0){
-            initial_params.maxprice=-parameters.max_price.structValue.fields.amount.numberValue
+        if (parameters.max_price.numberValue<0){
+            initial_params.maxprice=-parameters.max_price.numberValue
         }else{
-            initial_params.maxprice=parameters.max_price.structValue.fields.amount.numberValue
+            initial_params.maxprice=parameters.numberValue
         }
     }
-    if (parameters.min_sqm.stringValue===""){
-        initial_params.max_price=null
+    if (parameters.min_sqm.numberValue===""){
+        initial_params.min_sqm=null
     }else{
-        if(parameters.min_sqm.structValue.fields.amount.numberValue <0 ){
-            initial_params.minsqm = -parameters.min_sqm.structValue.fields.amount.numberValue
+        if(parameters.min_sqm.numberValue <0 ){
+            initial_params.minsqm = -parameters.min_sqm.numberValue
         }else{
-            initial_params.minsqm = parameters.min_sqm.structValue.fields.amount.numberValue
+            initial_params.minsqm = parameters.min_sqm.numberValue
         }
     }
 

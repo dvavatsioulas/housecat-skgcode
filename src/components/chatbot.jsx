@@ -72,7 +72,7 @@ class Chatbot extends Component {
       //ADD Bot Delay
       let time=650
 
-      if (msg.message==="text"){
+      if (msg.message === "text"){
         time= 2000/336*msg.text.text[0].length
       }
       if (time < 650){
@@ -116,7 +116,9 @@ class Chatbot extends Component {
     
     this.state.final_params=front_handle_intents.final_params   
     this.state.redirect_window=front_handle_intents.redirect_window
+    localStorage.setItem("redirect", front_handle_intents.redirect_window)
     this.myFunction(this.state.final_params, this.state.redirect_window)
+
   }
 
   async df_event_query(eventName){
@@ -148,8 +150,7 @@ class Chatbot extends Component {
 
   myFunction(final_params, redirect_window) {
     if (redirect_window!=null){
-      window.location=redirect_window
-      this.state.redirect_window=null
+      window.open(redirect_window)
     }
     if(final_params!=null){
       axios.post(api_address+'/api/properties/search',  {
@@ -168,39 +169,51 @@ class Chatbot extends Component {
             "minbuiltyear":null,
             "parking":null
         }).then(res => {
-
-          if (res.status == 200) {
-            let filteringResults = res.data;
-            localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-
-            let filterboxInfo = {
-              location: "Location"
-            };
-            localStorage.setItem("filters", JSON.stringify(filterboxInfo));
-         
-          } else if (res.status == 204) {
+                    
+          let filteringResults = res.data;
+          if (res.data===""){
             localStorage.setItem("searchdata", res.data);
+          }else{
+            localStorage.setItem("searchdata", JSON.stringify(filteringResults));
           }
-
+          let filterboxInfo = {
+            location: filteringResults.location,
+            maxprice: filteringResults.maxprice,
+            sale_type: filteringResults.sale_type,
+            property_type: filteringResults.property_type,
+           
+          };
+          localStorage.setItem("filters", JSON.stringify(filterboxInfo));
+         
           // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
           setTimeout( () => {
            this.setState({ position: 1 });
           }, 2000);
           
-          window.open("/results", "_self"); //to open new page
+          //window.open("/results", "_self"); //to open new page
+          console.log(JSON.stringify(this.state.messages))
+          window.open("/results"); 
         });
      }
   }
 
   componentDidMount(){
-
+        this.state.redirect_window=localStorage.getItem("redirect")
+        console.log("OPEN: "+this.state.redirect_window)
+        if (this.state.redirect_window != null){
+          this.show()
+          console.log("I AM HERE")
+          localStorage.removeItem("redirect")
+        }else{
+          this.hide()
+        }
         this.state.redirect_window=null
 
-
+        /*
         var popup = document.getElementById("myPopup");
         popup.style.display='none'
         this.setState({showBot: false});
-
+        */
         if (localStorage.getItem("chatmessages")===null){
           localStorage.setItem("chatmessages", JSON.stringify(this.state.messages))
           this.df_event_query('first_message')
@@ -269,6 +282,22 @@ class Chatbot extends Component {
     event.preventDefault();
     event.stopPropagation();
 
+    var last_msg_index=this.state.messages.length
+    var last_msg = this.state.messages[last_msg_index-1]
+    //TODO
+    let says={
+      speaks: 'bot',
+      msg : {
+        text: {
+          text: last_msg.msg.payload.fields.text.stringValue
+        }
+      } 
+    }
+    console.log("Says: "+JSON.stringify(says))
+    console.log("handlequick reply: "+JSON.stringify(last_msg))
+    this.state.messages.splice(last_msg_index-1, 1) 
+    this.setState({messages: [...this.state.messages, says]});
+    
     this.df_text_query(text);
 
   }
@@ -310,7 +339,7 @@ class Chatbot extends Component {
                       style={{float: 'left', clear: "both"}}>
                   </div>
             <div className="row-sm-2">
-                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '65%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} onChange={this.handleChange} id="user_says" type="text" value={this.state.input_message}/>
+                  <input style={{position:"absolute",bottom:0 ,marginBottom: 3,marginLeft: '5px' ,paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '65%', paddingBottom: '2%', paddingTop: '2%',height: '8%',borderRadius:'3px',backgroundColor: "#e4e4e4"}} ref={(input) => { this.talkInput = input; }} placeholder="Type a message:"  onKeyPress={this._handleInputKeyPress} onChange={this.handleChange} id="user_says" type="text" value={this.state.input_message} autocomplete="off"/>
                   <input class="btn btn-primary bg-light" type="submit" value="send" style={{position: "absolute",bottom:0 ,marginBottom: 3, paddingTop:'10px', paddingLeft: '1%', paddingRight: '1%', width: '28%', paddingBottom: '2%', paddingTop: '2%', marginLeft: '267px',height: '45px',marginTop: '0px', height: '8%'}} onClick={this.sendButton}/>
             </div>
           </div>
