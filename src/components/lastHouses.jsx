@@ -39,7 +39,7 @@ class LastHouses extends Component {
                           <li><strong>For:</strong> {house.sale_type}</li>
                         </ul>
                       </p>
-                      <p class="card-text"><Link to={`/houses/${house.id}`} class="btn btn-info d-flex justify-content-center">More details</Link></p>
+                      <p class="card-text"><Link to={`/houses/${house.id}`} style={{backgroundColor :"#008ae6", color:"white"}} class="btn  d-flex justify-content-center" id="buttons1">More details</Link></p>
                   </div>
               </div>
               ))
