@@ -468,13 +468,14 @@ class FilterBox extends Component {
             </div>
           </form>
           <a>
-            <p className="clearFilters" onClick={this.clearFilters}>
+            <p className="clearFilters" style={{color:"#008ae6"}}onClick={this.clearFilters}>
               Clear all filters
             </p>
           </a>
           <button
-            className="btn btn-outline-info btn-rounded btn-block "
+            className="btn  btn-rounded btn-block"
             onClick={this.reloadSearch}
+            id="reloadBtn"
           >
             Reload
           </button>

@@ -32,7 +32,7 @@ class House extends Component {
               <li class="block-example house" key={house.id}>
                 
                   <div class="card-group row ">
-                    <div class="col-md-4">
+                    <div class="col-md-4" >
                       <Link to={`/houses/${house.id}`} >
                         <img
                           class="card-img img-fluid house-img"
@@ -50,7 +50,7 @@ class House extends Component {
                           <li style={{marginRight:'30px',fontSize:'17px',fontFamily:"georgia"}}>Bedrooms: {house.bedrooms}</li>
                           <li style={{fontSize:'17px',fontFamily:"georgia"}}>Floor: {house.floor}</li>
                         </ul>
-                        <Link to={`/houses/${house.id}`} class="btn d-flex justify-content-center float-right" style={{width:'30%', marginBottom:'2%', backgroundColor :"#2ABBAC", color: "white", bottom:0, marginLeft:"60%", position:"absolute"}}>More details</Link>
+                        <Link to={`/houses/${house.id}`} class="btn d-flex justify-content-center float-right" style={{width:'30%', marginBottom:'2%', backgroundColor :"#008ae6", color: "white", bottom:0, marginLeft:"60%", position:"absolute"}}>More details</Link>
                       </div>
                     </div>
                   

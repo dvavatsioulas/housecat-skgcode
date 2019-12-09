@@ -47,7 +47,7 @@ class NavBarV2 extends Component {
   render() {
     return (
       //bg-dark instead of black
-      <nav class="navbar navbar-expand-md navbar-dark black scrolling-navbar" style={{paddingLeft:"16%"}}>
+      <nav class="navbar navbar-expand-md navbar-dark scrolling-navbar" style={{paddingLeft:"16%"}} id="navbar" >
         <a className="navbar-brand img-fluid" alt="Responsive image" href="/">
           <img src="/black-cat.png" alt="logo" />
         </a>
