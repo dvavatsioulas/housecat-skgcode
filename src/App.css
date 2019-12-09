@@ -299,13 +299,7 @@ cite {
   margin-top: 2%;
   border-left: 5px solid #008ae6;
   /* padding-left: 5px; */
-<<<<<<< HEAD
-  border-bottom: 1px solid #2ABBAC;
-  border-top: 0.8px solid gray;
-  border-right:1px solid gray;
-=======
   border-bottom: 1px solid #008ae6;
->>>>>>> 63e8fd4f7e9db7c4d89b4cef829702a9c326e646
 }
 
 .form {
@@ -357,10 +351,6 @@ cite {
   background-position: center;
   background-size: cover;
 }
-<<<<<<< HEAD
-.form-control{
-  margin-top: 4% !important;
-=======
 
 #navbar,#footer,#copyrightText{
   background-color: #303030;
@@ -381,5 +371,4 @@ cite {
 #submitBtn, #addBtnForm, #reloadBtn{
   background-color :#008ae6 !important;
   color: white !important;
->>>>>>> 63e8fd4f7e9db7c4d89b4cef829702a9c326e646
 }

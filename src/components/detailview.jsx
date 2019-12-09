@@ -105,13 +105,45 @@ class DetailView extends React.Component {
                     </div>
                     </div>
                     <div class="col-md-7 col-lg-7 section-md-t3">
-                        <div class="property-price d-flex justify-content-left foo DVtitles" style={{marginBottom:"5%",fontSize:"30px"}}>
+                        {/* <div class="property-price d-flex justify-content-left foo DVtitles" style={{marginBottom:"5%",fontSize:"30px"}}>
                             <div class="card-header-c d-flex">
                                 <div class="card-title-c align-self-center">
                                     <h2 class="title-c">€{this.state.house.price}</h2>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        <div class="dealer-widget">
+                            <div class="dealer-content" style={{backgroundColor: "grey"}}>
+                                 <div class="inner-wrapper">
+                                    <div class="single-property-header">
+                                        <h1 class="property-title">Title</h1>
+                                        <span class="property-price"> £ 648,266</span>
+                                        <br />
+                                        <a target="_blank" style={{color:"#FFF"}} href="https://www.currenciesdirect.com/aff/european-property.php">Check latest exchange rates</a>
+                                    </div>
+                                   <div class="property-meta entry-meta clearfix ">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <span class="property-info-icon icon-tag">
+                                                <img class="lazy" src="https://www.europeanproperty.com/assets/img/icon/sale-orange.png" style={{display: "inline"}}></img>
+                                            </span>
+                                            <span class="property-info-entry">
+                                                <span class="property-info-label">Status</span>
+                                                <span class="property-info-value">For Sale</span>
+                                            </span>
+                                        </div>
+                                                                        <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <span class="property-info icon-area">
+                                                <img class="lazy" src="https://www.europeanproperty.com/assets/img/icon/room-orange.png" style={{display: "inline"}}></img>
+                                            </span>
+                                            <span class="property-info-entry">
+                                                <span class="property-info-label">Area</span>
+                                                <span class="property-info-value">1550<b class="property-info-unit">Sq Ft</b></span>
+                                            </span>
+                                        </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
                         <div class="row">
                             <div class="col-sm-12">
                             <div class="title-box-d">
