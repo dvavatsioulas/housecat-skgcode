@@ -140,31 +140,34 @@ class AddHouse extends Component {
          this.state.sqm === null || this.state.bedrooms === null || this.state.bathrooms === null || this.state.builtYear === null ||
           this.state.heating === null      
          )
-        {  alert("Συμπληρώστε όλα τα πεδία");}
+        {  alert("Συμπληρώστε όλα τα πεδία");  
+        }
         else
-        { 
+        {
           // var form= document.getElementsByName("form")[0];
           // form.submit();
+          console.log("Hiiiiiiiiiiiiii");
           this.addProperty()
+        
         }
     }
     addProperty() {
-      // console.log(  this.state.price,
-      // this.state.sqm,
-      // this.state.location,
-      // this.state.bedrooms,
-      // this.state.bathrooms,
-      // this.state.propertyType,
-      // this.state.floor,
-      // this.state.description,
-      // this.state.saleType,
-      // this.state.phone,
-      // this.state.email,
-      // this.state.pictures,
-      // this.state.furnitured,
-      // this.state.heating,
-      // this.state.builtYear,
-      // this.state.parking );
+      console.log(  this.state.price,
+      this.state.sqm,
+      this.state.location,
+      this.state.bedrooms,
+      this.state.bathrooms,
+      this.state.propertyType,
+      this.state.floor,
+      this.state.description,
+      this.state.saleType,
+      this.state.phone,
+      this.state.email,
+      this.state.pictures,
+      this.state.furnitured,
+      this.state.heating,
+      this.state.builtYear,
+      this.state.parking );
       axios.post("https://housecat-skgcode-api.herokuapp.com/api/properties/addproperty",  {
               "price":this.state.price,
               "sqm": this.state.sqm,
@@ -182,7 +185,9 @@ class AddHouse extends Component {
               "heating_type":this.state.heating,
               "builtyear":this.state.builtYear,
               "parking":this.state.parking
-        });          
+        }).then(res => {
+            alert(res.data);
+        });         
       }
 
 render() { 
@@ -190,7 +195,7 @@ render() {
 <div className="containerAdd">
     <form name="form" className="needs-validation" novalidate>
         <div class="text-center">
-          <h3 class="dark-grey-text mb-5"><strong>Addd your house</strong></h3>
+          <h3 class="dark-grey-text mb-5"><strong>Add your house</strong></h3>
         </div>
         <div className="row ">
         <div className="col md-form">
@@ -215,14 +220,30 @@ render() {
     </div>
     <div className="row">
     <div className="col md-form">
-            <label for="validationTooltip022"> Location :</label><br/>
+            {/* <label for="validationTooltip022"> Location :</label><br/>
             <input 
               type="text" 
               id="validationTooltip022"
               className="form-control" 
               placeholder="City, Address, Zip" 
               onChange={this.handleChangeLocation}  
-              required/> 
+              required/>  */}
+              <select 
+            className="browser-default custom-select" 
+            id="validationTooltip022"
+            value={this.state.location} 
+            onChange={this.handleChangeLocation}
+            required >
+              <option selected disabled>Location</option>
+              <option value="Athens">Atens</option>
+              <option value="Crete">Crete</option>
+              <option value="Halkidiki">Halkidiki</option>
+              <option value="Patra">Patra</option>
+              <option value="Kavala">Kavala</option>
+              <option value="Larisa">Larisa</option>
+              <option value="Thessaloniki">Thessaloniki</option>
+              <option value="Trikala">Trikala</option>
+        </select>
     </div>
     </div>
     <div className="row">
@@ -232,10 +253,12 @@ render() {
           <label>
             <input
               type="radio"
-              id="saleTypeRadio"
+              name="radio-choice0"
+              id="radio-choice-1"
               value="Rent"
               checked={this.state.saleType === "Rent"}
-              onChange={this.handleSaleTypeChange} required/>
+              onChange={this.handleSaleTypeChange}
+               required/>
               Rent
            </label>
         </div>
@@ -243,10 +266,12 @@ render() {
             <label >
               <input
                 type="radio"
-                id="saleTypeRadio"
+                name="radio-choice0"
+                id="radio-choice-2"
                 value="Sale"
                 checked={this.state.saleType === "Sale"}
-                onChange={this.handleSaleTypeChange} required/>
+                onChange={this.handleSaleTypeChange} 
+                required/>
                 Sell     
             </label>
           </div>
@@ -257,6 +282,8 @@ render() {
             <label>
               <input
                 type="radio"
+                name="radio-choice1"
+                id="radio-choice-3"
                 value="Apartment"
                 checked={this.state.propertyType === "Apartment"}
                 onChange={this.handlePropertyTypeChange}/>
@@ -267,6 +294,8 @@ render() {
               <label>
                 <input
                   type="radio"
+                  name="radio-choice1"
+              id="radio-choice-4"
                   value="House"
                   checked={this.state.propertyType === "House"}
                   onChange={this.handlePropertyTypeChange}/>
@@ -277,7 +306,7 @@ render() {
     </div>
     </div>
     <div className="form-row form-group form-check form-check-inline"> 
-        <div class="col-md-4 mb-3 md-form">
+        <div class="col-md-4 mb-3 md-form formField">
             <label for="validationServer024"> Price : </label><br/>
             <input 
               type="text" 
@@ -286,7 +315,7 @@ render() {
               onChange={this.handleChangePrice} 
               required/>
         </div>
-        <div className="col-md-4 mb-3 md-form">
+        <div className="col-md-4 mb-3 md-form formField">
             <label for="validationTooltip025"> Floor :</label><br/>
             <input 
               type="text" 
@@ -295,7 +324,7 @@ render() {
               onChange={this.handleChangeFloor} 
               required/>
         </div>
-        <div className="col-md-4 mb-3 md-form">
+        <div className="col-md-4 mb-3 md-form formField">
             <label for="validationServer026"> Sqm : </label><br/>
             <input 
               type="text" 
@@ -306,7 +335,7 @@ render() {
         </div>
     </div>
     <div className="form-row form-group form-check form-check-inline"> 
-        <div className="col-md-4 mb-3 md-form">
+        <div className="col-md-4 mb-3 md-form formField">
             <label for="validationServer027"> Bedrooms : </label><br/>
             <input 
               type="text" 
@@ -352,7 +381,8 @@ render() {
             className="browser-default custom-select" 
             id="inputGroupSelect04" 
             value={this.state.heating} 
-            onChange={this.handleHeatingChange} >
+            onChange={this.handleHeatingChange} 
+            required>
               <option selected disabled>Heating type</option>
               <option value="Gas">Gas</option>
               <option value="Diesel">Diesel</option>
@@ -408,7 +438,8 @@ render() {
     <button className="btn btn-outline-info btn-rounded btn-block"
      type="submit" 
      onClick={this.runMyFunction }
-     value="Submit form">
+     value="Submit "
+     >
        Add
       </button>
     </form>

@@ -30,11 +30,10 @@ class Contact extends Component {
                       type="text"
                       id="name"
                       name="name"
+                      placeholder="Your name"
                       class="form-control"
                     />
-                    <label for="name" class="">
-                      Your name
-                    </label>
+                    
                   </div>
                 </div>
 
@@ -44,11 +43,10 @@ class Contact extends Component {
                       type="text"
                       id="email"
                       name="email"
+                      placeholder="Your email"
                       class="form-control"
                     />
-                    <label for="email" class="">
-                      Your email
-                    </label>
+                    
                   </div>
                 </div>
               </div>
@@ -60,11 +58,10 @@ class Contact extends Component {
                       type="text"
                       id="subject"
                       name="subject"
+                      placeholder="Subject"
                       class="form-control"
                     />
-                    <label for="subject" class="">
-                      Subject
-                    </label>
+                    
                   </div>
                 </div>
               </div>
@@ -76,10 +73,11 @@ class Contact extends Component {
                       type="text"
                       id="message"
                       name="message"
+                      placeholder="Your message"
                       rows="2"
                       class="form-control md-textarea"
                     ></textarea>
-                    <label for="message">Your message</label>
+                   
                   </div>
                 </div>
               </div>
