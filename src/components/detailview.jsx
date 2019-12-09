@@ -26,6 +26,9 @@ class DetailView extends React.Component {
    
     render() {
        var locationMap= "https://maps.google.com/maps?q="+ this.state.house.location +"&t=&z=14&ie=UTF8&iwloc=&output=embed"
+       if (this.state.house.description===null){
+           this.state.house.description=" `There is no description available for this property` "
+       }
        return (
         <React.Fragment>
         <section class="property-single nav-arrow-b">
