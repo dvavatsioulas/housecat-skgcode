@@ -17,9 +17,6 @@ class FilterBox extends Component {
   constructor(props) {
     super(props);
 
-    //this.handleChangeLocation = this.handleChangeLocation.bind(this);
-    this.handleChangeMinPrice = this.handleChangeMinPrice.bind(this);
-    this.handleChangeMaxPrice = this.handleChangeMaxPrice.bind(this);
     this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
     this.handleHeatingChange = this.handleHeatingChange.bind(this);
     this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
@@ -41,42 +38,36 @@ class FilterBox extends Component {
     bathrooms: null,
     propertyType: null,
     heating: null,
-    parking: false,
-    furnitured: false
+    parking: null,
+    furnitured: null
   };
 
   componentDidMount() {
-    if (localStorage.getItem("filters") == "") {
+    var item = JSON.parse(localStorage.getItem("filters"));
+    this.setState({
+      location: item.location,
+      minprice: item.minprice,
+      maxprice: item.maxprice,
+      saleType: item.sale_type,
+      bedrooms: item.bedrooms,
+      bathrooms: item.bathrooms,
+      floor: item.floor,
+      propertyType: item.property_type,
+      heating: item.heating_type,
+      parking: item.parking,
+      furnitured: item.furnitured
+    });
+    if (item.location === null) {
       this.setState({ location: "Location" });
-    } else {
-      var item = JSON.parse(localStorage.getItem("filters"));
-      this.setState({
-        location: item.location,
-        minprice: item.minprice,
-        maxprice: item.maxprice,
-        saleType: item.sale_type,
-        bedrooms: item.bedrooms,
-        bathrooms: item.bathrooms,
-        floor: item.floor,
-        propertyType: item.property_type,
-        heating: item.heating_type,
-        parking: item.parking,
-        furnitured: item.furnitured
-      });
-      document.getElementById("locationFilter").value = item.location;
+    }
+    if (item.minprice === null) {
+      this.setState({ minprice: "Minimum Price" });
+    }
+    if (item.maxprice === null) {
+      this.setState({ maxprice: "Maximum Price" });
     }
   }
 
-  handleChangeMaxPrice(event) {
-    this.setState({
-      maxprice: event.target.value
-    });
-  }
-  handleChangeMinPrice(event) {
-    this.setState({
-      minprice: event.target.value
-    });
-  }
   handleSaleTypeChange(changeEvent) {
     this.setState({
       saleType: changeEvent.target.value
@@ -109,31 +100,38 @@ class FilterBox extends Component {
   }
 
   reloadSearch() {
-    if (document.getElementById("locationFilter").value == "") {
-      this.state.location = null;
-    } else {
+    if (document.getElementById("locationFilter").value !== "") {
       this.state.location = document.getElementById("locationFilter").value;
-    }if (document.getElementById("minpricefield").value == "") { this.state.minprice = null }
-    else { this.state.minprice = document.getElementById("minpricefield").value }
-    if (document.getElementById("maxpricefield").value == "") { this.state.maxprice = null }
-    else { this.state.maxprice = document.getElementById("maxpricefield").value }
-    
+    } else if (this.state.location === "Location") {
+      this.state.location = null;
+    }
+    if (document.getElementById("minpricefield").value !== "") {
+      this.state.minprice = document.getElementById("minpricefield").value;
+    } else if (this.state.minprice === "Minimum Price") {
+      this.state.minprice = null;
+    }
+    if (document.getElementById("maxpricefield").value !== "") {
+      this.state.maxprice = document.getElementById("maxpricefield").value;
+    } else if (this.state.maxprice === "Maximum Price") {
+      this.state.maxprice = null;
+    }
     console.log(this.state.location, this.state.minprice, this.state.maxprice);
 
+    //need the else if or is "no" by default
     var parkingSend;
     if (this.state.parking === true) {
       parkingSend = "yes";
-    } else {
+    } else if (this.state.parking === false) {
       parkingSend = "no";
     }
     var furnituredSend;
     if (this.state.furnitured === true) {
       furnituredSend = "yes";
-    } else {
+    } else if (this.state.furnitured === false) {
       furnituredSend = "no";
     }
-    console.log(this.state.location, this.state.minprice, this.state.maxprice);
     var reloaded = false;
+
     axios
       .post(
         "https://housecat-skgcode-api.herokuapp.com/api/properties/search",
@@ -155,7 +153,6 @@ class FilterBox extends Component {
         }
       )
       .then(res => {
-        console.log(res.data);
         if (res.status == 200) {
           let filteringResults = res.data;
           localStorage.setItem("searchdata", JSON.stringify(filteringResults));
@@ -166,9 +163,10 @@ class FilterBox extends Component {
           }
         } else if (res.status == 204) {
           localStorage.setItem("searchdata", res.data);
-           window.open("/results", "_self");
+          window.open("/results", "_self");
         }
       });
+
     let filterboxInfo = {
       location: this.state.location,
       minprice: this.state.minprice,
@@ -231,10 +229,13 @@ class FilterBox extends Component {
   render() {
     return (
       <div className="card filterBox">
-        <h3 className="card-header text-center py-2" style={{fontFamily:"Georgia"}}>
+        <h3
+          className="card-header text-center py-2"
+          style={{ fontFamily: "Georgia" }}
+        >
           <strong>~Filters~</strong>
         </h3>
-        <div className="card-body pt-0" style={{height:"60%"}}>
+        <div className="card-body pt-0" style={{ height: "60%" }}>
           <hr />
           <Autocomplete
             freeSolo
@@ -243,9 +244,8 @@ class FilterBox extends Component {
             renderInput={params => (
               <TextField
                 {...params}
-                 label="Location"
+                label={this.state.location}
                 variant="outlined"
-                placeholder={this.state.location}
                 style={{ width: "100%" }}
               />
             )}
@@ -449,9 +449,12 @@ class FilterBox extends Component {
                   id="minpricebox"
                   class="flex-grow bd-highlight"
                 >
-                  <TextField id="minpricefield" placeholder={this.state.minprice} label="Minimum Price" variant="outlined" style={{ width: "100%" }} >
-                   
-                  </TextField>
+                  <TextField
+                    id="minpricefield"
+                    label={this.state.minprice}
+                    variant="outlined"
+                    style={{ width: "100%" }}
+                  ></TextField>
                 </Box>
               </div>
               <div className="mb-3">
@@ -460,15 +463,22 @@ class FilterBox extends Component {
                   id="maxpricebox"
                   class="flex-grow bd-highlight"
                 >
-                   <TextField id="maxpricefield" placeholder={this.state.maxprice} label="Maximum Price" variant="outlined" style={{ width: "100%" }}  >
-                      
-                    </TextField>
+                  <TextField
+                    id="maxpricefield"
+                    label={this.state.maxprice}
+                    variant="outlined"
+                    style={{ width: "100%" }}
+                  ></TextField>
                 </Box>
               </div>
             </div>
           </form>
           <a>
-            <p className="clearFilters" style={{color:"#008ae6"}}onClick={this.clearFilters}>
+            <p
+              className="clearFilters"
+              style={{ color: "#008ae6" }}
+              onClick={this.clearFilters}
+            >
               Clear all filters
             </p>
           </a>
