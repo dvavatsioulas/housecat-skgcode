@@ -18,7 +18,21 @@ class NavBarV2 extends Component {
       .then(res => {
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-        localStorage.setItem("filters", "");
+        let filterboxInfo = {
+          location: null,
+          minprice: null,
+          maxprice: null,
+          sale_type: "rent",
+          bedrooms: null,
+          bathrooms: null,
+          floor: null,
+          property_type: null,
+          heating_type: null,
+          parking: null,
+          furnitured: null,
+          sqm: null
+        };
+        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
         setTimeout(() => {
           this.setState({ position: 1 });
@@ -35,7 +49,21 @@ class NavBarV2 extends Component {
       .then(res => {
         let filteringResults = res.data;
         localStorage.setItem("searchdata", JSON.stringify(filteringResults));
-        localStorage.setItem("filters", "");
+        let filterboxInfo = {
+          location: null,
+          minprice: null,
+          maxprice: null,
+          sale_type: "sale",
+          bedrooms: null,
+          bathrooms: null,
+          floor: null,
+          property_type: null,
+          heating_type: null,
+          parking: null,
+          furnitured: null,
+          sqm: null
+        };
+        localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
         setTimeout(() => {
           this.setState({ position: 1 });
@@ -47,7 +75,11 @@ class NavBarV2 extends Component {
   render() {
     return (
       //bg-dark instead of black
-      <nav class="navbar navbar-expand-md navbar-dark scrolling-navbar" style={{paddingLeft:"16%"}} id="navbar" >
+      <nav
+        class="navbar navbar-expand-md navbar-dark scrolling-navbar"
+        style={{ paddingLeft: "16%" }}
+        id="navbar"
+      >
         <a className="navbar-brand img-fluid" alt="Responsive image" href="/">
           <img src="/black-cat.png" alt="logo" />
         </a>
@@ -83,16 +115,20 @@ class NavBarV2 extends Component {
               >
                 More
               </a>
-              <div
-                class="dropdown-menu"
-              >
+              <div class="dropdown-menu">
                 <a class="dropdown-item" href="/FAQ">
                   FAQ
                 </a>
-                <a class="dropdown-item" href="https://housecat-skgcode.herokuapp.com/#about">
+                <a
+                  class="dropdown-item"
+                  href="https://housecat-skgcode.herokuapp.com/#about"
+                >
                   About Us
                 </a>
-                <a class="dropdown-item" href="https://housecat-skgcode.herokuapp.com/#contact">
+                <a
+                  class="dropdown-item"
+                  href="https://housecat-skgcode.herokuapp.com/#contact"
+                >
                   Contact
                 </a>
               </div>
@@ -118,4 +154,4 @@ class NavBarV2 extends Component {
 
 export default NavBarV2;
 
-ReactDOM.render(<NavBarV2 />, document.getElementById('fixedNavbar'));
+ReactDOM.render(<NavBarV2 />, document.getElementById("fixedNavbar"));
