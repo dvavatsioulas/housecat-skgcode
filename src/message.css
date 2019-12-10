@@ -44,7 +44,7 @@
 
 .sc-message--content.sent .sc-message--text {
   color: black;
-  background-color: #4abde8; 
+  background-color: #008AE6; 
   max-width: calc(100% - 120px);
   word-wrap: break-word;
 }
