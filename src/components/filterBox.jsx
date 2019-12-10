@@ -39,7 +39,8 @@ class FilterBox extends Component {
     propertyType: null,
     heating: null,
     parking: null,
-    furnitured: null
+    furnitured: null,
+    sqm: null
   };
 
   componentDidMount() {
@@ -55,7 +56,8 @@ class FilterBox extends Component {
       propertyType: item.property_type,
       heating: item.heating_type,
       parking: item.parking,
-      furnitured: item.furnitured
+      furnitured: item.furnitured,
+      sqm: item.sqm
     });
     if (item.location === null) {
       this.setState({ location: "Location" });
@@ -65,6 +67,9 @@ class FilterBox extends Component {
     }
     if (item.maxprice === null) {
       this.setState({ maxprice: "Maximum Price" });
+    }
+    if (item.sqm === null) {
+      this.setState({ sqm: "Minimum Sqm" });
     }
   }
 
@@ -115,7 +120,17 @@ class FilterBox extends Component {
     } else if (this.state.maxprice === "Maximum Price") {
       this.state.maxprice = null;
     }
-    console.log(this.state.location, this.state.minprice, this.state.maxprice);
+    if (document.getElementById("sqmfield").value !== "") {
+      this.state.sqm = document.getElementById("sqmfield").value;
+    } else if (this.state.sqm === "Minimum Sqm") {
+      this.state.sqm = null;
+    }
+    console.log(
+      this.state.location,
+      this.state.minprice,
+      this.state.maxprice,
+      this.state.sqm
+    );
 
     //need the else if or is "no" by default
     var parkingSend;
@@ -138,7 +153,7 @@ class FilterBox extends Component {
         {
           minprice: this.state.minprice,
           maxprice: this.state.maxprice,
-          minsqm: null,
+          minsqm: this.state.sqm,
           maxsqm: null,
           location: this.state.location,
           bedrooms: this.state.bedrooms,
@@ -178,7 +193,8 @@ class FilterBox extends Component {
       property_type: this.state.propertyType,
       heating_type: this.state.heating,
       parking: this.state.parking,
-      furnitured: this.state.furnitured
+      furnitured: this.state.furnitured,
+      sqm: this.state.sqm
     };
     localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
@@ -218,7 +234,8 @@ class FilterBox extends Component {
           property_type: null,
           heating_type: null,
           parking: null,
-          furnitured: null
+          furnitured: null,
+          sqm: null
         };
         localStorage.setItem("filters", JSON.stringify(filterboxInfo));
 
@@ -250,6 +267,12 @@ class FilterBox extends Component {
               />
             )}
           />
+          <TextField
+            id="sqmfield"
+            label={this.state.sqm}
+            variant="outlined"
+            style={{ top: "30px", width: "40%" }}
+          ></TextField>
           <form className="filterboxForm">
             <div>
               <div className="md-form mt-3"></div>
