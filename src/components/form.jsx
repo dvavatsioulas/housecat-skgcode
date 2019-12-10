@@ -7,28 +7,15 @@ class AddHouse extends Component {
     constructor(props) {
       super(props);
 
-      this.handleChangeEmail= this.handleChangeEmail.bind(this);
-      this.handleChangePhone = this.handleChangePhone.bind(this);
-      this.handleChangeLocation = this.handleChangeLocation.bind(this);
-      this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
-      this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
-      this.handleChangePrice= this.handleChangePrice.bind(this);
-      this.handleChangeSqm= this.handleChangeSqm.bind(this);
-      this.handleChangeFloor= this.handleChangeFloor.bind(this);
-      this.handleChangeBedrooms= this.handleChangeBedrooms.bind(this);
-      this.handleChangeBathrooms= this.handleChangeBathrooms.bind(this);
-      this.handleChangeBuiltYear= this.handleChangeBuiltYear.bind(this);
-      this.handleHeatingChange = this.handleHeatingChange.bind(this);
-      this.handleParkingChecked = this.handleParkingChecked.bind(this);
-      this.handleChangeDescription= this.handleChangeDescription.bind(this);
-      this.handleFurnituredChecked = this.handleFurnituredChecked.bind(this);
-      this.handleChangePictures= this.handleChangePictures.bind(this);
+      this.myChangeHandler = this.myChangeHandler.bind(this);
+      this.mySwitchChangeHandler = this.mySwitchChangeHandler.bind(this);
       this.runMyFunction = this.runMyFunction.bind(this);
+      this.addProperty = this.addProperty.bind(this);
     }
     state = {
         email:  null,
         phone:  null,
-        address:  null,
+        location:  null,
         saleType: null,
         propertyType: null,
         price:  null,
@@ -43,93 +30,32 @@ class AddHouse extends Component {
         description:  null,
         pictures: null
     };
+    //Do the work for all the handlers!!
+    myChangeHandler = (event) => {
+      let nam = event.target.name;
+      let val = event.target.value;
+      this.setState({[nam]: val});
+    }
+
+    mySwitchChangeHandler = (event) => {
+      let nam = event.target.name;
+      if (nam === "parking") {
+        if(event.target.checked){
+          this.setState({parking: "yes"});
+        }else{
+          this.setState({parking: "no"});
+        }
+      }
+      if(nam === "furnitured"){
+        if(event.target.checked){
+          this.setState({furnitured: "yes"});
+        }else{
+          this.setState({furnitured: "no"});
+        }
+      }
+    }
+
     
-    handleChangeEmail(event) {
-      this.setState({
-       email: event.target.value
-      });
-    }
-    handleChangePhone(event) {
-      this.setState({
-        phone: event.target.value
-      });
-    }
-    handleChangeLocation(event) {
-      this.setState({
-        location: event.target.value
-      });
-    }
-    handleChangePrice(event) {
-      this.setState({
-       price: event.target.value
-      });
-    }
-    handleSaleTypeChange (changeEvent) {
-      this.setState({
-        saleType: changeEvent.target.value
-      });
-    };
-    handlePropertyTypeChange (changeEvent) {
-      this.setState({
-        propertyType: changeEvent.target.value
-      });
-    };
-    handleHeatingChange (changeEvent) {
-      this.setState({
-        heating: changeEvent.target.value
-      });
-    };
-    handleChangeSqm(event) {
-      this.setState({
-       sqm: event.target.value
-      });
-    }
-    handleChangeFloor(event) {
-      this.setState({
-       floor: event.target.value
-      });
-    }
-    handleChangeBedrooms(event) {
-      this.setState({
-       bedrooms: event.target.value
-      });
-    }
-    handleChangeBathrooms(event) {
-      this.setState({
-       bathrooms: event.target.value
-      });
-    }
-    handleChangeBuiltYear(event) {
-      this.setState({
-       builtYear: event.target.value
-      });
-    }
-    handleParkingChecked(event){
-      if(event.target.checked){
-        this.setState({parking: "yes"});
-      }else{
-        this.setState({parking: "no"});
-      }
-    };
-    handleFurnituredChecked(event){
-      if(event.target.checked){
-        this.setState({furnitured: "yes"});
-      }else{
-        this.setState({furnitured: "no"});
-      }
-    };
-    handleChangeDescription(event) {
-      this.setState({
-       description: event.target.value
-      });
-    }
-    handleChangePictures(event) {
-      this.setState({
-       pictures: event.target.value
-      });
-    }
-
-
     runMyFunction()
     { 
       if (this.state.email === null || this.state.phone === null || this.state.location === null
@@ -142,63 +68,67 @@ class AddHouse extends Component {
         }
         else
         {
-          axios.post("https://housecat-skgcode-api.herokuapp.com/api/properties/addproperty",  {
-            "price":this.state.price,
-            "sqm": this.state.sqm,
-            "location":this.state.location,
-            "bedrooms":this.state.bedrooms,
-            "bathrooms":this.state.bathrooms,
-            "property_type":this.state.propertyType,
-            "floor":this.state.floor,
-            "description": this.state.description,
-            "sale_type":this.state.saleType,
-            "phone":this.state.phone,
-            "email": this.state.email,
-            "img_url": this.state.pictures,
-            "furnitured":this.state.furnitured,
-            "heating_type":this.state.heating,
-            "builtyear":this.state.builtYear,
-            "parking":this.state.parking
-      }).then(res => {
-          alert(res.data);
-      });         
+          this.addProperty(); 
         }
-    }
+    };
+
+    addProperty() {
+      axios.post("https://housecat-skgcode-api.herokuapp.com/api/properties/addproperty",  {
+              "price":this.state.price,
+              "sqm": this.state.sqm,
+              "location":this.state.location,
+              "bedrooms":this.state.bedrooms,
+              "bathrooms":this.state.bathrooms,
+              "property_type":this.state.propertyType,
+              "floor":this.state.floor,
+              "description": this.state.description,
+              "sale_type":this.state.saleType,
+              "phone":this.state.phone,
+              "email": this.state.email,
+              "img_url": this.state.pictures,
+              "furnitured":this.state.furnitured,
+              "heating_type":this.state.heating,
+              "builtyear":this.state.builtYear,
+              "parking":this.state.parking
+        }).then(res => {
+            alert(res.data);              
+        });                  
+      }
 
 render() { 
     return (
       <div className="containerAdd">
-          <form name="form" className="needs-validation" novalidate> 
+          <form name="form" className="needs-validation" novalidate onSubmit={this.addProperty}> 
               <div class="text-center">
                 <h3 class="dark-grey-text mb-5"><strong>Add your house</strong></h3>
               </div>
               <div className="form-row w-100 form-group form-check-inline"> 
                 <div className="col md-form">
-                    <label for="validationServer015"> Email : </label><br/>
+                    <label> Email : </label><br/>
                     <input
                       type="email"
+                      name="email"
                       className="form-control" 
-                      id="validationServer015" 
                       placeholder="example@example.com" 
-                      onChange={this.handleChangeEmail}  
+                      onChange={this.myChangeHandler}  
                       required/>
                 </div>
                 <div className="col md-form">
                     <label for="validationTooltip021"> Phone Number :</label><br/>
                     <input 
-                    type="text" 
-                    id="validationTooltip021" 
+                    type="text"
+                    name="phone" 
                     className="form-control" 
-                    onChange={this.handleChangePhone} required/>
+                    onChange={this.myChangeHandler} required/>
                 </div>
               </div>
               <div className="row">
                 <div className="col md-form">
                           <select 
                         className="browser-default custom-select" 
-                        id="validationTooltip022"
+                        name="location"
                         value={this.state.location} 
-                        onChange={this.handleChangeLocation}
+                        onChange={this.myChangeHandler}
                         required >
                           <option selected disabled value="">Location</option>
                           <option value="Athens">Athens</option>
@@ -219,11 +149,10 @@ render() {
                       <label>
                         <input
                           type="radio"
-                          name="radio-choice0"
-                          id="radio-choice-1"
+                          name="saleType"
                           value="Rent"
                           checked={this.state.saleType === "Rent"}
-                          onChange={this.handleSaleTypeChange}
+                          onChange={this.myChangeHandler}
                           required/>
                           Rent
                       </label>
@@ -232,11 +161,10 @@ render() {
                         <label >
                           <input
                             type="radio"
-                            name="radio-choice0"
-                            id="radio-choice-2"
+                            name="saleType"
                             value="Sale"
                             checked={this.state.saleType === "Sale"}
-                            onChange={this.handleSaleTypeChange} 
+                            onChange={this.myChangeHandler} 
                             required/>
                             Sell     
                         </label>
@@ -248,11 +176,10 @@ render() {
                         <label>
                           <input
                             type="radio"
-                            name="radio-choice1"
-                            id="radio-choice-3"
+                            name="propertyType"
                             value="Apartment"
                             checked={this.state.propertyType === "Apartment"}
-                            onChange={this.handlePropertyTypeChange}
+                            onChange={this.myChangeHandler}
                             required/>
                           Apartment
                         </label>
@@ -261,11 +188,10 @@ render() {
                           <label>
                             <input
                               type="radio"
-                              name="radio-choice1"
-                              id="radio-choice-4"
+                              name="propertyType"
                               value="House"
                               checked={this.state.propertyType === "House"}
-                              onChange={this.handlePropertyTypeChange}
+                              onChange={this.myChangeHandler}
                               required/>
                             House
                             </label>
@@ -274,59 +200,59 @@ render() {
                 </div>
                 <div className="form-row w-75 form-group form-check form-check-inline"> 
                     <div class="col-md-4 mb-3 md-form formField">
-                        <label for="validationServer024"> Price : </label><br/>
+                        <label> Price : </label><br/>
                         <input 
                           type="text" 
+                          name="price"
                           className="form-control" 
-                          id="validationServer024" 
-                          onChange={this.handleChangePrice} 
+                          onChange={this.myChangeHandler} 
                           required/>
                     </div>
                     <div className="col-md-4 mb-3 md-form formField">
                         <label for="validationTooltip025"> Floor :</label><br/>
                         <input 
                           type="text" 
-                          id="validationTooltip025" 
+                          name="floor"
                           className="form-control" 
-                          onChange={this.handleChangeFloor} 
+                          onChange={this.myChangeHandler} 
                           required/>
                     </div>
                     <div className="col-md-4 mb-3 md-form formField">
                         <label for="validationServer026"> Sqm : </label><br/>
                         <input 
                           type="text" 
+                          name="sqm"
                           className="form-control" 
-                          id="validationServer026" 
-                          onChange={this.handleChangeSqm} 
+                          onChange={this.myChangeHandler} 
                           required/>
                     </div>
                 </div>
                 <div className="form-row w-75 form-group form-check form-check-inline"> 
                     <div className="col-md-4 mb-3 md-form formField">
-                        <label for="validationServer027"> Bedrooms : </label><br/>
+                        <label> Bedrooms : </label><br/>
                         <input 
-                          type="text" 
+                          type="text"
+                          name="bedrooms" 
                           className="form-control" 
-                          id="validationServer027" 
-                          onChange={this.handleChangeBedrooms} 
+                          onChange={this.myChangeHandler} 
                           required/>
                     </div>
                     <div className="col-md-4 mb-3 md-form">
-                        <label for="validationTooltip028"> Bathrooms :</label><br/>
+                        <label> Bathrooms :</label><br/>
                         <input 
                           type="text" 
-                          id="validationTooltip028" 
+                          name="bathrooms"
                           className="form-control" 
-                          onChange={this.handleChangeBathrooms}  
+                          onChange={this.myChangeHandler}  
                           required/>
                     </div>
                     <div className="col-md-4 mb-3 md-form">
-                        <label for="builtYear"> Built year :</label><br/>
+                        <label> Built year :</label><br/>
                         <input 
                           type="text" 
-                          id="builtYear" 
+                          name="builtYear" 
                           className="form-control" 
-                          onChange={this.handleChangeBuiltYear} 
+                          onChange={this.myChangeHandler} 
                           required/>
                     </div>
                 </div>
@@ -334,10 +260,10 @@ render() {
                 <div className="form-row form-group form-check form-check-inline">
                   <div className="input-group col-md-12 mb-3 md-form">
                     <select 
-                        className="browser-default custom-select" 
-                        id="inputGroupSelect04" 
+                        className="browser-default custom-select"
+                        name="heating" 
                         value={this.state.heating} 
-                        onChange={this.handleHeatingChange} 
+                        onChange={this.myChangeHandler} 
                         required>
                           <option selected disabled value=""> Heating type</option>
                           <option value="Gas">Gas</option>
@@ -351,45 +277,48 @@ render() {
                     <input 
                       type="checkbox"
                       className="custom-control-input" 
-                      id="parking" 
-                      onChange={this.handleParkingChecked}/>
+                      id="parking"
+                      name="parking"
+                      onChange={this.mySwitchChangeHandler}/>
                     <label className="custom-control-label" for="parking">Parking Spot</label>
                 </div>
                 <div className="custom-control custom-switch">
                    <input 
                     type="checkbox"
-                    className="custom-control-input" 
-                    id="furnitured" 
-                    onChange={this.handleFurnituredChecked}/>
+                    className="custom-control-input"
+                    id="furnitured"
+                    name="furnitured"  
+                    onChange={this.mySwitchChangeHandler}/>
                   <label className="custom-control-label" for="furnitured">Furnitured</label>
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-3 md-form">
-                        <label for="validationTooltip021"> Description :</label><br/>
+                        <label> Description :</label><br/>
                         <textarea 
-                          id="form7" 
+                          name="description" 
                           class="md-textarea form-control" 
                           rows="1"
-                          onChange={this.handleChangeDescription}>
+                          onChange={this.myChangeHandler}>
                         </textarea>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-3 md-form">
-                        <label for="validationTooltip021"> Pictures :</label><br/>
+                        <label> Pictures :</label><br/>
                         <input 
-                          type="text" 
-                          id="validationTooltip021" 
+                          type="text"
+                          name="pictures" 
                           className="form-control" 
                           placeholder="URL for pictures." 
-                          onChange={this.handleChangePictures}/> 
+                          onChange={this.myChangeHandler}/> 
                     </div>
                 </div>
-                <button className="btn btn-rounded btn-block"  
+                {/* <button className="btn btn-rounded btn-block"  
                     onClick={this.runMyFunction }
-                    id="addBtnForm">
+                   >
                     Add
-                </button>
+                </button> */}
+                <input className="btn btn-rounded btn-block" type="submit" value="Submit" />
           </form>
       </div>
     );
