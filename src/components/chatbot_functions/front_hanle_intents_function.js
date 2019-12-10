@@ -34,6 +34,7 @@ exports.front_handle_intents = function(res){
         //TODO!!
     }
     if (res.data.intent.displayName === 'Rentee Intent - got housetype - saletype - location - price - sqm - yes' || res.data.intent.displayName ==='More Filters Intent - yes'){
+
         var index=4
         if (res.data.intent.displayName ==='More Filters Intent - yes'){
             index=0;
@@ -42,10 +43,10 @@ exports.front_handle_intents = function(res){
 
         handle_params.handle_params(res, initial_params, index)
         final_params=handle_params.final_params
-        module.exports.final_params=final_params
-        console.log("DONE")        
+        
 
     }
+    module.exports.final_params=final_params
     module.exports.next_event=next_event
     module.exports.delete_messages=delete_messages
     module.exports.redirect_window=redirect_window

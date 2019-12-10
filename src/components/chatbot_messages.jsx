@@ -19,7 +19,7 @@ const Message = (props)=> {
         <div class="sc-message" style={{marginLeft: '70px', marginRight:'0px'}}>
             {props.speaks==='me' &&
                 <div className="sc-message--content sent">  
-                    <div className="sc-message--text">
+                    <div className="sc-message--text text-white">
                         {props.text}
                     </div>
                     <div className="sc-message--avatar" style={{backgroundImage: "url(https://kingsteigntonschool.org/wp-content/uploads/2015/07/facebook-default-no-profile-pic.jpg)"}}></div>
