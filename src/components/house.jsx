@@ -44,11 +44,11 @@ class House extends Component {
                     <div class="col-md-7">
                       <div class="card-body houseDetails">
                         <p id="housetitle">{ house.property_type +" "+ house.sqm +"m² for " + house.sale_type}</p>
-                        <p class="fas fa-map-marker-alt" style={{fontSize:'24px',fontStyle:'initial'}}> {house.location} {house.price}€</p>
+                        <p style={{fontSize:'24px',fontStyle:'initial',fontWeight:"initial"}}> <i class="fas fa-map-marker-alt"></i> {house.location} {house.price}€</p>
                         <p id="houseDesc">{house.description}</p>
                         <ul className="row">
-                          <li style={{marginRight:'30px',fontSize:'17px',fontFamily:"georgia"}}>Bedrooms: {house.bedrooms}</li>
-                          <li style={{fontSize:'17px',fontFamily:"georgia"}}>Floor: {house.floor}</li>
+                          <li style={{marginRight:'30px',fontSize:'17px'}}>Bedrooms: {house.bedrooms}</li>
+                          <li style={{fontSize:'17px'}}>Floor: {house.floor}</li>
                         </ul>
                         <Link to={`/houses/${house.id}`} class="btn d-flex justify-content-center float-right" style={{width:'30%', marginBottom:'2%', backgroundColor :"#008ae6", color: "white", bottom:0, marginLeft:"60%", position:"absolute"}}>More details</Link>
                       </div>
