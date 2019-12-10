@@ -125,13 +125,6 @@ class FilterBox extends Component {
     } else if (this.state.sqm === "Minimum Sqm") {
       this.state.sqm = null;
     }
-    console.log(
-      this.state.location,
-      this.state.minprice,
-      this.state.maxprice,
-      this.state.sqm
-    );
-
     //need the else if or is "no" by default
     var parkingSend;
     if (this.state.parking === true) {
@@ -286,8 +279,8 @@ class FilterBox extends Component {
                   type="radio"
                   class="custom-control-input"
                   id="rent"
-                  value="rent"
-                  checked={this.state.saleType === "rent"}
+                  value="Rent"
+                  checked={this.state.saleType === "Rent"}
                   onChange={this.handleSaleTypeChange}
                 />
                 <label class="custom-control-label filterText" for="rent">
@@ -299,8 +292,8 @@ class FilterBox extends Component {
                   type="radio"
                   class="custom-control-input"
                   id="sale"
-                  value="sale"
-                  checked={this.state.saleType === "sale"}
+                  value="Sale"
+                  checked={this.state.saleType === "Sale"}
                   onChange={this.handleSaleTypeChange}
                 />
                 <label class="custom-control-label filterText" for="sale">
@@ -321,8 +314,8 @@ class FilterBox extends Component {
                     type="radio"
                     class="custom-control-input"
                     id="apartment"
-                    value="apartment"
-                    checked={this.state.propertyType === "apartment"}
+                    value="Apartment"
+                    checked={this.state.propertyType === "Apartment"}
                     onChange={this.handlePropertyTypeChange}
                   />
                   <label
@@ -337,8 +330,8 @@ class FilterBox extends Component {
                     type="radio"
                     class="custom-control-input"
                     id="house"
-                    value="house"
-                    checked={this.state.propertyType === "house"}
+                    value="House"
+                    checked={this.state.propertyType === "House"}
                     onChange={this.handlePropertyTypeChange}
                   />
                   <label

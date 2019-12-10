@@ -216,8 +216,8 @@ class Carousel extends Component {
                     type="radio"
                     class="custom-control-input"
                     id="rent"
-                    value="rent"
-                    checked={this.state.saleType === "rent"}
+                    value="Rent"
+                    checked={this.state.saleType === "Rent"}
                     onChange={this.handleSaleTypeChange}
                   />
                   <label class="custom-control-label" for="rent">
@@ -229,8 +229,8 @@ class Carousel extends Component {
                     type="radio"
                     class="custom-control-input"
                     id="sale"
-                    value="sale"
-                    checked={this.state.saleType === "sale"}
+                    value="Sale"
+                    checked={this.state.saleType === "Sale"}
                     onChange={this.handleSaleTypeChange}
                   />
                   <label class="custom-control-label" for="sale">
