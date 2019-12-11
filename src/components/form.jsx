@@ -9,7 +9,6 @@ class AddHouse extends Component {
 
       this.myChangeHandler = this.myChangeHandler.bind(this);
       this.mySwitchChangeHandler = this.mySwitchChangeHandler.bind(this);
-      this.runMyFunction = this.runMyFunction.bind(this);
       this.addProperty = this.addProperty.bind(this);
     }
     state = {
@@ -55,50 +54,38 @@ class AddHouse extends Component {
       }
     }
 
-    
-    runMyFunction()
-    { 
-      if (this.state.email === null || this.state.phone === null || this.state.location === null
-         || this.state.saleType === null || this.state.propertyType === null || this.state.price === null || this.state.floor === null ||
-         this.state.sqm === null || this.state.bedrooms === null || this.state.bathrooms === null || this.state.builtYear === null ||
-          this.state.heating === null      
-         )
-        {  
-          alert("Please fill all the necessary fields");
-        }
-        else
-        {
-          this.addProperty(); 
-        }
-    };
-
     addProperty() {
-      axios.post("https://housecat-skgcode-api.herokuapp.com/api/properties/addproperty",  {
-              "price":this.state.price,
-              "sqm": this.state.sqm,
-              "location":this.state.location,
-              "bedrooms":this.state.bedrooms,
-              "bathrooms":this.state.bathrooms,
-              "property_type":this.state.propertyType,
-              "floor":this.state.floor,
-              "description": this.state.description,
-              "sale_type":this.state.saleType,
-              "phone":this.state.phone,
-              "email": this.state.email,
-              "img_url": this.state.pictures,
-              "furnitured":this.state.furnitured,
-              "heating_type":this.state.heating,
-              "builtyear":this.state.builtYear,
-              "parking":this.state.parking
-        }).then(res => {
-            alert(res.data);              
-        });                  
+      
+        axios
+        .post("https://housecat-skgcode-api.herokuapp.com/api/properties/addproperty",  {
+            price:this.state.price,
+            sqm: this.state.sqm,
+            location:this.state.location,
+            bedrooms:this.state.bedrooms,
+            bathrooms:this.state.bathrooms,
+            property_type:this.state.propertyType,
+            floor:this.state.floor,
+            description: this.state.description,
+            sale_type:this.state.saleType,
+            phone:this.state.phone,
+            email: this.state.email,
+            img_url: this.state.pictures,
+            furnitured:this.state.furnitured,
+            heating_type:this.state.heating,
+            builtyear:this.state.builtYear,
+            parking:this.state.parking
+        })
+      .then(res => {
+            alert(res.data);
+            window.open("/add", "_self");
+        });
+        return true;                  
       }
 
 render() { 
     return (
       <div className="containerAdd">
-          <form name="form" className="needs-validation" novalidate onSubmit={this.addProperty}> 
+          <form name="form" onSubmit={(e) => {this.addProperty(); e.preventDefault(); }}> 
               <div class="text-center">
                 <h3 class="dark-grey-text mb-5"><strong>Add your house</strong></h3>
               </div>
