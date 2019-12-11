@@ -470,7 +470,7 @@ class Chatbot extends Component {
         <span className={classList2.join(' ')}>
 
           <div className="card mb-2 bg-white text-dark" style={{ minHeight: 500, maxHeight: 500, width:400, position:"fixed", marginBottom:500, bottom: 80, right: 0, border: '1px solid lightgray'}}>
-            <div className="card-header bg-dark text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50, cursor: "pointer"}} onClick={this.handleClick.bind(this)}>
+            <div className="card-header text-light" id="chatbot" style={{ minHeight: 50, maxHeight: 50,backgroundColor: "#303030", cursor: "pointer"}} onClick={this.handleClick.bind(this)}>
               <div className="row">
                 <div className="col-sm-10 bg-black text-white" style={{textAlign: 'center'}}>
                   <h5>Cat-bot </h5>
