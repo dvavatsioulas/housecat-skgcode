@@ -52,7 +52,7 @@ class House extends Component {
                           <li style={{marginRight:'30px',fontSize:'17px'}}>Bedrooms: {house.bedrooms}</li>
                           <li style={{fontSize:'17px'}}>Floor: {house.floor}</li>
                         </ul>
-                        <Link to={`/houses/${house.id}`} class="btn d-flex justify-content-center float-right" style={{width:'30%', marginBottom:'2%', backgroundColor :"#008ae6", color: "white", bottom:0, marginLeft:"60%", position:"absolute"}}>More details</Link>
+                        <Link to={`/houses/${house.id}`} class="btn d-flex justify-content-center float-right" style={{width:'31%', marginBottom:'2%', backgroundColor :"#008ae6", color: "white", bottom:0, marginLeft:"59%", position:"absolute"}}>More details</Link>
                       </div>
                     </div>
                   
