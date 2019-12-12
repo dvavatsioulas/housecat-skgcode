@@ -40,7 +40,8 @@ class FilterBox extends Component {
     heating: null,
     parking: null,
     furnitured: null,
-    sqm: null
+    minsqm: null,
+    maxsqm:null
   };
 
   componentDidMount() {
@@ -57,7 +58,8 @@ class FilterBox extends Component {
       heating: item.heating_type,
       parking: item.parking,
       furnitured: item.furnitured,
-      sqm: item.sqm
+      minsqm: item.minsqm,
+      maxsqm: item.maxsqm
     });
     if (item.location === null) {
       this.setState({ location: "Location" });
@@ -68,8 +70,11 @@ class FilterBox extends Component {
     if (item.maxprice === null) {
       this.setState({ maxprice: "Maximum Price" });
     }
-    if (item.sqm === null) {
-      this.setState({ sqm: "Minimum Sqm" });
+    if (item.minsqm === null) {
+      this.setState({ minsqm: "Minimum Sqm" });
+    }
+    if (item.maxsqm === null) {
+      this.setState({ maxsqm: "Maximum Sqm" });
     }
   }
 
@@ -120,10 +125,15 @@ class FilterBox extends Component {
     } else if (this.state.maxprice === "Maximum Price") {
       this.state.maxprice = null;
     }
-    if (document.getElementById("sqmfield").value !== "") {
-      this.state.sqm = document.getElementById("sqmfield").value;
-    } else if (this.state.sqm === "Minimum Sqm") {
-      this.state.sqm = null;
+    if (document.getElementById("minsqmfield").value !== "") {
+      this.state.minsqm = document.getElementById("minsqmfield").value;
+    } else if (this.state.minsqm === "Minimum Sqm") {
+      this.state.minsqm = null;
+    }
+    if (document.getElementById("maxsqmfield").value !== "") {
+      this.state.maxsqm = document.getElementById("maxsqmfield").value;
+    } else if (this.state.maxsqm === "Maximum Sqm") {
+      this.state.maxsqm = null;
     }
     //need the else if or is "no" by default
     var parkingSend;
@@ -146,8 +156,8 @@ class FilterBox extends Component {
         {
           minprice: this.state.minprice,
           maxprice: this.state.maxprice,
-          minsqm: this.state.sqm,
-          maxsqm: null,
+          minsqm: this.state.minsqm,
+          maxsqm: this.state.maxsqm,
           location: this.state.location,
           bedrooms: this.state.bedrooms,
           bathrooms: this.state.bathrooms,
@@ -187,7 +197,8 @@ class FilterBox extends Component {
       heating_type: this.state.heating,
       parking: this.state.parking,
       furnitured: this.state.furnitured,
-      sqm: this.state.sqm
+      minsqm: this.state.minsqm,
+      maxsqm: this.state.maxsqm
     };
     localStorage.setItem("filters", JSON.stringify(filterboxInfo));
   }
@@ -228,7 +239,8 @@ class FilterBox extends Component {
           heating_type: null,
           parking: null,
           furnitured: null,
-          sqm: null
+          minsqm: null,
+          maxsqm: null
         };
         localStorage.setItem("filters", JSON.stringify(filterboxInfo));
 
@@ -241,12 +253,12 @@ class FilterBox extends Component {
       <div className="card filterBox">
         <h3
           className="card-header text-center py-2"
-          style={{ fontFamily: "Georgia" }}
+          style={{ fontFamily: "Georgia" ,borderBottom:"3px solid #008ae6"}}
         >
           <strong>~Filters~</strong>
         </h3>
-        <div className="card-body pt-0" style={{ height: "60%" }}>
-          <hr />
+        <div className="card-body pt-0">
+          <br />
           <Autocomplete
             freeSolo
             options={locations}
@@ -261,15 +273,18 @@ class FilterBox extends Component {
             )}
           />
           <TextField
-            id="sqmfield"
-            label={this.state.sqm}
+            id="minsqmfield"
+            label={this.state.minsqm}
             variant="outlined"
-            style={{ top: "30px", width: "40%" }}
+            style={{ width: "49%",marginBottom:"1%",marginTop:"2%", marginRight:"1%" }}
           ></TextField>
-          <form className="filterboxForm">
-            <div>
-              <div className="md-form mt-3"></div>
-            </div>
+          <TextField
+            id="maxsqmfield"
+            label={this.state.maxsqm}
+            variant="outlined"
+            style={{ width: "49%",marginBottom:"1%",marginTop:"2%", marginLeft:"1%" }}
+          ></TextField>
+          
             <div className="text-center d-flex flex-row">
               <div className="custom-control-inline p-2">
                 <p className="filterTextDescription"> Purpose: </p>
@@ -302,9 +317,9 @@ class FilterBox extends Component {
               </div>
             </div>
 
-            <hr />
+            
 
-            <div className="text-center">
+            
               <div className="text-center d-flex flex-row">
                 <div className="custom-control-inline p-2">
                   <p className="filterTextDescription"> Type: </p>
@@ -341,13 +356,26 @@ class FilterBox extends Component {
                     House
                   </label>
                 </div>
-              </div>
+              
             </div>
-            <hr />
+            
+            <TextField
+              id="minpricefield"
+              label={this.state.minprice}
+              variant="outlined"
+              style={{ width: "49%",marginBottom:"1%", marginRight:"1%" }}
+            ></TextField>
+            <TextField
+              id="minpricefield"
+              label={this.state.minprice}
+              variant="outlined"
+              style={{ width: "49%",marginBottom:"1%", marginLeft:"1%" }}
+            ></TextField>
+                
+                
             <div className="form-group form-row text-center">
-              <div className="d-flex flex-row">
+              <div className="d-flex flex-row w-50">
                 <div className="mr-auto p-2">
-                  {" "}
                   <label className="filterTextDescription">Bedrooms: </label>
                 </div>
                 <div className="p-2">
@@ -357,7 +385,7 @@ class FilterBox extends Component {
                     onChange={this.handleBedroomChange}
                   >
                     <option selected disabled>
-                      Choose
+                      Any
                     </option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -366,30 +394,8 @@ class FilterBox extends Component {
                 </div>
               </div>
 
-              <div className="d-flex flex-row">
+              <div className="d-flex flex-row w-50">
                 <div className="mr-auto p-2">
-                  {" "}
-                  <label className="filterTextDescription">Bathrooms: </label>
-                </div>
-                <div className="p-2">
-                  <select
-                    className="custom-select filterText"
-                    value={this.state.bathrooms}
-                    onChange={this.handleBathroomChange}
-                  >
-                    <option selected disabled>
-                      Choose
-                    </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="d-flex flex-row">
-                <div className="mr-auto p-2">
-                  {" "}
                   <label className="filterTextDescription">Floor: </label>
                 </div>
                 <div className="p-2">
@@ -399,7 +405,7 @@ class FilterBox extends Component {
                     onChange={this.handleFloorChange}
                   >
                     <option selected disabled>
-                      Choose
+                      Any
                     </option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -407,88 +413,84 @@ class FilterBox extends Component {
                   </select>
                 </div>
               </div>
-            </div>
 
-            <hr />
-            <p className="text-center filterText">Anything else?</p>
-            <div className="form-group form-row text-center ">
-              <div className="d-flex flex-row">
-                <label className="p-2 filterTextDescription">Heating: </label>
-                <select
-                  className="custom-select filterText"
-                  value={this.state.heating}
-                  onChange={this.handleHeatingChange}
-                >
-                  <option selected disabled>
-                    Choose
-                  </option>
-                  <option value="gas"> Gas </option>
-                  <option value="diesel">Diesel</option>
-                </select>
+              <div className="d-flex flex-row w-50">
+                <div className="mr-auto p-2">
+                  <label className="filterTextDescription">Bathrooms: </label>
+                </div>
+                <div className="p-2">
+                  <select
+                    className="custom-select filterText"
+                    value={this.state.bathrooms}
+                    onChange={this.handleBathroomChange}
+                  >
+                    <option selected disabled>
+                      Any
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
+
+              
+
+              <div className="d-flex flex-row w-50">
+                <div className="mr-auto p-2">
+                <label className="filterTextDescription">Heating: </label>
+                </div>
+                <div className="p-2">
+                  <select
+                    className="custom-select filterText"
+                    value={this.state.heating}
+                    onChange={this.handleHeatingChange}
+                  >
+                    <option selected disabled>
+                      Any
+                    </option>
+                    <option value="gas"> Gas </option>
+                    <option value="diesel">Diesel</option>
+                    <option value="A/C">A/C</option>
+                    <option value="None">None</option>
+                  </select>
+                </div>
               </div>
             </div>
-
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="parking"
-                checked={this.state.parking}
-                onChange={this.handleParkingChecked}
-              />
-              <label className="custom-control-label filterText" for="parking">
-                Parking Spot
-              </label>
-            </div>
-            <div className="custom-control custom-switch">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="furnitured"
-                checked={this.state.furnitured}
-                onChange={this.handleFurnituredChecked}
-              />
-              <label
-                className="custom-control-label filterText"
-                for="furnitured"
-              >
-                Furnitured
-              </label>
-            </div>
-
-            <hr />
-
-            <div className="d-flex flex-fill">
-              <div className="mb-3">
-                <Box
-                  width={0.1}
-                  id="minpricebox"
-                  class="flex-grow bd-highlight"
-                >
-                  <TextField
-                    id="minpricefield"
-                    label={this.state.minprice}
-                    variant="outlined"
-                    style={{ width: "100%" }}
-                  ></TextField>
-                </Box>
+            
+            <div className="form-group form-row text-center">
+              <div className="d-flex flex-row w-50">
+                <div className="custom-control custom-switch">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="parking"
+                    checked={this.state.parking}
+                    onChange={this.handleParkingChecked}
+                  />
+                  <label className="custom-control-label filterText" for="parking">
+                    Parking Spot
+                  </label>
+                </div>
               </div>
-              <div className="mb-3">
-                <Box
-                  width={0.1}
-                  id="maxpricebox"
-                  class="flex-grow bd-highlight"
-                >
-                  <TextField
-                    id="maxpricefield"
-                    label={this.state.maxprice}
-                    variant="outlined"
-                    style={{ width: "100%" }}
-                  ></TextField>
-                </Box>
+              <div className="d-flex flex-row w-50">
+                <div className="custom-control custom-switch">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="furnitured"
+                    checked={this.state.furnitured}
+                    onChange={this.handleFurnituredChecked}
+                  />
+                  <label
+                    className="custom-control-label filterText"
+                    for="furnitured"
+                  >
+                    Furnitured
+                  </label>
+                </div>
               </div>
             </div>
-          </form>
           <a>
             <p
               className="clearFilters"
@@ -498,12 +500,19 @@ class FilterBox extends Component {
               Clear all filters
             </p>
           </a>
+          {/* <button
+            className="btn  btn-rounded btn-block"
+            style={{ color: "#008ae6" }}
+            onClick={this.clearFilters}
+          >
+            Clear all filters
+          </button> */}
           <button
             className="btn  btn-rounded btn-block"
             onClick={this.reloadSearch}
             id="reloadBtn"
           >
-            Reload
+            Search
           </button>
         </div>
       </div>
