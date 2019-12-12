@@ -210,10 +210,10 @@ cite {
   width: 80%;
   height: 100%;
   position: center;
-  top: 15%;
+  top: 10%;
   padding-left: 2%;
   margin-bottom: 15%;
-  margin-top: 5%;
+  margin-top: 2%;
   margin-left: 10%;
   bottom: 5%;
 }
@@ -289,14 +289,16 @@ cite {
   width: 49.6%;
   margin-left: 25.15%;
   align-content: center;
-  margin-bottom: 1.5%;
+  margin-bottom: 10px;
 }
 .containerAdd{ 
   padding: 5%;
   margin: 25%;
+  margin-bottom: 10%;
   margin-top: 2%;
   border: 5px solid #008ae6;
   /* padding-left: 5px; */
+  background-color:#f7fbfe  ;
 }
 
 .form {
@@ -395,7 +397,11 @@ cite {
 .property-info-value{
   font-size: x-large;
 }
-
 .filterTextDescription{
  padding-top: 7px; 
+}
+.addHouseLabel {
+  font-size: 20px;
+  margin-bottom: -20px;
+  font-style: initial;
 }

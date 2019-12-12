@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import color from "@material-ui/core/colors/amber";
 
  
 class AddHouse extends Component {
 
     constructor(props) {
       super(props);
-
+      this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
+      this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
       this.myChangeHandler = this.myChangeHandler.bind(this);
       this.mySwitchChangeHandler = this.mySwitchChangeHandler.bind(this);
       this.addProperty = this.addProperty.bind(this);
@@ -54,6 +56,17 @@ class AddHouse extends Component {
       }
     }
 
+    handlePropertyTypeChange(changeEvent) {
+      this.setState({
+        propertyType: changeEvent.target.value
+      });
+    }
+    handleSaleTypeChange(changeEvent) {
+      this.setState({
+        saleType: changeEvent.target.value
+      });
+    }
+
     addProperty() {
       
         axios
@@ -87,7 +100,7 @@ render() {
       <div className="containerAdd">
           <form name="form" onSubmit={(e) => {this.addProperty(); e.preventDefault(); }}> 
               <div class="text-center">
-                <h3 class="dark-grey-text mb-5"><strong>Add your house</strong></h3>
+                <h1 class="dark-grey-text mb-5"><strong>Add your house</strong></h1>
               </div>
               <div className="form-row w-100 form-group form-check-inline"> 
                 <div className="col md-form">
@@ -119,72 +132,81 @@ render() {
                         required >
                           <option selected disabled value="">Location</option>
                           <option value="Athens">Athens</option>
-                          <option value="Crete">Crete</option>
                           <option value="Halkidiki">Halkidiki</option>
-                          <option value="Patra">Patra</option>
                           <option value="Kavala">Kavala</option>
                           <option value="Larisa">Larisa</option>
+                          <option value="Patra">Patra</option>
                           <option value="Thessaloniki">Thessaloniki</option>
-                          <option value="Trikala">Trikala</option>
                     </select>
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-6">
-                    <p >For : </p>
-                    <div className="custom-control-inline">                  
-                      <label>
-                        <input
-                          type="radio"
-                          name="saleType"
-                          value="Rent"
-                          checked={this.state.saleType === "Rent"}
-                          onChange={this.myChangeHandler}
-                          required/>
-                          Rent
-                      </label>
-                    </div>
-                      <div className="custom-control-inline">
-                        <label >
-                          <input
-                            type="radio"
-                            name="saleType"
-                            value="Sale"
-                            checked={this.state.saleType === "Sale"}
-                            onChange={this.myChangeHandler} 
-                            required/>
-                            Sell     
-                        </label>
-                      </div>
-                  </div>
-                  <div className="col-md-6">
-                    <p >Type : </p>
-                    <div className="custom-control-inline">          
-                        <label>
-                          <input
-                            type="radio"
-                            name="propertyType"
-                            value="Apartment"
-                            checked={this.state.propertyType === "Apartment"}
-                            onChange={this.myChangeHandler}
-                            required/>
-                          Apartment
-                        </label>
-                      </div>
-                      <div className="custom-control-inline">         
-                          <label>
-                            <input
-                              type="radio"
-                              name="propertyType"
-                              value="House"
-                              checked={this.state.propertyType === "House"}
-                              onChange={this.myChangeHandler}
-                              required/>
-                            House
-                            </label>
-                      </div>
-                    </div>
+                <p className="filterTextDescription"> For: </p>
+               <div class="custom-control-inline custom-radio p-2">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="rent"
+                  value="Rent"
+                  checked={this.state.saleType === "Rent"}
+                  onChange={this.handleSaleTypeChange}
+                />
+                <label class="custom-control-label filterText" for="rent">
+                  Rent
+                </label>
+              </div>
+              <div class="custom-control-inline custom-radio p-2">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="sale"
+                  value="Sale"
+                  checked={this.state.saleType === "Sale"}
+                  onChange={this.handleSaleTypeChange}
+                />
+                <label class="custom-control-label filterText" for="sale">
+                  Buy
+                </label>
+              </div>
+            </div>
+                <div className="col-md-6">
+                  <p className="filterTextDescription"> Type: </p>
+                <div className="custom-control-inline custom-radio p-2">
+                  <input
+                    type="radio"
+                    class="custom-control-input"
+                    id="apartment"
+                    value="Apartment"
+                    checked={this.state.propertyType === "Apartment"}
+                    onChange={this.handlePropertyTypeChange}
+                  />
+                  <label
+                    className="custom-control-label filterText"
+                    for="apartment">
+                    Apartment
+                  </label>
                 </div>
+                <div class="custom-control-inline custom-radio p-2">
+                  <input
+                    type="radio"
+                    class="custom-control-input"
+                    id="house"
+                    value="House"
+                    checked={this.state.propertyType === "House"}
+                    onChange={this.handlePropertyTypeChange}
+                  />
+                  <label
+                    className="custom-control-label filterText"
+                    for="house"
+                  >
+                    House
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
                 <div className="form-row w-75 form-group form-check form-check-inline"> 
                     <div class="col-md-4 mb-3 md-form formField">
                         <label> Price : </label><br/>
@@ -280,7 +302,7 @@ render() {
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-3 md-form">
-                        <label> Description :</label><br/>
+                        <p className="addHouseLabel"> Description :</p><br/>
                         <textarea 
                           name="description" 
                           class="md-textarea form-control" 
@@ -291,7 +313,7 @@ render() {
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-3 md-form">
-                        <label> Pictures :</label><br/>
+                        <p className="addHouseLabel"> Pictures :</p><br/>
                         <input 
                           type="text"
                           name="pictures" 
@@ -305,7 +327,12 @@ render() {
                    >
                     Add
                 </button> */}
-                <input className="btn btn-rounded btn-block" type="submit" value="Submit" />
+                <button 
+                className="btn btn-rounded btn-block " 
+                type="submit" 
+                id="addBtnForm"
+                value="Add">Add 
+                </button>
           </form>
       </div>
     );
