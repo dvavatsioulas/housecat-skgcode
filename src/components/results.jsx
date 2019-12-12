@@ -9,8 +9,8 @@ class Results extends React.Component {
     return (
       <React.Fragment>
         <div class="row justify-content-between" id="rowDiv">
-          <div class="col-md-5 col-lg-4"><FilterBox /></div>
-          <div class="col-md-7 col-lg-8"> <House /></div>
+          <div class="col-md-5 col-lg-4" style={{marginLeft: "2%"}}><FilterBox /></div>
+          <div class="col-md-7 col-lg-7"> <House /></div>
           <Chatbot />
         </div>
       </React.Fragment>

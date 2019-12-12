@@ -99,7 +99,7 @@ cite {
 }
 .filterBox {
   position: sticky;
-  top: 9.9%;
+  top: 94px;
   width: 80%;
   float: right;
   
@@ -142,7 +142,6 @@ cite {
 .houses {
   list-style: none;
   padding-top: 50px;
-  margin-right: 15%;
 }
 .house {
   list-style: none;
