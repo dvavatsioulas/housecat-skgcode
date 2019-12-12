@@ -101,7 +101,8 @@ class Carousel extends Component {
             minprice: this.state.minprice,
             maxprice: this.state.maxprice,
             sale_type: this.state.saleType,
-            sqm: null
+            minsqm: null,
+            maxsqm: null
           };
           localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         } else if (res.status == 204) {

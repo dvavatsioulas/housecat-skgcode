@@ -30,7 +30,8 @@ class NavBarV2 extends Component {
           heating_type: null,
           parking: null,
           furnitured: null,
-          sqm: null
+          minsqm: null,
+          maxsqm: null
         };
         localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
@@ -61,7 +62,8 @@ class NavBarV2 extends Component {
           heating_type: null,
           parking: null,
           furnitured: null,
-          sqm: null
+          minsqm: null,
+          maxsqm: null
         };
         localStorage.setItem("filters", JSON.stringify(filterboxInfo));
         // LocalStorage takes a few milliseconds to execute SO this delay is necessary otherwise redirect will happen before the process is complete
