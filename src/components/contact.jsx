@@ -6,7 +6,7 @@ class Contact extends Component {
     return (
       <section className="mb-4 homePageStyle">
         <hr className="strong black" />
-        <h1 id="contact" className="text-center display-4">
+        <h1  className="text-center display-4">
           Contact Information
         </h1>
         <p class="text-center w-responsive mx-auto mb-4">
