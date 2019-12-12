@@ -31,7 +31,7 @@ class LastHouses extends Component {
                     <img id="lastHousesImg"class="card-img-top img-fluid" src={house.img_url} alt="Card image cap"></img>
                     </Link>
                   <div class="card-body">
-                      <h4 class="card-title">{house.property_type} at {house.location}</h4>
+                      <h4 class="card-title" id="cardTitle">{house.property_type} at {house.location}</h4>
                       <p id="about" class="card-text">
                         <ul className="house3Details">
                           <li><strong>Area:</strong> {house.sqm} m²</li>
