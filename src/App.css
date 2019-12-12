@@ -97,12 +97,13 @@
 cite {
   font-size: 25px;
 }
-/* .filterBox {
+.filterBox {
   position: sticky;
   top: 9.9%;
-  margin-left: 32%;
-  margin-right: 8%;
-} */
+  width: 80%;
+  float: right;
+  
+}
 .checkboxes {
   margin-left: 60px;
   font-size: 18px;
@@ -393,4 +394,8 @@ cite {
 }
 .property-info-value{
   font-size: x-large;
+}
+
+.filterTextDescription{
+ padding-top: 7px; 
 }
