@@ -287,7 +287,7 @@ class FilterBox extends Component {
           
             <div className="text-center d-flex flex-row">
               <div className="custom-control-inline p-2">
-                <p className="filterTextDescription"> Purpose: </p>
+                <p> Purpose: </p>
               </div>
               <div class="custom-control-inline custom-radio p-2">
                 <input
@@ -322,7 +322,7 @@ class FilterBox extends Component {
             
               <div className="text-center d-flex flex-row">
                 <div className="custom-control-inline p-2">
-                  <p className="filterTextDescription"> Type: </p>
+                  <p> Type: </p>
                 </div>
                 <div className="custom-control-inline custom-radio p-2">
                   <input
@@ -366,8 +366,8 @@ class FilterBox extends Component {
               style={{ width: "49%",marginBottom:"1%", marginRight:"1%" }}
             ></TextField>
             <TextField
-              id="minpricefield"
-              label={this.state.minprice}
+              id="maxpricefield"
+              label={this.state.maxprice}
               variant="outlined"
               style={{ width: "49%",marginBottom:"1%", marginLeft:"1%" }}
             ></TextField>

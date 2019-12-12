@@ -7,6 +7,7 @@ class DetailView extends React.Component {
      state = { house: {}, agent: {} };
 
      componentDidMount(){
+         window.scrollTo(0,0);
         var baseURL="https://housecat-skgcode-api.herokuapp.com/api/properties/id=";
         var idFromURL=this.props.match.params.id;
         axios.get(baseURL.concat(idFromURL)).then(res => {
@@ -50,9 +51,11 @@ class DetailView extends React.Component {
                                     </div>
                                    <div class="row justify-content-md-center">
                                         <div class="col col-lg-3 widgets">
-                                            <i id="DVicons" class="fas fa-money-bill-wave"></i>
-                                            <span class="property-info-label"> Price </span><br/>
-                                            <span class="property-info-value">€{this.state.house.price}</span>
+                                            <img id="DVicons" src="/money.png" style={{display: "inline"}}></img>
+                                            <span class="property-info-entry">    
+                                                <span class="property-info-label"> Price </span><br/>
+                                                <span class="property-info-value">€{this.state.house.price}</span>
+                                            </span>
                                         </div>
                                         <div class="col col-lg-3 widgets">
                                             <img id="DVicons" src="/sale.png" style={{display: "inline"}}></img>
