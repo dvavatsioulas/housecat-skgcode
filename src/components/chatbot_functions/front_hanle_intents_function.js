@@ -43,9 +43,10 @@ exports.front_handle_intents = function(res){
 
         handle_params.handle_params(res, initial_params, index)
         final_params=handle_params.final_params
-        
+        next_event=handle_params.next_event      
 
     }
+
     module.exports.final_params=final_params
     module.exports.next_event=next_event
     module.exports.delete_messages=delete_messages

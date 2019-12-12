@@ -215,7 +215,7 @@ class Chatbot extends Component {
             "minprice":final_params.minprice,
             "maxprice":final_params.maxprice,
             "minsqm": final_params.minsqm,
-            "maxsqm":null,
+            "maxsqm":final_params.maxsqm,
             "location":final_params.location,
             "bedrooms":null,
             "bathrooms":null,
@@ -238,17 +238,18 @@ class Chatbot extends Component {
 
           let filterboxInfo = {
             location: final_params.location,
-            minprice: null,
+            minprice: final_params.minprice,
             maxprice: final_params.maxprice,
-            saleType: final_params.sale_type,
+            sale_type: final_params.sale_type,
             bedrooms: null,
             bathrooms: null,
             floor: null,
-            propertyType: final_params.property_type,
+            property_type: final_params.property_type,
             heating: null,
             parking: null,
             furnitured: null,
-            sqm: final_params.minsqm
+            minsqm: final_params.minsqm,
+            maxsqm: final_params.maxsqm
             /*
             location: filteringResults.location,
             maxprice: filteringResults.maxprice,
