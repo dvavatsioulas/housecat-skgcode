@@ -7,6 +7,7 @@ class DetailView extends React.Component {
      state = { house: {}, agent: {} };
 
      componentDidMount(){
+         window.scrollTo(0,0);
         var baseURL="https://housecat-skgcode-api.herokuapp.com/api/properties/id=";
         var idFromURL=this.props.match.params.id;
         axios.get(baseURL.concat(idFromURL)).then(res => {

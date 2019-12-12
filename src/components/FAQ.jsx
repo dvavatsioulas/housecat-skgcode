@@ -123,6 +123,7 @@ class FAQ extends Component{
     
 
     <div className="accordion FAQ" id="accordionExample">
+        <h1>Frequently Asked Questions</h1>
         <div class="card">
             <div class="card-header" id="headingOne">
             <h2 class="mb-0">
