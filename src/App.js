@@ -5,6 +5,8 @@ import LastHouses from "./components/lastHouses";
 import About from "./components/about";
 import Contact from "./components/contact";
 import Carousel from "./components/carousel";
+import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
+
 
 //den xrisimopoiountai men alla an bgoun den tha emfanizontai 
 import NavbarV2 from "./components/navbarV2"
@@ -18,7 +20,11 @@ class App extends React.Component {
         <LastHouses />
         <About />
         <Contact />
+        <div>
+          <ScrollUpButton style={{marginRight: "3.5%", marginBottom: "0.7%", width: "40px",height: "40px",border: "5px solid white" }}/>
+        </div>
         <Chatbot />
+
       </React.Fragment>
     );
   }
