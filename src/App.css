@@ -370,6 +370,10 @@ cite {
   color: white !important;
 }
 
+#submitBtn{
+  margin-left: 25%;
+}
+
 .dealer-content{
   background-color: #4d4d4d;
   margin-bottom: 5%;
@@ -398,4 +402,17 @@ cite {
 
 .filterTextDescription{
  padding-top: 7px; 
+}
+
+#about{
+  padding-left: 3.2%;
+}
+
+#cardTitle{
+  margin-left: 15.4%;
+}
+
+#accordionExample{
+  margin-top: 4%;
+  margin-bottom: 4%;
 }

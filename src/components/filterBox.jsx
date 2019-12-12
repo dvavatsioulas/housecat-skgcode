@@ -366,8 +366,8 @@ class FilterBox extends Component {
               style={{ width: "49%",marginBottom:"1%", marginRight:"1%" }}
             ></TextField>
             <TextField
-              id="minpricefield"
-              label={this.state.minprice}
+              id="maxpricefield"
+              label={this.state.maxprice}
               variant="outlined"
               style={{ width: "49%",marginBottom:"1%", marginLeft:"1%" }}
             ></TextField>
