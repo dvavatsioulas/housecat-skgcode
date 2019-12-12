@@ -287,7 +287,7 @@ class FilterBox extends Component {
           
             <div className="text-center d-flex flex-row">
               <div className="custom-control-inline p-2">
-                <p className="filterTextDescription"> Purpose: </p>
+                <p> Purpose: </p>
               </div>
               <div class="custom-control-inline custom-radio p-2">
                 <input
@@ -322,7 +322,7 @@ class FilterBox extends Component {
             
               <div className="text-center d-flex flex-row">
                 <div className="custom-control-inline p-2">
-                  <p className="filterTextDescription"> Type: </p>
+                  <p> Type: </p>
                 </div>
                 <div className="custom-control-inline custom-radio p-2">
                   <input
