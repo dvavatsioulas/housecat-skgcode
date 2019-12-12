@@ -21,7 +21,7 @@ class App extends React.Component {
         <About />
         <Contact />
         <div>
-          <ScrollUpButton style={{marginRight: "3.5%", marginBottom: "0.7%", width: "40px",height: "40px",border: "5px solid white" }}/>
+          <ScrollUpButton style={{marginRight: "70px", marginBottom: "14px", width: "40px",height: "40px",border: "5px solid rgb(232, 232, 232)", backgroundColor: "rgb(232,232,232)"}}/>
         </div>
         <Chatbot />
 
