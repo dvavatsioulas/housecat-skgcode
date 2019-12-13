@@ -20,8 +20,10 @@ class House extends Component {
       return (
         <div className="d-flex p-8 bd-highlight">
           <p className="noHouseText" role="alert">
-            There are not houses with that properties!
+            There are no houses with that properties! &emsp;
+            <img src="/sad.png"></img> 
           </p>
+          
         </div>
       );
     } else {
