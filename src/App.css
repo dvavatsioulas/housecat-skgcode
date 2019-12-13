@@ -102,7 +102,7 @@ cite {
   top: 94px;
   width: 80%;
   float: right;
-  
+  margin-bottom: 40px;
 }
 .checkboxes {
   margin-left: 60px;
@@ -292,8 +292,7 @@ cite {
 }
 .containerAdd{ 
   padding: 5%;
-  margin: 25%;
-  margin-top: 2%;
+  margin: 2% 25% 3% 25%;
   border: 5px solid #008ae6;
   /* padding-left: 5px; */
 }
@@ -367,6 +366,8 @@ cite {
 #submitBtn, #addBtnForm, #reloadBtn{
   background-color :#008ae6 !important;
   color: white !important;
+  margin-top: 6%;
+  margin-bottom: 10px;
 }
 
 #submitBtn{
