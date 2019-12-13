@@ -7,8 +7,6 @@ class AddHouse extends Component {
 
     constructor(props) {
       super(props);
-      this.handleSaleTypeChange = this.handleSaleTypeChange.bind(this);
-      this.handlePropertyTypeChange = this.handlePropertyTypeChange.bind(this);
       this.myChangeHandler = this.myChangeHandler.bind(this);
       this.mySwitchChangeHandler = this.mySwitchChangeHandler.bind(this);
       this.addProperty = this.addProperty.bind(this);
@@ -54,17 +52,6 @@ class AddHouse extends Component {
           this.setState({furnitured: "no"});
         }
       }
-    }
-
-    handlePropertyTypeChange(changeEvent) {
-      this.setState({
-        propertyType: changeEvent.target.value
-      });
-    }
-    handleSaleTypeChange(changeEvent) {
-      this.setState({
-        saleType: changeEvent.target.value
-      });
     }
 
     addProperty() {
@@ -130,7 +117,7 @@ render() {
                         value={this.state.location} 
                         onChange={this.myChangeHandler}
                         required >
-                          <option selected disabled value="">Location</option>
+                          <option selected value="">Location</option>
                           <option value="Athens">Athens</option>
                           <option value="Halkidiki">Halkidiki</option>
                           <option value="Kavala">Kavala</option>
@@ -142,71 +129,64 @@ render() {
               </div>
               <div className="row">
                 <div className="col-md-6">
-                <p className="filterTextDescription"> For: </p>
-               <div class="custom-control-inline custom-radio p-2">
-                <input
-                  type="radio"
-                  class="custom-control-input"
-                  id="rent"
-                  value="Rent"
-                  checked={this.state.saleType === "Rent"}
-                  onChange={this.handleSaleTypeChange}
-                />
-                <label class="custom-control-label filterText" for="rent">
-                  Rent
-                </label>
-              </div>
-              <div class="custom-control-inline custom-radio p-2">
-                <input
-                  type="radio"
-                  class="custom-control-input"
-                  id="sale"
-                  value="Sale"
-                  checked={this.state.saleType === "Sale"}
-                  onChange={this.handleSaleTypeChange}
-                />
-                <label class="custom-control-label filterText" for="sale">
-                  Buy
-                </label>
-              </div>
-            </div>
-                <div className="col-md-6">
-                  <p className="filterTextDescription"> Type: </p>
-                <div className="custom-control-inline custom-radio p-2">
-                  <input
+                <p >For : </p>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input 
                     type="radio"
-                    class="custom-control-input"
-                    id="apartment"
-                    value="Apartment"
-                    checked={this.state.propertyType === "Apartment"}
-                    onChange={this.handlePropertyTypeChange}
+                    id="customRadioInline1" 
+                    name="saleType" 
+                    value="Rent" 
+                    className="custom-control-input"
+                    // checked={this.state.saleType === "Rent"}
+                    onChange={this.myChangeHandler}
+                    required
                   />
-                  <label
-                    className="custom-control-label filterText"
-                    for="apartment">
-                    Apartment
-                  </label>
+                  <label class="custom-control-label" for="customRadioInline1">Rent</label>
                 </div>
-                <div class="custom-control-inline custom-radio p-2">
-                  <input
-                    type="radio"
-                    class="custom-control-input"
-                    id="house"
-                    value="House"
-                    checked={this.state.propertyType === "House"}
-                    onChange={this.handlePropertyTypeChange}
-                  />
-                  <label
-                    className="custom-control-label filterText"
-                    for="house"
-                  >
-                    House
-                  </label>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input 
+                      type="radio"
+                      id="customRadioInline2" 
+                      name="saleType" 
+                      value="Sale" 
+                      className="custom-control-input"
+                      // checked={this.state.saleType === "Sale"}
+                      onChange={this.myChangeHandler}
+                      required
+                    />
+                  <label class="custom-control-label" for="customRadioInline2">Sell</label>
                 </div>
-              </div>
-            </div>
-
-
+                  </div>
+                  <div className="col-md-6">
+                    <p >Type : </p>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input 
+                        type="radio"
+                        id="customRadioInline3" 
+                        name="propertyType" 
+                        value="Apartment" 
+                        className="custom-control-input"
+                        // checked={this.state.saleType === "Apartment"}
+                        onChange={this.myChangeHandler}
+                        required
+                        />                      
+                        <label class="custom-control-label" for="customRadioInline3">Apartment</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input 
+                          type="radio" 
+                          id="customRadioInline4"
+                          name="propertyType" 
+                          value="House" 
+                          className="custom-control-input"
+                          // checked={this.state.saleType === "House"}
+                          onChange={this.myChangeHandler}
+                          required
+                        />
+                      <label class="custom-control-label" for="customRadioInline4">House</label>
+                    </div>
+                  </div> 
+                </div>
                 <div className="form-row w-75 form-group form-check form-check-inline"> 
                     <div class="col-md-4 mb-3 md-form formField">
                         <label> Price : </label><br/>
@@ -274,7 +254,7 @@ render() {
                         value={this.state.heating} 
                         onChange={this.myChangeHandler} 
                         required>
-                          <option selected disabled value=""> Heating type</option>
+                          <option selected value=""> Heating type</option>
                           <option value="Gas">Gas</option>
                           <option value="Diesel">Diesel</option>
                           <option value="A/C">A/C</option>
@@ -302,7 +282,7 @@ render() {
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-3 md-form">
-                        <p className="addHouseLabel"> Description :</p><br/>
+                    <label> Description :</label><br/>
                         <textarea 
                           name="description" 
                           class="md-textarea form-control" 
@@ -313,7 +293,7 @@ render() {
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-3 md-form">
-                        <p className="addHouseLabel"> Pictures :</p><br/>
+                        <label> Pictures :</label><br/>
                         <input 
                           type="text"
                           name="pictures" 
@@ -322,17 +302,9 @@ render() {
                           onChange={this.myChangeHandler}/> 
                     </div>
                 </div>
-                {/* <button className="btn btn-rounded btn-block"  
-                    onClick={this.runMyFunction }
-                   >
-                    Add
-                </button> */}
-                <button 
-                className="btn btn-rounded btn-block " 
-                type="submit" 
-                id="addBtnForm"
-                value="Add">Add 
-                </button>
+                
+                <input className="btn btn-rounded btn-block" id="addBtnForm" type="submit" value="Add" />
+                <input className="btn btn-rounded btn-block justify-content-md-center" type="reset" value="Clear"></input>
           </form>
       </div>
     );
