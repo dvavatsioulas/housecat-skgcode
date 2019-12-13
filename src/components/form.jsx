@@ -75,7 +75,7 @@ class AddHouse extends Component {
             parking:this.state.parking
         })
       .then(res => {
-            if (res.data == "Your house has been added successfully into DB!") {
+            if (res.data == "Your house has been added successfully!") {
               Toast.success(res.data, 3000, () => {
                 window.open("/add", "_self");
               });
