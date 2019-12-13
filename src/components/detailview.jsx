@@ -83,7 +83,7 @@ class DetailView extends React.Component {
                             </div>
                         </div>
                         <div class="property-description">
-                            <p class="description color-text-a">
+                            <p class="description color-text-a" style={{fontSize:"large"}}>
                                 {this.state.house.description}
                             </p>
                         </div>
@@ -99,7 +99,7 @@ class DetailView extends React.Component {
                         </div>
                         </div>
                         <div class="summary-list" style={{marginRight:"2%"}}>
-                        <ul class="list">
+                        <ul class="list" style={{fontSize:"17px"}}>
                             <li class="d-flex justify-content-between">
                             <strong>Property ID:</strong>
                             <span>{this.state.house.id}</span>
