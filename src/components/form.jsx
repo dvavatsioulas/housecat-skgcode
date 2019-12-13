@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import color from "@material-ui/core/colors/amber";
-
+import Toast from 'light-toast';
  
 class AddHouse extends Component {
 
@@ -76,8 +75,14 @@ class AddHouse extends Component {
             parking:this.state.parking
         })
       .then(res => {
-            alert(res.data);
-            window.open("/add", "_self");
+            if (res.data == "Your house has been added successfully into DB!") {
+              Toast.success(res.data, 3000, () => {
+                window.open("/add", "_self");
+              });
+            }else{
+              Toast.fail(res.data, 3000, () => {
+                window.open("/add", "_self");
+              });            }
         });
         return true;                  
       }
